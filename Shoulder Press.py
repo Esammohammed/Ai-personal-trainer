@@ -42,7 +42,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             angle1 = Pose_Estimation.calculate_angle(right_shoulder, right_elbow, right_wrist)
             angle2 = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
 
-            # visualize angleright_elbow
+            # visualize angle
             cv2.putText(image, str(angle1), tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
             cv2.putText(image, str(angle2), tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
