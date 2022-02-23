@@ -1,10 +1,15 @@
+import threading
+
 import cv2
 import mediapipe as mp
 import numpy as np
+import Timer
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
+Firsttime=True
+flag = False
 
 def calculate_angle(a, b, c):
     a = np.array(a)  # First
@@ -152,7 +157,17 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
             if a1 == 1 and a2 == 1 and a3 == 1:
                 stage = "timer starts"
-                # change this stage to make a timer
+                if Firsttime:
+                    t1 = threading.Thread(target=Timer.lol)
+                    t1.start()
+                    Firsttime = False
+
+                if flag :
+                  Timer.app.start()
+                  flag = True
+            if a1 != 1 and a2 != 1 and a3 != 1:
+                Timer.app.pause()
+                flag = True
 
         except:
             pass
