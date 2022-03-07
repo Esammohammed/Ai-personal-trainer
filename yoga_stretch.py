@@ -3,7 +3,7 @@ import mediapipe as mp
 import numpy as np
 import tkinter as tk
 import Timer
-import time
+import Pose_Estimation
 import threading
 
 
@@ -45,18 +45,7 @@ leg_right = 0
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
-        ret, frame = cap.read()
-
-        # Recolor image to RGB
-        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        image.flags.writeable = False
-
-        # Make detection
-        results = pose.process(image)
-
-        # Recolor back to BGR
-        image.flags.writeable = True
-        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
 
         # Extract landmarks
         try:
@@ -110,18 +99,18 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                           landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
 
             # Calculate angle (hand)
-            first_angle_hand = calculate_angle(left_shoulder, left_elbow, left_wrist)
-            second_angle_hand = calculate_angle(right_shoulder, right_elbow, right_wrist)
+            first_angle_hand = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
+            second_angle_hand = Pose_Estimation.calculate_angle(right_shoulder, right_elbow, right_wrist)
 
             # Calculate angle (body)
 
-            first_angle_body = calculate_angle(left_shoulder,left_hip, left_knee)
-            second_angle_body = calculate_angle(right_shoulder, right_hip, right_knee)
+            first_angle_body = Pose_Estimation.calculate_angle(left_shoulder,left_hip, left_knee)
+            second_angle_body = Pose_Estimation.calculate_angle(right_shoulder, right_hip, right_knee)
 
             # Calculate angle (leg)
 
-            first_angle_leg = calculate_angle(left_ankle, left_heel, left_foot_index)
-            second_angle_leg = calculate_angle(right_ankle, right_heel, right_foot_index)
+            first_angle_leg = Pose_Estimation.calculate_angle(left_ankle, left_heel, left_foot_index)
+            second_angle_leg = Pose_Estimation.calculate_angle(right_ankle, right_heel, right_foot_index)
 
             # Visualize angle
             #hand

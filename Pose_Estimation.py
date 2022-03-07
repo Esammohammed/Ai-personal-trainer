@@ -13,7 +13,7 @@ def calculate_angle(a, b, c):
     if angle > 180.0:
         angle = 360 - angle
 
-    return angle
+    return round(angle, 2)
 
 
 def MakedetectionandExtract (pose, cap):
@@ -24,7 +24,6 @@ def MakedetectionandExtract (pose, cap):
 
     # Make detection
     results = pose.process(image)
-
     # Recolor back to BGR
     image.flags.writeable = True
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)

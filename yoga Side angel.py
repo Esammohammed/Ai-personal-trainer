@@ -1,5 +1,5 @@
 import threading
-
+import Pose_Estimation
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -11,21 +11,10 @@ mp_pose = mp.solutions.pose
 Firsttime=True
 flag = False
 
-def calculate_angle(a, b, c):
-    a = np.array(a)  # First
-    b = np.array(b)  # Mid
-    c = np.array(c)  # End
-    radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-    angle = np.abs(radians * 180.0 / np.pi)
-
-    if angle > 180.0:
-        angle = 360 - angle
-
-    return angle
 
 
-cap = cv2.VideoCapture(0)
-
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('yogaS_A.mpeg')
 # Curl counter variables
 counter = 0
 stage = None
@@ -33,18 +22,10 @@ stage = None
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
-        ret, frame = cap.read()
-
-        # Recolor image to RGB
-        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        image.flags.writeable = False
-
-        # Make detection
-        results = pose.process(image)
-
-        # Recolor back to BGR
-        image.flags.writeable = True
-        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        a1=0 
+        a2=0
+        a3=0
+        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap)
 
         # Extract landmarks
         try:
@@ -87,44 +68,52 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                            landmarks[mp_pose.PoseLandmark.RIGHT_ANKLE.value].y]
 
             # Calculate angle
-            angle1 = calculate_angle(left_elbow, left_shoulder, left_hip)
-            angle2 = calculate_angle(right_elbow, right_shoulder, right_hip)
-            angle3 = calculate_angle(left_ankle, left_knee, left_hip)
-            angle4 = calculate_angle(right_ankle, right_knee, right_hip)
-            angle5 = (left_knee, left_shoulder, left_hip)
-            angle6 = calculate_angle(right_knee, right_shoulder, right_hip)
-
+            angle1 = Pose_Estimation.calculate_angle(left_elbow, left_shoulder, left_hip)
+            angle2 = Pose_Estimation.calculate_angle(right_elbow, right_shoulder, right_hip)
+            angle3 = Pose_Estimation.calculate_angle(left_ankle, left_knee, left_hip)
+            angle4 = Pose_Estimation.calculate_angle(right_ankle, right_knee, right_hip)
+            angle5 = Pose_Estimation.calculate_angle(left_knee, left_shoulder, left_hip)
+            angle6 = Pose_Estimation.calculate_angle(right_knee, right_shoulder, right_hip)
+            
             # Visualize arms
             cv2.putText(image, str(angle1),
-                        tuple(np.multiply(left_shoulder, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        #for recorded live  dimentions are [640, 480]
+                        tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1,(225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle2),
-                        tuple(np.multiply(right_shoulder, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
                         )
+            cv2.putText(image, str(angle3),
+                        tuple(np.multiply(left_knee, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
+                        )
+            cv2.putText(image, str(angle4),
+                        tuple(np.multiply(right_knee, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
+                        )
+            cv2.putText(image, str( angle5),tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
+            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA)
+            cv2.putText(image, str(angle6),tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
+            cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA)
 
+            
             # Curl counter logic for arms
             if angle1 > 40 or angle1 < 25:
                 stage = "put your left elbow on your left thigh to create 35 degree with your body"
             if angle2 < 175 or angle2 > 185:
                 stage = "raise your right arm up to create 180 degree with your body right side"
-            if 40 >= angle1 >= 25 and 185 >= angle2 >= 175:
+            
+            if ((130 <= angle1 and angle1 <= 150) and ( 55 <= angle2  and angle2<= 75)):
                 stage = "keep you arms at this pose"
                 a1 = 1
+            
                 # counter += 1   put timer
                 # print(counter)
 
             # Visualize knees
-            cv2.putText(image, str(angle3),
-                        tuple(np.multiply(left_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
-                        )
-            cv2.putText(image, str(angle4),
-                        tuple(np.multiply(right_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
-                        )
-
+            
             # Curl counter logic for knees
             if angle3 > 95:
                 stage = "make your ankle closer to your body to make 90 degree angle with your thigh"
@@ -132,29 +121,22 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                 stage = "make your leg straight  to make 180 degree angle between your thigh and ankle"
             if angle3 < 85:
                 stage = "take step away with your left ankle to make 90 degree angle with your thigh"
-            if 95 >= angle3 >= 85 and 185 >= angle4 >= 175:
+            if 105 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
                 stage = "keep you legs at this pose"
                 a2 = 1
-
                 # Visualize sides
-                cv2.putText(image, str(angle5),
-                            tuple(np.multiply(left_hip, [640, 480]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
-                            )
-                cv2.putText(image, str(angle6),
-                            tuple(np.multiply(right_hip, [640, 480]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
-                            )
-
+            
                 # Curl counter logic for body sides
-                if angle5 > 45 or angle5 < 25:
-                    stage = "go with your left side to make 35 degree angle with your  thigh"
-                if angle6 < 170 or angle6 > 180:
-                    stage = "make your right side straight  to make 180 degree angle between your thigh and right side"
-                if 45 >= angle5 >= 25 and 170 >= angle6 >= 180:
-                    stage = "keep you body at this pose"
-                    a3 = 1
-
+            if angle5 > 45 or angle5 < 25:
+                stage = "go with your left side to make 35 degree angle with your  thigh"
+            if angle6 < 170 or angle6 > 180:
+                stage = "make your right side straight  to make 180 degree angle between your thigh and right side"
+          
+            if 60 <= angle6 <= 80 and  (0 <= angle5 <= 10 or 170 <= angle5 <= 180 ):
+                stage = "keep you body at this pose"
+                a3 = 1
+            
+            print(a2) 
             if a1 == 1 and a2 == 1 and a3 == 1:
                 stage = "timer starts"
                 if Firsttime:
@@ -163,9 +145,9 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                     Firsttime = False
 
                 if flag :
-                  Timer.app.start()
-                  flag = True
-            if a1 != 1 and a2 != 1 and a3 != 1:
+                    Timer.app.start()
+                    flag = True
+            if a1 != 1 or a2 != 1 or a3 != 1:
                 Timer.app.pause()
                 flag = True
 
@@ -188,7 +170,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
         cv2.putText(image, stage,
                     (60, 60),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
+                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
 
         # Render detections
         mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,

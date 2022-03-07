@@ -41,7 +41,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
             # Visualize angle
             cv2.putText(image, str(angle),
-                        tuple(np.multiply(elbow, [640, 480]).astype(int)),
+                        tuple(np.multiply(elbow, [1280,720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 

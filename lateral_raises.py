@@ -5,13 +5,13 @@ import Pose_Estimation
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('letral.mpeg')
 
 # Curl counter variables
 counter = 0
-stage = None
-for lndmrk in mp_pose.PoseLandmark:
-    print(lndmrk)
+stage = 'down'
+
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
@@ -43,22 +43,22 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
             # Visualize angle
             cv2.putText(image, str(angle1),
-                        tuple(np.multiply(right_shoulder, [640, 480]).astype(int)),
+                        tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
-            cv2.putText(image, str(angle1),
-                        tuple(np.multiply(left_shoulder, [640, 480]).astype(int)),
+            cv2.putText(image, str(angle2),
+                        tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 
+            print(angle1)
             # Curl counter logic
-            if angle1 > 100 and angle2 >100:
-                stage = "down"
-
-            if (angle1 < 50 and stage == 'down'and angle2<50):
+            if angle1 > 85 and angle2 >85 and stage == 'down':
                 stage = "up"
+            if (angle1 < 45 and  angle2<45 and stage == "up"):
                 counter += 1
                 print(counter)
+                stage = "down"
 
         except:
             pass
