@@ -8,7 +8,10 @@ mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 
 
-cap = cv2.VideoCapture(0)
+#for recorded vidoe 
+#
+cap = cv2.VideoCapture('bi.mp4')
+#cap = cv2.VideoCapture(0)
 
 # Curl counter variables
 counter = 0
@@ -17,6 +20,7 @@ stage = None
 
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    
     while cap.isOpened():
         # Extract landmarks
         results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
@@ -44,7 +48,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             # Curl counter logic
             if angle > 160:
                 stage = "down"
-            if angle < 30 and stage == 'down':
+            if angle < 35 and stage == 'down':
                 stage = "up"
                 counter += 1
                 print(counter)
