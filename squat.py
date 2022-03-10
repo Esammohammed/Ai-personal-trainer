@@ -11,7 +11,11 @@ stage = None
 
 
 
-cap = cv2.VideoCapture(0)
+#for recorded vidoe
+#
+cap = cv2.VideoCapture('Squat.mp4')
+#cap = cv2.VideoCapture(0)
+
 ##setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
@@ -43,10 +47,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             angle2 = Pose_Estimation.calculate_angle(left_hip, left_knee, left_ankel)
 
             # visualize angle
-            cv2.putText(image, str(angle1), tuple(np.multiply(right_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
-            cv2.putText(image, str(angle2), tuple(np.multiply(left_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA)
+            cv2.putText(image, str(angle1), tuple(np.multiply(right_knee, [1920,1080]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+            cv2.putText(image, str(angle2), tuple(np.multiply(left_knee, [1920,1080]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
             # CURL COUNTER LOGIC
             if angle1 > 160 and angle2 > 160:
@@ -64,12 +68,16 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         cv2.rectangle(image, (0, 0), (225, 73), (245, 117, 16), -1)
 
         # rep data
-        cv2.putText(image, 'REPS', (15, 12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-        cv2.putText(image, str(counter), (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(image, 'REPS', (15, 12), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, str(counter), (10, 60), cv2.FONT_HERSHEY_SIMPLEX,
+                    2, (255, 255, 255), 2, cv2.LINE_AA)
 
         # stage data
-        cv2.putText(image, 'STAGE', (65, 12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-        cv2.putText(image, stage, (60, 60), cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(image, 'STAGE', (65, 12), cv2.FONT_HERSHEY_SIMPLEX,
+                    0.5, (0, 0, 0), 1, cv2.LINE_AA)
+        cv2.putText(image, stage, (60, 60), cv2.FONT_HERSHEY_SIMPLEX,
+                    2, (255, 255, 255), 2, cv2.LINE_AA)
 
         # rendering detections
         mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,

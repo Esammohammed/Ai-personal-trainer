@@ -7,7 +7,7 @@ import Timer
 
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('Warrior_Pose_2.mp4')
 
 First_time = True
 flag = False
@@ -15,14 +15,16 @@ flag = False
 # Curl counter variables
 counter = 0
 stage = None
-for lndmrk in mp_pose.PoseLandmark:
-    print(lndmrk)
+
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
+        a1 = 0
+        a2 = 0
+        a3 = 0
+        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap)
 
-        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
-
+        # Extract landmarks
         try:
             landmarks = results.pose_landmarks.landmark
 
@@ -78,54 +80,62 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
 
             # Visualize ELBOWS angles
             cv2.putText(image, str(angle1),
-                        tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(left_elbow, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle2),
-                        tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(right_elbow, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
 
             # Curl counter logic for ELBOWS
             if angle1 >= 170 and angle2 >= 170:
                 a1 = 1
+                stage = "keep you elbows at this pose"
+            else:
+                stage = "Make your elbows at a 170 or more"
 
             # Visualize shoulders angles
             cv2.putText(image, str(angle3),
-                        tuple(np.multiply(left_shoulder, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle4),
-                        tuple(np.multiply(right_shoulder, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
 
             # Curl counter logic for SHOULDERS
             if 80 <= angle3 <= 90 and 80 <= angle4 <= 90:
                 a2 = 1
+                stage = "keep you shoulders at this pose"
+            else:
+                stage = "Make your shoulder between 90 and 80 degrees"
 
             # Visualize KNEES angles
             cv2.putText(image, str(angle5),
-                        tuple(np.multiply(left_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(left_knee, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle6),
-                        tuple(np.multiply(right_knee, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(right_knee, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
 
             # Curl counter logic for knees
             if 100 >= angle5 >= 80 and 185 >= angle6 >= 170:
                 a3 = 1
-
+                stage = "keep you knees at this pose"
+            else:
+                stage = "Make your knees between 90 and 80 degrees"
             # Visualize sides
             cv2.putText(image, str(angle7),
-                        tuple(np.multiply(left_hip, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle8),
-                        tuple(np.multiply(right_hip, [640, 480]).astype(int)),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
 
             # Curl Counter Logic for SIDES
@@ -142,7 +152,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                 if flag:
                     Timer.app.start()
                     flag = True
-            if a1 != 1 and a2 != 1 and a3 != 1 and a4 == 1:
+            if a1 != 1 and a2 != 1 and a3 != 1 and a4 != 1:
                 Timer.app.pause()
                 flag = True
         except:
@@ -164,7 +174,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
         cv2.putText(image, stage,
                     (60, 60),
-                    cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
+                    cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 0, 0), 2, cv2.LINE_AA)
 
         # Render detections
         mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
