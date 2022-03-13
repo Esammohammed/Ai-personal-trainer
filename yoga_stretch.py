@@ -3,10 +3,10 @@ import mediapipe as mp
 import numpy as np
 import tkinter as tk
 import Timer
-import Pose_Estimation
+import time
 import threading
 
-
+#cobra stretch
 mp_drawing = mp.solutions.drawing_utils
 mp_pose = mp.solutions.pose
 Firsttime=True
@@ -29,14 +29,14 @@ def calculate_angle(a, b, c):
 
 
 
-
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('Cobra_Stretch.mp4')
+#cap = cv2.VideoCapture(0)
 
 # Curl counter variables
 counter = 0
 stage = None
 hand_right = 0
-body_right =0
+body_right = 0
 leg_right = 0
 
 
@@ -45,7 +45,18 @@ leg_right = 0
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
-        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
+        ret, frame = cap.read()
+
+        # Recolor image to RGB
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+
+        # Make detection
+        results = pose.process(image)
+
+        # Recolor back to BGR
+        image.flags.writeable = True
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
         # Extract landmarks
         try:
@@ -99,86 +110,87 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                           landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
 
             # Calculate angle (hand)
-            first_angle_hand = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
-            second_angle_hand = Pose_Estimation.calculate_angle(right_shoulder, right_elbow, right_wrist)
+            first_angle_hand = calculate_angle(left_shoulder, left_elbow, left_wrist)
+            second_angle_hand = calculate_angle(right_shoulder, right_elbow, right_wrist)
 
             # Calculate angle (body)
 
-            first_angle_body = Pose_Estimation.calculate_angle(left_shoulder,left_hip, left_knee)
-            second_angle_body = Pose_Estimation.calculate_angle(right_shoulder, right_hip, right_knee)
+            first_angle_body = calculate_angle(left_shoulder,left_hip, left_knee)
+            second_angle_body = calculate_angle(right_shoulder, right_hip, right_knee)
 
             # Calculate angle (leg)
 
-            first_angle_leg = Pose_Estimation.calculate_angle(left_ankle, left_heel, left_foot_index)
-            second_angle_leg = Pose_Estimation.calculate_angle(right_ankle, right_heel, right_foot_index)
+            first_angle_leg = calculate_angle(left_ankle, left_heel, left_foot_index)
+            second_angle_leg = calculate_angle(right_ankle, right_heel, right_foot_index)
 
             # Visualize angle
             #hand
             cv2.putText(image, str(first_angle_hand),
-                        tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
+                        tuple(np.multiply(left_elbow, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(second_angle_hand),
-                        tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
+                        tuple(np.multiply(right_elbow, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 
             #body
             cv2.putText(image, str(first_angle_body),
-                       tuple(np.multiply(left_hip, [640, 480]).astype(int)),
+                       tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                        )
             cv2.putText(image, str(second_angle_body),
-                        tuple(np.multiply(right_hip, [640, 480]).astype(int)),
+                        tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 
             #leg
             cv2.putText(image, str(first_angle_leg),
-                        tuple(np.multiply(left_heel, [640, 480]).astype(int)),
+                        tuple(np.multiply(left_heel, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(second_angle_leg),
-                        tuple(np.multiply(right_heel, [640, 480]).astype(int)),
+                        tuple(np.multiply(right_heel, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 
 
 
             # Curl counter logic
-            if first_angle_hand > 150 and second_angle_hand > 150:
+            if  180 >= first_angle_hand >= 165 and 180 >= second_angle_hand >= 165:
                 stage = "correct hand"
                 hand_right = 1
             else:
                 hand_right = 0
-            if first_angle_body > 130 and second_angle_body > 130 and stage == 'correct hand':
+            if  125 >= first_angle_body >= 115 and 125 >= second_angle_body >= 115 :
                 stage = "correct body"
                 body_right = 1
             else:
                 body_right = 0
-            if first_angle_leg > 50 and second_angle_leg > 50 and stage == 'correct body':
+            if  55 >= first_angle_leg >= 45 and 55 >= second_angle_leg >= 45 :
                 stage = "correct leg"
                 leg_right = 1
             else:
                 leg_right = 0
 
 
+            if hand_right == 1 and body_right == 1 and leg_right == 1:
+                stage = "timer starts"
+                if Firsttime:
+                    t1 = threading.Thread(target=Timer.lol)
+                    t1.start()
+                    Firsttime = False
+                    if flag:
+                        Timer.app.start()
+                        flag = True
+                if hand_right != 1 or body_right != 1 or leg_right != 1:
+                    stage = "timer pause"
+                    Timer.app.pause()
+                    flag = True
+
+
         except:
             pass
-
-        if hand_right == 1 and body_right == 1 and leg_right == 1:
-            stage = "timer starts"
-            if Firsttime:
-                t1 = threading.Thread(target=Timer.lol)
-                t1.start()
-                Firsttime = False
-                if flag :
-                  Timer.app.start()
-                  flag = True
-            if hand_right != 1 or body_right != 1 or leg_right != 1:
-                Timer.app.pause()
-                flag = True
-
 
 
 
@@ -191,7 +203,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         # Rep data
         cv2.putText(image, 'REPS', (15, 12),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-        cv2.putText(image, str(),
+        cv2.putText(image, str(stage),
                     (10, 60),
                     cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
 
