@@ -19,12 +19,15 @@ def calculate_angle(a, b, c):
     return angle
 
 
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('pushup.mp4')
 
 # Curl counter variables
 counter = 0
 stage = None
-
+a1 = 0
+a2 = 0
+a3 = 0
 ## Setup mediapipe instance
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while cap.isOpened():
@@ -61,26 +64,68 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             right_wrist = [landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].x,
                           landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].y]
 
+
+
+            #body
+
+            left_shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,
+                             landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
+            left_hip = [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x,
+                        landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y]
+            left_knee = [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x,
+                         landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
+
+            right_shoulder = [landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].x,
+                              landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y]
+            right_hip = [landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].x,
+                         landmarks[mp_pose.PoseLandmark.RIGHT_HIP.value].y]
+            right_knee = [landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].x,
+                          landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
+
             # Calculate angle
             first_angle = calculate_angle(left_shoulder, left_elbow, left_wrist)
             second_angle = calculate_angle(right_shoulder, right_elbow, right_wrist)
+            #body
+
+            first_angle_body = calculate_angle(left_shoulder, left_hip, left_knee)
+            second_angle_body = calculate_angle(right_shoulder, right_hip, right_knee)
 
             # Visualize angle
             cv2.putText(image, str(first_angle),
-                        tuple(np.multiply(left_elbow, [640, 480]).astype(int)),
+                        tuple(np.multiply(left_elbow, [640, 360]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(second_angle),
-                        tuple(np.multiply(right_elbow, [640, 480]).astype(int)),
+                        tuple(np.multiply(right_elbow, [640, 360]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        )
+            #body
+
+            cv2.putText(image, str(first_angle_body),
+                        tuple(np.multiply(left_hip, [640, 360]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                        )
+            cv2.putText(image, str(second_angle_body),
+                        tuple(np.multiply(right_hip, [640, 360]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                         )
 
             # Curl counter logic
-            if first_angle > 160 and second_angle > 160:
+            if  170 >=first_angle >= 160 and 170 >= second_angle >= 160:
                 stage = "up"
-            if first_angle < 100 and second_angle < 100 and stage == 'up':
+
+            if 70 >=first_angle >= 50 and 70 >= second_angle >= 50 and stage == 'up':
                 stage = "down"
-                counter += 1
+                if 180 >= first_angle_body >= 160 and 180 >= second_angle_body >= 160:
+                    counter += 1
+
+
+
+
+
+
+
+
 
 
 
