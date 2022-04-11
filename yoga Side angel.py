@@ -93,10 +93,12 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                         tuple(np.multiply(right_knee, [1280, 720]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                         )
-            cv2.putText(image, str( angle5),tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
-            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA)
-            cv2.putText(image, str(angle6),tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
-            cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA)
+            cv2.putText(image, str( angle5),
+                        tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA)
+            cv2.putText(image, str(angle6),
+                        tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
+                        cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA)
 
             
             # Curl counter logic for arms
@@ -121,7 +123,7 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                 stage = "make your leg straight  to make 180 degree angle between your thigh and ankle"
             if angle3 < 85:
                 stage = "take step away with your left ankle to make 90 degree angle with your thigh"
-            if 105 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
+            if 100 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
                 stage = "keep you legs at this pose"
                 a2 = 1
                 # Visualize sides
