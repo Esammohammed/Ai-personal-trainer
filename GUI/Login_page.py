@@ -4,10 +4,13 @@ from matplotlib import use
 
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
-from Database import User_information
-user = User_information.User_info
+from Database import DBoperation
+
 import Userinfo
+
+DBoperations = DBoperation.User_info
 class Ui_MainWindow(object):
+
 
     def open_register(self):
         self.window = QtWidgets.QMainWindow()
@@ -127,7 +130,7 @@ class Ui_MainWindow(object):
         else:
 
            try:
-                row =user.select_user(self.lineEdit.text(),self.lineEdit_2.text())
+                row =DBoperations.select_user(self.lineEdit.text(),self.lineEdit_2.text())
 
                 if row == None:
                     msg = QMessageBox()
@@ -138,19 +141,16 @@ class Ui_MainWindow(object):
 
                 else:
                     self.window = QtWidgets.QMainWindow()
-                    self.ui = Userinfo.Ui_MainWindow(user)
+                    self.ui = Userinfo.Ui_MainWindow(row)
                     self.ui.setupUi(self.window)
                     self.window.show()
                     MainWindow.destroy()
-
            except Exception as es:
                msg = QMessageBox()
-               msg.setIcon(QMessageBox.Critical)
-               msg.setText( 'Error Due to : '+ {str(es)})
-               msg.setWindowTitle("Error")
+               msg.setIcon(QMessageBox.Information)
+               msg.setText("")
+               msg.setWindowTitle("")
                msg.exec_()
-
-
 
 if __name__ == "__main__":
     import sys

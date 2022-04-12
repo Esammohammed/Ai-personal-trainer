@@ -5,9 +5,9 @@ from GUI import Login_page
 from PyQt5.QtWidgets import QMessageBox
 
 
-from Database import User_information
+from Database import DBoperation
 
-user = User_information.User_info
+DBoperations = DBoperation.User_info
 
 class Ui_MainWindow(object):
 
@@ -171,7 +171,7 @@ class Ui_MainWindow(object):
                     msg.setWindowTitle("Error")
                     msg.exec_()
                 else:
-                    user.insert(self.lineEdit_4.text() ,self.lineEdit.text(), self.lineEdit_5.text(),
+                    DBoperations.insert(self.lineEdit_4.text() ,self.lineEdit.text(), self.lineEdit_5.text(),
 
                                    self.lineEdit_2.text(), int(self.lineEdit_3.text()), None,None,None,None)
 
@@ -180,11 +180,6 @@ class Ui_MainWindow(object):
                     msg.setText("Register Succesfull")
                     msg.setWindowTitle("success")
                     msg.exec_()
-
-
-
-                    self.regclear()
-
 
             except Exception as es:
 

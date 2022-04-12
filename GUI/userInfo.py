@@ -1,9 +1,10 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Database import User_information
-userinformationclass=User_information.User_info()
+from Database import DBoperation
 class Ui_MainWindow(object):
+
     def __init__(self,u):
-        userinformationclass =u
+        global data
+        data=u
         print("lol")
 
     def setupUi(self, MainWindow):
@@ -364,26 +365,26 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Basic information"))
         self.label_3.setText(_translate("MainWindow", "Extra infotmation"))
-        self.label_6.setText(_translate("MainWindow", userinformationclass.name))
+        self.label_6.setText(_translate("MainWindow", data[0]))
         self.label_5.setText(_translate("MainWindow", "Full name"))
-        self.label_27.setText(_translate("MainWindow", userinformationclass.id))
+        self.label_27.setText(_translate("MainWindow", data[1]))
         self.label_28.setText(_translate("MainWindow", "Username"))
-        self.label_29.setText(_translate("MainWindow", userinformationclass.email))
+        self.label_29.setText(_translate("MainWindow",data[2]))
         self.label_30.setText(_translate("MainWindow", "Email"))
-        self.label_31.setText(_translate("MainWindow", userinformationclass.password))
+        self.label_31.setText(_translate("MainWindow", data[3]))
         self.label_32.setText(_translate("MainWindow", "Password"))
-        self.label_35.setText(_translate("MainWindow", userinformationclass.age))
+        self.label_35.setText(_translate("MainWindow", data[4]))
         self.label_36.setText(_translate("MainWindow", "Age"))
-        self.label_9.setText(_translate("MainWindow", userinformationclass.height))
+        self.label_9.setText(_translate("MainWindow", data[5]))
         self.label_10.setText(_translate("MainWindow", "Height"))
-        self.label_43.setText(_translate("MainWindow", userinformationclass.weight))
+        self.label_43.setText(_translate("MainWindow", data[6]))
         self.label_44.setText(_translate("MainWindow", "Weight"))
-        self.label_45.setText(_translate("MainWindow", userinformationclass.gender))
+        self.label_45.setText(_translate("MainWindow", data[7]))
         self.label_46.setText(_translate("MainWindow", "Gender"))
-        self.label_47.setText(_translate("MainWindow", userinformationclass.level))
+        self.label_47.setText(_translate("MainWindow", data[8]))
         self.label_48.setText(_translate("MainWindow", "Level"))
-        self.label_11.setText(_translate("MainWindow", "Full name"))
-        self.label_12.setText(_translate("MainWindow", "username"))
+        self.label_11.setText(_translate("MainWindow", data[0]))
+        self.label_12.setText(_translate("MainWindow", data[1]))
 
 
 

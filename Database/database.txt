@@ -1,0 +1,47 @@
+CREATE TABLE `activity` (
+  `Activityid` int NOT NULL,
+  `idUser` varchar(45) NOT NULL,
+  `Date` date DEFAULT NULL,
+  PRIMARY KEY (`Activityid`),
+  KEY `iduser_idx` (`idUser`),
+  CONSTRAINT `iduser` FOREIGN KEY (`idUser`) REFERENCES `userr` (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `exer_act` (
+  `Activityid` int NOT NULL,
+  `exname` varchar(45) NOT NULL,
+  PRIMARY KEY (`Activityid`),
+  KEY `exnam_idx` (`exname`),
+  CONSTRAINT `activityid` FOREIGN KEY (`Activityid`) REFERENCES `activity` (`Activityid`),
+  CONSTRAINT `exnam` FOREIGN KEY (`exname`) REFERENCES `exercise` (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `exercise` (
+  `Name` varchar(45) NOT NULL,
+  `Type` varchar(45) DEFAULT NULL,
+  `Calories` int DEFAULT NULL,
+  `Information` text,
+  `duration` int DEFAULT NULL,
+  `Counts` int DEFAULT NULL,
+  PRIMARY KEY (`Name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `timetable` (
+  `Table_id` int NOT NULL,
+  `Daysperweek` int DEFAULT NULL,
+  `Hoursperday` int DEFAULT NULL,
+  PRIMARY KEY (`Table_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `userr` (
+  `idUser` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `Email` varchar(45) DEFAULT NULL,
+  `Password` varchar(45) DEFAULT NULL,
+  `Age` varchar(45) DEFAULT NULL,
+  `height` double DEFAULT NULL,
+  `weight` double DEFAULT NULL,
+  `Level` varchar(45) DEFAULT NULL,
+  `Gender` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idUser`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
