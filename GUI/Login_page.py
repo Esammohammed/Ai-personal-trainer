@@ -1,15 +1,22 @@
 import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
+from matplotlib import use
+
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
-
+from Database import User_information
+user = User_information.User_info
+import Userinfo
 class Ui_MainWindow(object):
+
     def open_register(self):
         self.window = QtWidgets.QMainWindow()
         self.ui  =  registration_form.Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
         MainWindow.destroy()
+
+
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -120,16 +127,7 @@ class Ui_MainWindow(object):
         else:
 
            try:
-
-                con = pymysql.connect(host='localhost', user='root', password='1230A',
-                                     )
-                cur = con.cursor()
-
-                cur.execute('select * from e_trainer.userr where idUser=%s and password=%s'
-
-                           , (self.lineEdit.text(), self.lineEdit_2.text()))
-
-                row = cur.fetchone()
+                row =user.select_user(self.lineEdit.text(),self.lineEdit_2.text())
 
                 if row == None:
                     msg = QMessageBox()
@@ -138,17 +136,13 @@ class Ui_MainWindow(object):
                     msg.setWindowTitle("Error")
                     msg.exec_()
 
-
                 else:
-                    con.close()
-                    """"
-                    Navigate to home page 
-                    msg = QMessageBox()
-                    msg.setIcon(QMessageBox.Information)
-                    msg.setText("login Succesfull")
-                    msg.setWindowTitle("success")
-                    msg.exec_()
-                    """
+                    self.window = QtWidgets.QMainWindow()
+                    self.ui = Userinfo.Ui_MainWindow(user)
+                    self.ui.setupUi(self.window)
+                    self.window.show()
+                    MainWindow.destroy()
+
            except Exception as es:
                msg = QMessageBox()
                msg.setIcon(QMessageBox.Critical)
