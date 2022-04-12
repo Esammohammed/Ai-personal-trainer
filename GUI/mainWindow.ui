@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1129</width>
-    <height>855</height>
+    <width>1125</width>
+    <height>849</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,15 +66,6 @@ background-color:#708090;
 height:100px;
 
 }</string>
-    </property>
-    <property name="movement">
-     <enum>QListView::Free</enum>
-    </property>
-    <property name="isWrapping" stdset="0">
-     <bool>true</bool>
-    </property>
-    <property name="resizeMode">
-     <enum>QListView::Adjust</enum>
     </property>
    </widget>
    <widget class="QPushButton" name="userInfo">
