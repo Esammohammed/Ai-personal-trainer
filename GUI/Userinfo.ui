@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 45, 67);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame_3">
     <property name="geometry">
@@ -85,11 +88,10 @@ background-color: rgb(255, 255, 255);
 QWidget#widget_17,#widget_18,#widget_19,#widget_20,#widget_21{
   border: 1px solid #d4d4d4;
 }
-QPushButton{
-	
-  border: none;
-
+QPushButton:hover {
+  background-color: rgb(200, 200, 200);
 }
+
 </string>
      </property>
      <widget class="QWidget" name="widget_17" native="true">
@@ -104,31 +106,13 @@ QPushButton{
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>241</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
+         <y>20</y>
+         <width>231</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="font">
@@ -142,11 +126,29 @@ QPushButton{
         <string>Full name</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QTextEdit" name="name">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="b1">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -159,7 +161,7 @@ QPushButton{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -187,31 +189,13 @@ QPushButton{
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <widget class="QLabel" name="label_27">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_28">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
+         <y>20</y>
+         <width>231</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="font">
@@ -225,11 +209,11 @@ QPushButton{
         <string>Username</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="b2">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -242,7 +226,7 @@ QPushButton{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -255,6 +239,24 @@ QPushButton{
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="user">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -270,31 +272,13 @@ QPushButton{
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <widget class="QLabel" name="label_29">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_30">
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
+         <y>20</y>
+         <width>231</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="font">
@@ -308,11 +292,29 @@ QPushButton{
         <string>Email</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QTextEdit" name="email">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="b3">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -325,7 +327,7 @@ QPushButton{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -353,24 +355,6 @@ QPushButton{
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <widget class="QLabel" name="label_31">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_32">
        <property name="geometry">
         <rect>
@@ -391,11 +375,29 @@ QPushButton{
         <string>Password</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QTextEdit" name="password">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="b4">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -408,7 +410,7 @@ QPushButton{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -436,24 +438,6 @@ QPushButton{
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <widget class="QLabel" name="label_35">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_36">
        <property name="geometry">
         <rect>
@@ -474,11 +458,11 @@ QPushButton{
         <string>Age</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="b5">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -491,7 +475,7 @@ QPushButton{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -504,6 +488,24 @@ QPushButton{
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="age">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -525,8 +527,9 @@ background-color: rgb(255, 255, 255);
 QWidget#widget_27,#widget_28,#widget_29,#widget_30{
   border:1px solid #d4d4d4;
 }
-QPushButton{
-border : none;
+
+QPushButton:hover {
+  background-color: rgb(200, 200, 200);
 }
 
 </string>
@@ -547,24 +550,6 @@ border : none;
 
 }</string>
       </property>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_10">
        <property name="geometry">
         <rect>
@@ -585,11 +570,11 @@ border : none;
         <string>Height</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_11">
+      <widget class="QPushButton" name="b6">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -602,11 +587,11 @@ border : none;
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>37</width>
+         <width>22</width>
          <height>22</height>
         </size>
        </property>
@@ -615,6 +600,24 @@ border : none;
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="height">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -634,24 +637,6 @@ border : none;
 
 }</string>
       </property>
-      <widget class="QLabel" name="label_43">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_44">
        <property name="geometry">
         <rect>
@@ -672,11 +657,11 @@ border : none;
         <string>Weight</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_12">
+      <widget class="QPushButton" name="b7">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -689,11 +674,11 @@ border : none;
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>37</width>
+         <width>22</width>
          <height>22</height>
         </size>
        </property>
@@ -702,6 +687,24 @@ border : none;
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="weight">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -721,24 +724,6 @@ border : none;
 
 }</string>
       </property>
-      <widget class="QLabel" name="label_45">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_46">
        <property name="geometry">
         <rect>
@@ -759,11 +744,29 @@ border : none;
         <string>Gender</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_13">
+      <widget class="QTextEdit" name="gender">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="b8">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -776,11 +779,11 @@ border : none;
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>37</width>
+         <width>22</width>
          <height>22</height>
         </size>
        </property>
@@ -808,24 +811,6 @@ border : none;
 
 }</string>
       </property>
-      <widget class="QLabel" name="label_47">
-       <property name="geometry">
-        <rect>
-         <x>259</x>
-         <y>10</y>
-         <width>240</width>
-         <height>81</height>
-        </rect>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_48">
        <property name="geometry">
         <rect>
@@ -846,11 +831,11 @@ border : none;
         <string>Level</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_14">
+      <widget class="QPushButton" name="b9">
        <property name="geometry">
         <rect>
          <x>460</x>
-         <y>30</y>
+         <y>40</y>
          <width>31</width>
          <height>31</height>
         </rect>
@@ -863,11 +848,11 @@ border : none;
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../qqqq/Edit_Notepad_Icon.svg</normaloff>../qqqq/Edit_Notepad_Icon.svg</iconset>
+         <normaloff>download.png</normaloff>download.png</iconset>
        </property>
        <property name="iconSize">
         <size>
-         <width>37</width>
+         <width>22</width>
          <height>22</height>
         </size>
        </property>
@@ -876,6 +861,24 @@ border : none;
        </property>
        <property name="default">
         <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QTextEdit" name="level">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>30</y>
+         <width>211</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -942,6 +945,33 @@ border : none;
      </property>
      <property name="text">
       <string>username</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>510</x>
+       <y>720</y>
+       <width>191</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+background-color: rgb(0, 45, 67);
+border-radius:20px;
+color:rgb(255, 255, 255);}
+QPushButton:hover{
+background-color: rgb(10, 60, 75);
+}</string>
+     </property>
+     <property name="text">
+      <string>Save</string>
      </property>
     </widget>
    </widget>
