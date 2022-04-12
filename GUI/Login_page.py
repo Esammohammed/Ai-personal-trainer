@@ -5,10 +5,8 @@ from matplotlib import use
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
 from Database import DBoperation
-
-import Userinfo
-
-DBoperations = DBoperation.User_info
+from GUI import Userinfo
+DBoperations = DBoperation.User_info()
 class Ui_MainWindow(object):
 
 
