@@ -158,7 +158,7 @@ class Ui_MainWindow(object):
 
             try:
 
-                con = pymysql.connect(host="localhost", user="root", password="1230A",)
+                con = pymysql.connect(host="localhost", user="root", password="1234",)
                 cur = con.cursor()
                 cur.execute("select * from e_trainer.userr where idUser=%s"
                             , self.lineEdit_4.text())
