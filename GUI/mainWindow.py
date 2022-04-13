@@ -10,6 +10,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from GUI.Achievements import Ui_Dialog
+from GUI.userInfo import Ui_MainWindow1
+from GUI.HistoryPage import Ui_Form
 
 class Ui_MainWindow(object):
 
@@ -30,14 +32,14 @@ class Ui_MainWindow(object):
         self.exercises = QtWidgets.QPushButton(self.centralwidget)
         self.exercises.setGeometry(QtCore.QRect(0, 110, 300, 51))
         self.exercises.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#302a75;\n"
+"background-color:#042940;\n"
 "color:#FFFFFF;\n"
 "}")
         self.exercises.setObjectName("exercises")
@@ -47,7 +49,7 @@ class Ui_MainWindow(object):
         self.listView.setGeometry(QtCore.QRect(0, 0, 300, 1050))
         self.listView.setMinimumSize(QtCore.QSize(0, 621))
         self.listView.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "height:100px;\n"
 "\n"
 "}")
@@ -56,14 +58,14 @@ class Ui_MainWindow(object):
         self.userInfo = QtWidgets.QPushButton(self.centralwidget)
         self.userInfo.setGeometry(QtCore.QRect(0, 170, 300, 51))
         self.userInfo.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#302a75;\n"
+"background-color:#042940;\n"
 "color:#FFFFFF;\n"
 "}")
         self.userInfo.setObjectName("userInfo")
@@ -72,14 +74,14 @@ class Ui_MainWindow(object):
         self.history = QtWidgets.QPushButton(self.centralwidget)
         self.history.setGeometry(QtCore.QRect(0, 220, 300, 51))
         self.history.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#302a75;\n"
+"background-color:#042940;\n"
 "color:#FFFFFF;\n"
 "}")
         self.history.setObjectName("history")
@@ -88,14 +90,14 @@ class Ui_MainWindow(object):
         self.achievements = QtWidgets.QPushButton(self.centralwidget)
         self.achievements.setGeometry(QtCore.QRect(0, 270, 300, 51))
         self.achievements.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#302a75;\n"
+"background-color:#042940;\n"
 "color:#FFFFFF;\n"
 "}")
         self.achievements.setObjectName("achievements")
@@ -104,14 +106,14 @@ class Ui_MainWindow(object):
         self.EXIT = QtWidgets.QPushButton(self.centralwidget)
         self.EXIT.setGeometry(QtCore.QRect(0, 330, 300, 51))
         self.EXIT.setStyleSheet("*{\n"
-"background-color:#10454F;\n"
+"background-color:#03416E;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#302a75;\n"
+"background-color:#042940;\n"
 "color:#FFFFFF;\n"
 "}")
         self.EXIT.setObjectName("EXIT")
@@ -135,12 +137,6 @@ class Ui_MainWindow(object):
         self.usFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.usFrame.setObjectName("exFrame")
 
-        self.label5 = QtWidgets.QLabel(self.usFrame)
-        self.label5.setGeometry(QtCore.QRect(200, 30, 191, 61))
-        self.label5.setStyleSheet("font-weight:900;\n"
-                                 "background-color:gray;")
-        self.label5.setObjectName("label5")
-        self.label5.setText('user info')
 
         self.hisframe = QtWidgets.QFrame(self.centralwidget)
         self.hisframe.setGeometry(QtCore.QRect(300, -10, 591, 631))
@@ -148,11 +144,6 @@ class Ui_MainWindow(object):
         self.hisframe.setStyleSheet("background-color:white;")
         self.hisframe.setFrameShadow(QtWidgets.QFrame.Raised)
         self.hisframe.setObjectName("hisframe")
-
-        self.label_4 = QtWidgets.QLabel(self.hisframe)
-        self.label_4.setGeometry(QtCore.QRect(230, 30, 91, 41))
-        self.label_4.setStyleSheet("background-color:gray;")
-        self.label_4.setObjectName("label_4")
 
         self.achFrame = QtWidgets.QFrame(self.centralwidget)
         self.achFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
@@ -188,7 +179,6 @@ class Ui_MainWindow(object):
         self.achievements.setText(_translate("MainWindow", "Achievements"))
         self.EXIT.setText(_translate("MainWindow", "Exit"))
         self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Exercises</p></body></html>"))
-        self.label_4.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">History</span></p></body></html>"))
         self.label_5.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Achievements</span></p></body></html>"))
         self.exFrame.hide()
         self.usFrame.hide()
@@ -202,6 +192,8 @@ class Ui_MainWindow(object):
         self.usFrame.hide()
 
     def showUs(self):
+        ui = Ui_MainWindow1()
+        ui.setupUi(self.usFrame)
         self.usFrame.show()
         self.hisframe.hide()
         self.achFrame.hide()
@@ -209,6 +201,8 @@ class Ui_MainWindow(object):
 
 
     def showHis(self):
+        ui = Ui_Form()
+        ui.setupUi(self.hisframe)
         self.hisframe.show()
         self.achFrame.hide()
         self.usFrame.hide()

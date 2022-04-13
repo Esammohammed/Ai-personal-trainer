@@ -41,7 +41,11 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: rgb(220, 220, 220);</string>
+     <string notr="true">background-color:#7996C3;
+
+QPushButton{
+ background-color: #333333;
+}</string>
     </property>
     <property name="frameShape">
      <enum>QFrame::StyledPanel</enum>
@@ -64,16 +68,27 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(195, 216, 220);</string>
+      <string notr="true">*{
+background-color:#03416E;
+color:white;
+border-radius: 10px;
+box-shadow: 5px 10px #888888;
+}
+
+*:hover {
+	background-color: #042940;
+	transition-duration: 2s;
+}
+</string>
      </property>
      <property name="text">
-      <string>previous Exercise</string>
+      <string>Previous Exercise</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>760</x>
+       <x>740</x>
        <y>520</y>
        <width>201</width>
        <height>51</height>
@@ -85,7 +100,17 @@
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(195, 216, 220);</string>
+      <string notr="true">*{
+background-color:#03416E;
+color:white;
+border-radius: 10px;
+box-shadow: 5px 10px #888888;
+}
+
+*:hover {
+	background-color: #042940;
+}
+</string>
      </property>
      <property name="text">
       <string>Next Exercise</string>
@@ -101,7 +126,9 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(31, 2, 104);</string>
+      <string notr="true">background-color:#042940;
+
+</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -252,7 +279,8 @@
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(31, 2, 104);</string>
+      <string notr="true">background-color: #03416E;
+</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -272,7 +300,7 @@
       <property name="font">
        <font>
         <family>Arial Black</family>
-        <pointsize>18</pointsize>
+        <pointsize>20</pointsize>
         <weight>75</weight>
         <bold>true</bold>
        </font>
