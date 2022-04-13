@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
 from GUI.HistoryPage import Ui_Form
+from GUI.exercise_info import Ui_Frame
 
 class Ui_MainWindow(object):
 
@@ -125,11 +126,6 @@ class Ui_MainWindow(object):
         self.exFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exFrame.setObjectName("exFrame")
 
-        self.label = QtWidgets.QLabel(self.exFrame)
-        self.label.setGeometry(QtCore.QRect(200, 30, 191, 61))
-        self.label.setStyleSheet("font-weight:900;\n"
-"background-color:gray;")
-        self.label.setObjectName("label")
         self.usFrame = QtWidgets.QFrame(self.centralwidget)
         self.usFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.usFrame.setStyleSheet("background-color:white;")
@@ -178,14 +174,14 @@ class Ui_MainWindow(object):
         self.history.setText(_translate("MainWindow", "History"))
         self.achievements.setText(_translate("MainWindow", "Achievements"))
         self.EXIT.setText(_translate("MainWindow", "Exit"))
-        self.label.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\">Exercises</p></body></html>"))
-        self.label_5.setText(_translate("MainWindow", "<html><head/><body><p align=\"center\"><span style=\" font-weight:600;\">Achievements</span></p></body></html>"))
         self.exFrame.hide()
         self.usFrame.hide()
         self.hisframe.hide()
         self.achFrame.hide()
 
     def showEx(self):
+        ui = Ui_Frame()
+        ui.setupUi(self.exFrame)
         self.exFrame.show()
         self.hisframe.hide()
         self.achFrame.hide()

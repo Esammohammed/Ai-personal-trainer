@@ -53,6 +53,9 @@ class Ui_Frame(object):
             ' but dumbbells and kettlebells may also be used. When a barbell is used, it may be braced across the upper trapezius muscle,'
             ' which is termed a high bar squat, or held lower across the rear deltoids, termed a low bar squat.The movement is initiated'
             ' by moving the hips back and bending the knees and hips to lower the torso and accompanying weight, then returning to the upright position.')
+
+
+
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
         Frame.resize(1081, 833)
@@ -142,8 +145,7 @@ class Ui_Frame(object):
 
 if __name__ == "__main__":
     import sys
-   # Frame = QtWidgets.QFrame()
-   # ui = Ui_Frame()
-   # ui.setupUi(Frame)
-   # Frame.show()
-   # sys.exit(app.exec_())
+    Frame = QtWidgets.QFrame()
+    ui = Ui_Frame()
+    ui.setupUi(Frame)
+    Frame.show()
