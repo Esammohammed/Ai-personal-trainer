@@ -5,8 +5,8 @@ from matplotlib import use
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
 from Database import DBoperation
-from GUI import Userinfo
-DBoperations = DBoperation.User_info()
+import Userinfo
+DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
 
 
@@ -138,11 +138,14 @@ class Ui_MainWindow(object):
                     msg.exec_()
 
                 else:
+
                     self.window = QtWidgets.QMainWindow()
+
                     self.ui = Userinfo.Ui_MainWindow(row)
                     self.ui.setupUi(self.window)
                     self.window.show()
                     MainWindow.destroy()
+
            except Exception as es:
                msg = QMessageBox()
                msg.setIcon(QMessageBox.Information)

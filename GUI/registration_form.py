@@ -7,8 +7,7 @@ from PyQt5.QtWidgets import QMessageBox
 
 from Database import DBoperation
 
-DBoperations = DBoperation.User_info
-
+DBoperations = DBoperation.database_operations()
 class Ui_MainWindow(object):
 
 
