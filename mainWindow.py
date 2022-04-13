@@ -11,8 +11,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from ex import Ui_Frame
-
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -180,8 +178,6 @@ class Ui_MainWindow(object):
         self.achFrame.hide()
 
     def showEx(self):
-        ui = Ui_Frame()
-        ui.setupUi(self.exFrame)
         self.exFrame.show()
         self.hisframe.hide()
         self.achFrame.hide()
