@@ -116,50 +116,56 @@ class Ui_MainWindow(object):
 "}")
         self.EXIT.setObjectName("EXIT")
         self.exFrame = QtWidgets.QFrame(self.centralwidget)
-        self.exFrame.setGeometry(QtCore.QRect(210, -10, 591, 631))
+        self.exFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.exFrame.setStyleSheet("background-color:white;\n"
 "display:none;")
         self.exFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exFrame.setObjectName("exFrame")
+
         self.label = QtWidgets.QLabel(self.exFrame)
         self.label.setGeometry(QtCore.QRect(200, 30, 191, 61))
         self.label.setStyleSheet("font-weight:900;\n"
 "background-color:gray;")
         self.label.setObjectName("label")
         self.usFrame = QtWidgets.QFrame(self.centralwidget)
-        self.usFrame.setGeometry(QtCore.QRect(210, -10, 591, 631))
+        self.usFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.usFrame.setStyleSheet("background-color:white;")
         self.usFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.usFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.usFrame.setObjectName("exFrame")
+
         self.label5 = QtWidgets.QLabel(self.usFrame)
         self.label5.setGeometry(QtCore.QRect(200, 30, 191, 61))
         self.label5.setStyleSheet("font-weight:900;\n"
                                  "background-color:gray;")
         self.label5.setObjectName("label5")
         self.label5.setText('user info')
+
         self.hisframe = QtWidgets.QFrame(self.centralwidget)
-        self.hisframe.setGeometry(QtCore.QRect(210, -10, 591, 631))
+        self.hisframe.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.hisframe.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.hisframe.setStyleSheet("background-color:white;")
         self.hisframe.setFrameShadow(QtWidgets.QFrame.Raised)
         self.hisframe.setObjectName("hisframe")
+
         self.label_4 = QtWidgets.QLabel(self.hisframe)
         self.label_4.setGeometry(QtCore.QRect(230, 30, 91, 41))
         self.label_4.setStyleSheet("background-color:gray;")
         self.label_4.setObjectName("label_4")
 
         self.achFrame = QtWidgets.QFrame(self.centralwidget)
-        self.achFrame.setGeometry(QtCore.QRect(210, -10, 591, 631))
+        self.achFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.achFrame.setStyleSheet("background-color:white;")
         self.achFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.achFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.achFrame.setObjectName("achFrame")
+
         self.label_5 = QtWidgets.QLabel(self.achFrame)
         self.label_5.setGeometry(QtCore.QRect(230, 20, 131, 41))
         self.label_5.setStyleSheet("background-color:gray;")
         self.label_5.setObjectName("label_5")
+
         self.EXIT.clicked.connect(sys.exit)
         self.exFrame.raise_()
         self.listView.raise_()
@@ -225,3 +231,17 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+#   def getPrevious(self):
+  #      self.label_4.setText("Previous")
+   #     self.label_11.setText("1000")
+    #    self.label_13.setText("20/3/2019")
+
+
+   # def getnext(self):
+    #    self.label_4.setText("Next")
+     #   self.label_11.setText("2000")
+      #  self.label_13.setText("20/3/2000")
+
+      #self.pushButton_2.clicked.connect(self.getPrevious)
+      #self.pushButton.clicked.connect(self.getnext)
