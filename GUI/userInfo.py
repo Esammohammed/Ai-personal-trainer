@@ -10,13 +10,12 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(2000, 1000)
+        MainWindow.resize(1222, 866)
         MainWindow.setStyleSheet("background-color: rgb(0, 45, 67);")
-        MainWindow.setGeometry(QtCore.QRect(380, 60, 1300, 900))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.frame_3 = QtWidgets.QFrame(self.centralwidget)
-        self.frame_3.setGeometry(QtCore.QRect(80, 60, 1161, 761))
+        self.frame_3.setGeometry(QtCore.QRect(40, 20, 1131, 821))
         self.frame_3.setStyleSheet("background-color: #f8f8f8;")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -373,12 +372,14 @@ class Ui_MainWindow(object):
 "background-color: rgb(10, 60, 75);\n"
 "}")
         self.pushButton.setObjectName("pushButton")
+        MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1222, 26))
         self.menubar.setObjectName("menubar")
+        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
-      
+        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
