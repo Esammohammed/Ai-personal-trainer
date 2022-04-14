@@ -7,17 +7,11 @@ from PyQt5.QtWidgets import QMessageBox
 
 from Database import DBoperation
 
-DBoperations = DBoperation.database_operations()
+DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
 
-
-    def open_login(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui  =  Login_page.Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        self.window.show()
-        MainWindow.destroy()
     def setupUi(self, MainWindow):
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(890, 834)
         MainWindow.setStyleSheet("background-color:rgb(0, 45, 67)")
@@ -79,7 +73,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget , clicked= lambda : self.open_login())
+        self.pushButton_2 = QtWidgets.QPushButton(self.widget , clicked= lambda : self.open_login(MainWindow))
 
         self.pushButton_2.setGeometry(QtCore.QRect(160, 640, 221, 31))
         font = QtGui.QFont()
@@ -157,7 +151,7 @@ class Ui_MainWindow(object):
 
             try:
 
-                con = pymysql.connect(host="localhost", user="root", password="1234",)
+                con = pymysql.connect(host="localhost", user="root", password="1230A",)
                 cur = con.cursor()
                 cur.execute("select * from e_trainer.userr where idUser=%s"
                             , self.lineEdit_4.text())
@@ -203,6 +197,13 @@ class Ui_MainWindow(object):
         self.lineEdit_4.setPlaceholderText(_translate("MainWindow", "Enter the Username"))
         self.lineEdit_5.setPlaceholderText(_translate("MainWindow", "Enter the E-mail"))
 
+    def open_login(self,MainWindow):
+
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Login_page.Ui_MainWindow()
+        self.ui.setupUi(self.window)
+        self.window.show()
+        MainWindow.hide()
 
 if __name__ == "__main__":
     import sys

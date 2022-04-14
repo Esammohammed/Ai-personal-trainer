@@ -2,11 +2,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Database import DBoperation
 up = DBoperation.database_operations
-data = ('102', '2', '3', '4', None, None, None, None, None)
-class Ui_MainWindow1(object):
-#    def __init__(self, u):
-   #     global data
-    #    data = u
+#data = ('102', '2', '3', '4', None, None, None, None, None)
+class Ui_MainWindow(object):
+    def __init__(self, u):
+        global data
+        data = u
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -378,6 +378,7 @@ class Ui_MainWindow1(object):
         self.menubar.setObjectName("menubar")
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
+      
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -399,34 +400,35 @@ class Ui_MainWindow1(object):
         self.label_11.setText(_translate("MainWindow", data[1]))
         self.label_12.setText(_translate("MainWindow", data[0]))
         self.pushButton.setText(_translate("MainWindow", "Save"))
+        print (data)
 
-        self.user.setText(_translate("MainWindow", data[0]))
-
+        self.name.setText(_translate("MainWindow", data[0]))
         self.name.setText(_translate("MainWindow", data[1]))
 
+        self.user.setText(_translate("MainWindow", data[0]))
         self.email.setText(_translate("MainWindow", data[2]))
 
         self.password.setText(_translate("MainWindow", data[3]))
 
         self.age.setText(_translate("MainWindow", data[4]))
 
-        self.height.setText(_translate("MainWindow", data[5]))
+        self.height.setText(_translate("MainWindow", str(data[5])))
 
-        self.weight.setText(_translate("MainWindow", data[6]))
+        self.weight.setText(_translate("MainWindow",str(data[6])))
 
         self.level.setText(_translate("MainWindow", data[7]))
 
         self.gender.setText(_translate("MainWindow", data[8]))
+        self.label_12.setText(_translate("MainWindow", data[0]))
+        self.label_11.setText(_translate("MainWindow", data[1]))
 
-        self.name.setText(_translate("MainWindow", data[0]))
-        self.user.setText(_translate("MainWindow", data[1]))
 
     def calldatabase(self):
 
         up.Update(self.user.toPlainText()
                , self.name.toPlainText(), self.email.toPlainText(),
-               self.password.toPlainText(), int(self.age.toPlainText()), self.height.toPlainText(), self.weight.toPlainText(),
-                  self.level.toPlainText(),
+               self.password.toPlainText(), int (self.age.toPlainText()), self.height.toPlainText(), self.weight.toPlainText(),
+               self.level.toPlainText(),
                self.gender.toPlainText())
 
 
@@ -436,7 +438,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow1()
+    ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
