@@ -5,19 +5,18 @@ from matplotlib import use
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
 from Database import DBoperation
-import Userinfo
+import userInfo
 DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
 
 
-    def open_register(self):
+    def open_register(self,MainWindow):
+
         self.window = QtWidgets.QMainWindow()
         self.ui  =  registration_form.Ui_MainWindow()
         self.ui.setupUi(self.window)
         self.window.show()
         MainWindow.destroy()
-
-
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -35,6 +34,7 @@ class Ui_MainWindow(object):
         font.setPointSize(10)
         self.lineEdit.setFont(font)
         self.lineEdit.setStyleSheet("color:rgb(0, 0, 0);\n"
+                                    
 "\n"
 "borde-bottom:5px solid;\n"
 "border-bottom-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 57, 255, 255), stop:1 rgba(255, 255, 255, 255));;\n"
@@ -53,7 +53,7 @@ class Ui_MainWindow(object):
         self.lineEdit_2.setText("")
         self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.Login = QtWidgets.QPushButton(self.widget,clicked= lambda : self.login_DB())
+        self.Login = QtWidgets.QPushButton(self.widget,clicked= lambda : self.login_DB(MainWindow))
         self.Login.setGeometry(QtCore.QRect(20, 320, 491, 60))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -79,7 +79,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.pushButton_2 = QtWidgets.QPushButton(self.widget , clicked= lambda : self.open_register())
+        self.pushButton_2 = QtWidgets.QPushButton(self.widget , clicked= lambda : self.open_register(MainWindow))
         self.pushButton_2.setGeometry(QtCore.QRect(190, 420, 141, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
@@ -107,6 +107,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -115,7 +116,7 @@ class Ui_MainWindow(object):
         self.Login.setText(_translate("MainWindow", "Log in"))
         self.label.setText(_translate("MainWindow", "Log in"))
         self.pushButton_2.setText(_translate("MainWindow", "sign up"))
-    def login_DB(self):
+    def login_DB(self,MainWindow):
 
 
         if self.lineEdit.text() == "" or self.lineEdit_2.text() == "":
@@ -138,13 +139,12 @@ class Ui_MainWindow(object):
                     msg.exec_()
 
                 else:
-
                     self.window = QtWidgets.QMainWindow()
-
-                    self.ui = Userinfo.Ui_MainWindow(row)
+                    self.ui = userInfo.Ui_MainWindow(row)
                     self.ui.setupUi(self.window)
                     self.window.show()
-                    MainWindow.destroy()
+
+
 
            except Exception as es:
                msg = QMessageBox()

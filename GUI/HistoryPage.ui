@@ -185,8 +185,22 @@
      </property>
     </column>
    </widget>
+   <widget class="QPushButton" name="LoadData">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>640</y>
+      <width>151</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load History Data</string>
+    </property>
+   </widget>
    <zorder>tableWidget</zorder>
    <zorder>label</zorder>
+   <zorder>LoadData</zorder>
   </widget>
  </widget>
  <resources/>
