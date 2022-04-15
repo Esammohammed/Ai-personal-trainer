@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from GUI.Achievements import Ui_Dialog
-from GUI.userInfo import Ui_MainWindow1
+from GUI.userInfo import Ui_MainWindow
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
 
@@ -188,7 +188,7 @@ class Ui_MainWindow(object):
         self.usFrame.hide()
 
     def showUs(self):
-        ui = Ui_MainWindow1()
+        ui = Ui_MainWindow()
         ui.setupUi(self.usFrame)
         self.usFrame.show()
         self.hisframe.hide()

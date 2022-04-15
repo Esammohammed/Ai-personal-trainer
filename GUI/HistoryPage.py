@@ -9,7 +9,8 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+import pymysql
+from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -92,6 +93,7 @@ class Ui_Form(object):
         self.LoadData = QtWidgets.QPushButton(self.frame)
         self.LoadData.setGeometry(QtCore.QRect(430, 640, 151, 28))
         self.LoadData.setObjectName("LoadData")
+        self.LoadData.clicked.connect(self.select_data)
         self.tableWidget.raise_()
         self.label.raise_()
         self.LoadData.raise_()
@@ -99,6 +101,27 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+    def select_data(self):
+        try:
+            con = pymysql.connect(host='localhost', user='root', password='Mariam999', )
+            cur = con.cursor()
+            cur.execute('SELECT Date FROM e_trainer.activity where idUser= %s group by Date;'
+                    , (id))
+            result = cur.fetchall()
+
+            self.tableWidget.rowCount(0)
+            for row_number, row_data in enumerate(result):
+               self.tableWidget.insertRow(row_number)
+               for column_number, Itemdata in enumerate(row_data):
+                 self.tableWidget.setItem(row_number,column_number,QTableWidgetItem(str(Itemdata)))
+
+        except Exception as es:
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Error")
+            msg.setWindowTitle("Error")
+            msg.exec_()
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
