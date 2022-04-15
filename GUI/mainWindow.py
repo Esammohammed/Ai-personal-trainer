@@ -13,11 +13,13 @@ from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
+data = ('5', '2', '3', '4', None, None, None, None, None)
+
 import sys
 class Ui_MainWindow(object):
-    def __init__(self, u):
-        global data
-        data = u
+    ###def __init__(self, u):
+       # global data
+       # data = u
 
 
     def setupUi(self, MainWindow):
@@ -31,7 +33,7 @@ class Ui_MainWindow(object):
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
+        MainWindow.setStyleSheet("background-color: rgb(0, 45, 67);")
         self.exercises = QtWidgets.QPushButton(self.centralwidget)
         self.exercises.setGeometry(QtCore.QRect(0, 110, 300, 51))
         self.exercises.setStyleSheet("*{\n"
@@ -49,8 +51,8 @@ class Ui_MainWindow(object):
         self.exercises.clicked.connect(self.showEx)
 
         self.listView = QtWidgets.QListView(self.centralwidget)
-        self.listView.setGeometry(QtCore.QRect(0, 0, 300, 1050))
-        self.listView.setMinimumSize(QtCore.QSize(0, 621))
+        self.listView.setGeometry(QtCore.QRect(0, 0, 301, 1050))
+        self.listView.setMinimumSize(QtCore.QSize(0, 700))
         self.listView.setStyleSheet("*{\n"
 "background-color:#03416E;\n"
 "height:100px;\n"
