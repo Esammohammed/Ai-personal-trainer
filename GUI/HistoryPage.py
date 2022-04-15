@@ -89,8 +89,12 @@ class Ui_Form(object):
         font.setWeight(75)
         item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(1, item)
+        self.LoadData = QtWidgets.QPushButton(self.frame)
+        self.LoadData.setGeometry(QtCore.QRect(430, 640, 151, 28))
+        self.LoadData.setObjectName("LoadData")
         self.tableWidget.raise_()
         self.label.raise_()
+        self.LoadData.raise_()
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -141,7 +145,7 @@ class Ui_Form(object):
         item.setText(_translate("Form", "Date"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("Form", "What you practiced"))
-
+        self.LoadData.setText(_translate("Form", "Load History Data"))
 
 if __name__ == "__main__":
     import sys

@@ -38,6 +38,15 @@ class database_operations:
             msg.setWindowTitle("")
             msg.exec_()
 
+    def GetAchievements(id):
+        con = pymysql.connect(host='localhost', user='root', password='1234', )
+
+        cur = con.cursor()
+        cur.execute('select * from e_trainer.bestscore where username=%s'
+                    , (id))
+        row = cur.fetchall()
+        return row
+
 
 
 

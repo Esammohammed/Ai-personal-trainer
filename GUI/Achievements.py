@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pymysql
+from Database import DBoperation
+
 
 
 class Ui_Dialog(object):
@@ -165,9 +168,11 @@ class Ui_Dialog(object):
         self.label.setText(_translate("Dialog", "Achievements"))
 
     def getPrevious(self):
-        self.label_4.setText("Previous")
-        self.label_11.setText("1000")
-        self.label_13.setText("20/3/2019")
+        result = DBoperation.database_operations.GetAchievements('1')
+        print(str(result[0]))
+        self.label_4.setText(str(result[0][0]))
+        self.label_11.setText(str(result[0][2]))
+        self.label_13.setText(str(result[0][3]))
 
     def getnext(self):
         self.label_4.setText("Next")

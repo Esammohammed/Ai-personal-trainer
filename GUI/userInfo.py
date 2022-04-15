@@ -435,7 +435,7 @@ class Ui_MainWindow1(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    MainWindow = QtWidgets.QFrame()
     ui = Ui_MainWindow1()
     ui.setupUi(MainWindow)
     MainWindow.show()
