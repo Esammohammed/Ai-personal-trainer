@@ -1,13 +1,11 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Database import DBoperation
 up = DBoperation.database_operations
-data = ('102', '2', '3', '4', None, None, None, None, None)
+#data = ('102', '2', '3', '4', None, None, None, None, None)
 class Ui_MainWindow1(object):
-#    def __init__(self, u):
-   #     global data
-    #    data = u
-
+    def __init__(self, u):
+        global data
+        data = u
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(2000, 1000)
@@ -359,10 +357,11 @@ class Ui_MainWindow1(object):
         font.setWeight(75)
         self.label_12.setFont(font)
         self.label_12.setObjectName("label_12")
-
-        self.pushButton = QtWidgets.QPushButton(self.frame_3 ,clicked=lambda:self.calldatabase())
+        self.pushButton = QtWidgets.QPushButton(self.frame_3 )
+        self.pushButton.clicked.connect(lambda:self.calldatabase())
         self.pushButton.setGeometry(QtCore.QRect(510, 720, 191, 51))
         font = QtGui.QFont()
+
         font.setPointSize(14)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("QPushButton{\n"
@@ -378,10 +377,8 @@ class Ui_MainWindow1(object):
         self.menubar.setObjectName("menubar")
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
-
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -396,44 +393,27 @@ class Ui_MainWindow1(object):
         self.label_44.setText(_translate("MainWindow", "Weight"))
         self.label_46.setText(_translate("MainWindow", "Gender"))
         self.label_48.setText(_translate("MainWindow", "Level"))
-        self.label_11.setText(_translate("MainWindow", data[1]))
-        self.label_12.setText(_translate("MainWindow", data[0]))
         self.pushButton.setText(_translate("MainWindow", "Save"))
-
         self.user.setText(_translate("MainWindow", data[0]))
-
         self.name.setText(_translate("MainWindow", data[1]))
-
         self.email.setText(_translate("MainWindow", data[2]))
-
         self.password.setText(_translate("MainWindow", data[3]))
-
         self.age.setText(_translate("MainWindow", data[4]))
-
-        self.height.setText(_translate("MainWindow", data[5]))
-
-        self.weight.setText(_translate("MainWindow", data[6]))
-
+        self.height.setText(_translate("MainWindow", str(data[5])))
+        self.weight.setText(_translate("MainWindow", str(data[6])))
         self.level.setText(_translate("MainWindow", data[7]))
-
         self.gender.setText(_translate("MainWindow", data[8]))
-
-        self.name.setText(_translate("MainWindow", data[0]))
-        self.user.setText(_translate("MainWindow", data[1]))
-
+        self.label_11.setText(_translate("MainWindow", data[0]))
+        self.label_12.setText(_translate("MainWindow", data[1]))
     def calldatabase(self):
-
         up.Update(self.user.toPlainText()
                , self.name.toPlainText(), self.email.toPlainText(),
                self.password.toPlainText(), int(self.age.toPlainText()), self.height.toPlainText(), self.weight.toPlainText(),
                   self.level.toPlainText(),
                self.gender.toPlainText())
-
-
-
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QFrame()
     ui = Ui_MainWindow1()
