@@ -13,13 +13,13 @@ from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
-data = ('5', '2', '3', '4', None, None, None, None, None)
+#data = ('5', '2', '3', '4', None, None, None, None, None)
 
 import sys
 class Ui_MainWindow(object):
-    ###def __init__(self, u):
-       # global data
-       # data = u
+    def __init__(self, u):
+        global data
+        data = u
 
 
     def setupUi(self, MainWindow):
@@ -210,7 +210,7 @@ class Ui_MainWindow(object):
         self.exFrame.hide()
 
     def showAch(self):
-        ui = Ui_Dialog()
+        ui = Ui_Dialog(data)
         ui.setupUi(self.achFrame)
         self.achFrame.show()
         self.hisframe.hide()

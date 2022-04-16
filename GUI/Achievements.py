@@ -1,12 +1,22 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import pymysql
 from Database import DBoperation
 
 
 
 class Ui_Dialog(object):
+
+    def __init__(self, u):
+        global data
+        global result
+        global counter
+        self.counter = 1
+        data = u
+        result = DBoperation.database_operations.GetAchievements(data[0])
+        print(result)
+
     def setupUi(self, Dialog):
+
         Dialog.setObjectName("Dialog")
         Dialog.resize(2000, 1000)
         Dialog.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -151,24 +161,38 @@ class Ui_Dialog(object):
         self.pushButton_2.setText(_translate("Dialog", "Previous Exercise"))
         self.pushButton.setText(_translate("Dialog", "Next Exercise"))
         self.label_2.setText(_translate("Dialog", "Exercise Name"))
-        self.label_4.setText(_translate("Dialog", "Name"))
         self.label_10.setText(_translate("Dialog", "Best Score"))
-        self.label_11.setText(_translate("Dialog", "Score"))
         self.label_12.setText(_translate("Dialog", "Date"))
-        self.label_13.setText(_translate("Dialog", "20/3/2022"))
+
+        if len(result) == 0:
+            self.label_4.setText(_translate("Dialog", "-"))
+            self.label_11.setText(_translate("Dialog", "-"))
+            self.label_13.setText(_translate("Dialog", "-"))
+            self.pushButton_2.hide()
+            self.pushButton.hide()
+
+        else:
+            self.label_4.setText(_translate("Dialog", str(result[0][0])))
+            self.label_11.setText(_translate("Dialog", str(result[0][2])))
+            self.label_13.setText(_translate("Dialog", str(result[0][3])))
         self.label.setText(_translate("Dialog", "Achievements"))
 
     def getPrevious(self):
-        result = DBoperation.database_operations.GetAchievements('1')
-        print(str(result[0]))
-        self.label_4.setText(str(result[0][0]))
-        self.label_11.setText(str(result[0][2]))
-        self.label_13.setText(str(result[0][3]))
+        if self.counter < 0:
+            self.counter = len(result)-1
+        self.label_4.setText(str(result[self.counter][0]))
+        self.label_11.setText(str(result[self.counter][2]))
+        self.label_13.setText(str(result[self.counter][3]))
+        self.counter = self.counter - 1
 
     def getnext(self):
-        self.label_4.setText("Next")
-        self.label_11.setText("2000")
-        self.label_13.setText("20/3/2000")
+        if self.counter == len(result):
+            self.counter = 0
+        self.label_4.setText(str(result[self.counter][0]))
+        self.label_11.setText(str(result[self.counter][2]))
+        self.label_13.setText(str(result[self.counter][3]))
+        self.counter = self.counter + 1
+
 
 
 
