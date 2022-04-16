@@ -1,16 +1,17 @@
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pymysql
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
-data = ('1', '2', '3', '4', None, None, None, None, None)
+
+data = ('5', '2', '3', '4', None, None, None, None, None)
+
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(2000, 1000)
         self.frame = QtWidgets.QFrame(Form)
-
-
+        self.frame.setGeometry(QtCore.QRect(80, 70, 1161, 761))
+        self.frame.setStyleSheet("background-color: white;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -26,15 +27,9 @@ class Ui_Form(object):
         self.tableWidget.setGeometry(QtCore.QRect(80, 160, 841, 461))
         self.tableWidget.setLineWidth(1)
         self.tableWidget.setObjectName("tableWidget")
-
+        self.tableWidget.setColumnCount(2)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-
-
-
+        self.tableWidget.setColumnWidth(1, 690)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
@@ -61,40 +56,25 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-    def Create_table(self ,user_rows):
-        self.tableWidget.setColumnCount(2)
-        self.tableWidget.setRowCount(user_rows)
-        for i in range(user_rows):
-            self.tableWidget.setVerticalHeaderItem(i, item)
-            item = QtWidgets.QTableWidgetItem()
-            _translate = QtCore.QCoreApplication.translate
-            item = self.tableWidget.verticalHeaderItem(0)
-            item.setText(_translate("Form", "1"))
-
     def select_data(self):
         try:
-            con = pymysql.connect(host='localhost', user='root', password='1230A', )
+            con = pymysql.connect(host='localhost', user='root', password='Mariam999', )
             cur = con.cursor()
-            cur.execute('SELECT DATE(Date) FROM e_trainer.activity where idUser = %s group by Date;'
-                        , 5)
+            cur.execute('SELECT DISTINCT DATE(Date) FROM e_trainer.activity where idUser = %s;'
+                        , (1))
             Dates = cur.fetchall()
             self.tableWidget.rowCount()
             for row_number, row_data in enumerate(Dates):
-               self.tableWidget.insertRow(row_number)
-               for column_number, Itemdata in enumerate(row_data):
-                 self.tableWidget.setItem(row_number, 0, QTableWidgetItem(str(Itemdata)))
-
-
-            for date in Dates:
-                cur.execute('SELECT Exername FROM e_trainer.activity where Date = %s;'
-                            , (date[0]))
+                self.tableWidget.insertRow(row_number)
+                self.tableWidget.setItem(row_number, 0, QTableWidgetItem(str(row_data[0])))
+                cur = con.cursor()
+                cur.execute('SELECT DISTINCT Exername FROM e_trainer.activity where Date = %s AND idUser = %s;'
+                            , (row_data[0], 1))
                 Activities = cur.fetchall()
-                self.tableWidget.rowCount()
-                for row_number, row_data in enumerate(Activities):
-                    self.tableWidget.insertRow(row_number)
-                    for column_number, Itemdata in enumerate(row_data):
-                        self.tableWidget.setItem(row_number, 1, QTableWidgetItem(str(Itemdata)))
+                self.tableWidget.setItem(row_number, 1, QTableWidgetItem(str(', '.join(a[0] for a in Activities))))
+
         except Exception as es:
+            print(es)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
             msg.setText("Error")
@@ -105,44 +85,6 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label.setText(_translate("Form", "History"))
-        item = self.tableWidget.verticalHeaderItem(0)
-        item.setText(_translate("Form", "1"))
-        item = self.tableWidget.verticalHeaderItem(1)
-        item.setText(_translate("Form", "2"))
-        item = self.tableWidget.verticalHeaderItem(2)
-        item.setText(_translate("Form", "3"))
-        item = self.tableWidget.verticalHeaderItem(3)
-        item.setText(_translate("Form", "4"))
-        item = self.tableWidget.verticalHeaderItem(4)
-        item.setText(_translate("Form", "5"))
-        item = self.tableWidget.verticalHeaderItem(5)
-        item.setText(_translate("Form", "6"))
-        item = self.tableWidget.verticalHeaderItem(6)
-        item.setText(_translate("Form", "7"))
-        item = self.tableWidget.verticalHeaderItem(7)
-        item.setText(_translate("Form", "8"))
-        item = self.tableWidget.verticalHeaderItem(8)
-        item.setText(_translate("Form", "9"))
-        item = self.tableWidget.verticalHeaderItem(9)
-        item.setText(_translate("Form", "10"))
-        item = self.tableWidget.verticalHeaderItem(10)
-        item.setText(_translate("Form", "11"))
-        item = self.tableWidget.verticalHeaderItem(11)
-        item.setText(_translate("Form", "12"))
-        item = self.tableWidget.verticalHeaderItem(12)
-        item.setText(_translate("Form", "13"))
-        item = self.tableWidget.verticalHeaderItem(13)
-        item.setText(_translate("Form", "14"))
-        item = self.tableWidget.verticalHeaderItem(14)
-        item.setText(_translate("Form", "15"))
-        item = self.tableWidget.verticalHeaderItem(15)
-        item.setText(_translate("Form", "16"))
-        item = self.tableWidget.verticalHeaderItem(16)
-        item.setText(_translate("Form", "17"))
-        item = self.tableWidget.verticalHeaderItem(17)
-        item.setText(_translate("Form", "18"))
-        item = self.tableWidget.verticalHeaderItem(18)
-        item.setText(_translate("Form", "20"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Form", "Date"))
         item = self.tableWidget.horizontalHeaderItem(1)
@@ -152,6 +94,7 @@ class Ui_Form(object):
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()
