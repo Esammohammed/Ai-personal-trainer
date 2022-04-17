@@ -15,13 +15,13 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(2000, 1000)
-        Form.setStyleSheet("background-color: rgb(0, 45, 67);")
+
         Form.setGeometry(QtCore.QRect(380, 60, 1300, 900))
         self.frame = QtWidgets.QFrame(Form)
         self.frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.frame.resize(1140, 833)
         effect = QGraphicsDropShadowEffect(
-            offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+            offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
 
         self.frame.setGraphicsEffect(effect)

@@ -13,7 +13,7 @@ class Ui_MainWindow1(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
 
-        MainWindow.setStyleSheet("background-color: rgb(0, 45, 67);")
+
         MainWindow.setGeometry(QtCore.QRect(380, 60, 1300, 900))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -22,7 +22,7 @@ class Ui_MainWindow1(object):
         self.frame_3.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.frame_3.setStyleSheet("background-color: #f8f8f8;")
         effect = QGraphicsDropShadowEffect(
-                offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+                offset=QPoint(3,3), blurRadius=50, color=QColor("black")
         )
         self.frame_3.setGraphicsEffect(effect)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)

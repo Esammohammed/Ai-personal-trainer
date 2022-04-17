@@ -38,18 +38,18 @@ class Ui_MainWindow(object):
 "}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        MainWindow.setStyleSheet("background-color: rgb(0, 45, 67);")
+        MainWindow.setStyleSheet("background-color: #778898")
         self.exercises = QtWidgets.QPushButton(self.centralwidget)
         self.exercises.setGeometry(QtCore.QRect(0, 110, 300, 51))
         self.exercises.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#042940;\n"
+"background-color:#161c20;\n"
 "color:#FFFFFF;\n"
 "}")
         self.exercises.setObjectName("exercises")
@@ -59,24 +59,28 @@ class Ui_MainWindow(object):
         self.listView.setGeometry(QtCore.QRect(0, 0, 301, 1050))
         self.listView.setMinimumSize(QtCore.QSize(0, 700))
         self.listView.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "height:100px;\n"
 "\n"
-"border: 5px solid #03416E;\n"
+"border: 5px solid #2b3942;\n"
 "\n"
 "}")
+        effect = QGraphicsDropShadowEffect(
+            offset=QPoint(3,3), blurRadius=50, color=QColor("black")
+        )
+        self.listView.setGraphicsEffect(effect)
         self.listView.setObjectName("listView")
         self.userInfo = QtWidgets.QPushButton(self.centralwidget)
         self.userInfo.setGeometry(QtCore.QRect(0, 170, 300, 51))
         self.userInfo.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#042940;\n"
+"background-color:#161c20;\n"
 "color:#FFFFFF;\n"
 "}")
         self.userInfo.setObjectName("userInfo")
@@ -85,14 +89,14 @@ class Ui_MainWindow(object):
         self.history = QtWidgets.QPushButton(self.centralwidget)
         self.history.setGeometry(QtCore.QRect(0, 220, 300, 51))
         self.history.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#042940;\n"
+"background-color:#161c20;\n"
 "color:#FFFFFF;\n"
 "}")
         self.history.setObjectName("history")
@@ -101,14 +105,14 @@ class Ui_MainWindow(object):
         self.achievements = QtWidgets.QPushButton(self.centralwidget)
         self.achievements.setGeometry(QtCore.QRect(0, 270, 300, 51))
         self.achievements.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#042940;\n"
+"background-color:#161c20;\n"
 "color:#FFFFFF;\n"
 "}")
         self.achievements.setObjectName("achievements")
@@ -117,14 +121,14 @@ class Ui_MainWindow(object):
         self.EXIT = QtWidgets.QPushButton(self.centralwidget)
         self.EXIT.setGeometry(QtCore.QRect(0, 330, 300, 51))
         self.EXIT.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:#FFFFFF;\n"
 "border:0px;\n"
 "font-size:20px;\n"
 "}\n"
 "\n"
 "*:hover{\n"
-"background-color:#042940;\n"
+"background-color:#161c20;\n"
 "color:#FFFFFF;\n"
 "}")
         self.EXIT.setObjectName("EXIT")
@@ -138,7 +142,7 @@ class Ui_MainWindow(object):
 
         self.usFrame = QtWidgets.QFrame(self.centralwidget)
         self.usFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
-        self.usFrame.setStyleSheet("background-color:white;")
+
         self.usFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.usFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.usFrame.setObjectName("exFrame")
@@ -147,7 +151,7 @@ class Ui_MainWindow(object):
         self.hisframe = QtWidgets.QFrame(self.centralwidget)
         self.hisframe.setGeometry(QtCore.QRect(300, -10, 591, 631))
         self.hisframe.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.hisframe.setStyleSheet("background-color:white;")
+
         self.hisframe.setFrameShadow(QtWidgets.QFrame.Raised)
         self.hisframe.setObjectName("hisframe")
 

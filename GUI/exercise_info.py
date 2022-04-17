@@ -63,7 +63,7 @@ class Ui_Frame(object):
         Frame.setObjectName("Frame")
         Frame.resize(1140, 833)
         effect = QGraphicsDropShadowEffect(
-            offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+            offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
         Frame.setGraphicsEffect(effect)
         self.squatButton = QtWidgets.QPushButton(Frame)
