@@ -9,6 +9,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
 
 class Ui_Frame(object):
@@ -58,7 +61,11 @@ class Ui_Frame(object):
 
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
-        Frame.resize(1081, 833)
+        Frame.resize(1140, 833)
+        effect = QGraphicsDropShadowEffect(
+            offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+        )
+        Frame.setGraphicsEffect(effect)
         self.squatButton = QtWidgets.QPushButton(Frame)
         self.squatButton.setGeometry(QtCore.QRect(110, 480, 221, 101))
         font = QtGui.QFont()

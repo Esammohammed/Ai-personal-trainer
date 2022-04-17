@@ -1,17 +1,31 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pymysql
-from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QGraphicsDropShadowEffect
 
-data = ('5', '2', '3', '4', None, None, None, None, None)
+
+#data = ('5', '2', '3', '4', None, None, None, None, None)
 
 
 class Ui_Form(object):
+    def __init__(self, u):
+        global data
+        data = u
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(2000, 1000)
+        Form.setStyleSheet("background-color: rgb(0, 45, 67);")
+        Form.setGeometry(QtCore.QRect(380, 60, 1300, 900))
         self.frame = QtWidgets.QFrame(Form)
-        self.frame.setGeometry(QtCore.QRect(80, 70, 1161, 761))
-        self.frame.setStyleSheet("background-color: white;")
+        self.frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
+        self.frame.resize(1140, 833)
+        effect = QGraphicsDropShadowEffect(
+            offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+        )
+
+        self.frame.setGraphicsEffect(effect)
+        self.frame.setStyleSheet("background-color: #f8f8f8;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
@@ -45,10 +59,10 @@ class Ui_Form(object):
         font.setWeight(75)
         item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(1, item)
-        self.LoadData = QtWidgets.QPushButton(self.frame)
+        self.LoadData = QtWidgets.QPushButton(self.frame, clicked=lambda: self.select_data())
         self.LoadData.setGeometry(QtCore.QRect(430, 640, 151, 28))
         self.LoadData.setObjectName("LoadData")
-        self.LoadData.clicked.connect(self.select_data)
+
         self.tableWidget.raise_()
         self.label.raise_()
         self.LoadData.raise_()
@@ -58,10 +72,10 @@ class Ui_Form(object):
 
     def select_data(self):
         try:
-            con = pymysql.connect(host='localhost', user='root', password='Mariam999', )
+            con = pymysql.connect(host='localhost', user='root', password='1230A', )
             cur = con.cursor()
             cur.execute('SELECT DISTINCT DATE(Date) FROM e_trainer.activity where idUser = %s;'
-                        , (1))
+                        , (data[0]))
             Dates = cur.fetchall()
             self.tableWidget.rowCount()
             for row_number, row_data in enumerate(Dates):
@@ -69,7 +83,7 @@ class Ui_Form(object):
                 self.tableWidget.setItem(row_number, 0, QTableWidgetItem(str(row_data[0])))
                 cur = con.cursor()
                 cur.execute('SELECT DISTINCT Exername FROM e_trainer.activity where Date = %s AND idUser = %s;'
-                            , (row_data[0], 1))
+                            , (row_data[0], data[0]))
                 Activities = cur.fetchall()
                 self.tableWidget.setItem(row_number, 1, QTableWidgetItem(str(', '.join(a[0] for a in Activities))))
 

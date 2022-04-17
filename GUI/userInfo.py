@@ -1,4 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QColor
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+
 from Database import DBoperation
 up = DBoperation.database_operations
 #data = ('102', '2', '3', '4', None, None, None, None, None)
@@ -8,17 +12,23 @@ class Ui_MainWindow1(object):
         data = u
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(2000, 1000)
+
         MainWindow.setStyleSheet("background-color: rgb(0, 45, 67);")
         MainWindow.setGeometry(QtCore.QRect(380, 60, 1300, 900))
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.frame_3 = QtWidgets.QFrame(self.centralwidget)
+
         self.frame_3.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.frame_3.setStyleSheet("background-color: #f8f8f8;")
+        effect = QGraphicsDropShadowEffect(
+                offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+        )
+        self.frame_3.setGraphicsEffect(effect)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
+        self.frame_3.resize(1140, 833)
         self.label = QtWidgets.QLabel(self.frame_3)
         self.label.setGeometry(QtCore.QRect(60, 140, 281, 51))
         font = QtGui.QFont()

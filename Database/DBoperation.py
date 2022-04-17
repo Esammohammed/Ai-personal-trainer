@@ -2,7 +2,7 @@ import pymysql
 from PyQt5.QtWidgets import QMessageBox
 class database_operations:
     global con
-    con = pymysql.connect(host='localhost', user='root', password='1234', )
+    con = pymysql.connect(host='localhost', user='root', password='1230A', )
     def select_user(id, password):
 
 
