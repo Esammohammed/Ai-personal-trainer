@@ -14,27 +14,40 @@ class Ui_Form(object):
         data = u
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(2000, 1000)
-
         Form.setGeometry(QtCore.QRect(380, 60, 1300, 900))
-        self.frame = QtWidgets.QFrame(Form)
+        self.centralwidget = QtWidgets.QWidget(Form)
+        self.centralwidget.setObjectName("centralwidget")
+        self.frame = QtWidgets.QFrame(self.centralwidget)
+
         self.frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
-        self.frame.resize(1140, 833)
+        self.frame.setStyleSheet("background-color: #f8f8f8;")
         effect = QGraphicsDropShadowEffect(
             offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
 
         self.frame.setGraphicsEffect(effect)
-        self.frame.setStyleSheet("background-color: #f8f8f8;")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
-        self.label = QtWidgets.QLabel(self.frame)
-        self.label.setGeometry(QtCore.QRect(440, 70, 141, 81))
+        self.frame.resize(1140, 833)
+
+        self.frame_3 = QtWidgets.QFrame(self.frame)
+        self.frame_3.setGeometry(QtCore.QRect(0, 0, 1161, 111))
+
+        self.frame_3.setStyleSheet("background-color:#2b3942;")
+        self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_3.setObjectName("frame_3")
+
+        self.label = QtWidgets.QLabel(self.frame_3)
+        self.label.setGeometry(QtCore.QRect(500, 40, 254, 46))
+
         font = QtGui.QFont()
         font.setPointSize(22)
         font.setBold(True)
         font.setWeight(75)
+
+        self.label.setStyleSheet("color: rgb(255, 255, 255);")
         self.label.setFont(font)
         self.label.setObjectName("label")
         self.tableWidget = QtWidgets.QTableWidget(self.frame)

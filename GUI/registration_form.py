@@ -14,12 +14,12 @@ class Ui_MainWindow(object):
 
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(890, 834)
-        MainWindow.setStyleSheet("background-color:rgb(0, 45, 67)")
+        MainWindow.setStyleSheet("background-color:#2b3942")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setGeometry(QtCore.QRect(160, 50, 581, 711))
-        self.widget.setStyleSheet("background-color:rgb(255, 255, 255)")
+        self.widget.setStyleSheet("background-color:#f8f8f8")
         self.widget.setObjectName("widget")
         self.lineEdit = QtWidgets.QLineEdit(self.widget)
         self.lineEdit.setGeometry(QtCore.QRect(20, 140, 491, 60))
@@ -54,16 +54,14 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.Login.setFont(font)
         self.Login.setStyleSheet("QPushButton{\n"
-"background-color:rgb(0, 170, 255);\n"
-"border:2px solid rgb(0, 170, 255);\n"
-"border-radius:20px;\n"
-"color:rgb(255, 255, 255)\n"
-"}\n"
-"QPushButton:hover{\n"
-"background-color:rgb(0, 135, 202);\n"
-"}\n"
-"")
+                                 "background-color: #2b3942;\n"
+                                 "border-radius:20px;\n"
+                                 "color:rgb(255, 255, 255);}\n"
+                                 "QPushButton:hover{\n"
+                                 "background-color: #1f292f;\n"
+                                 "}")
         self.Login.setObjectName("Login")
+
 
         self.label = QtWidgets.QLabel(self.widget)
         self.label.setGeometry(QtCore.QRect(30, 50, 281, 51))

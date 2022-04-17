@@ -32,17 +32,19 @@ class Ui_Dialog(object):
         Dialog.setObjectName("Dialog")
         Dialog.resize(2000, 1000)
         Dialog.setGeometry(QtCore.QRect(380, 60, 1300, 900))
+        self.centralwidget = QtWidgets.QWidget(Dialog)
+        self.centralwidget.setObjectName("centralwidget")
+        self.frame_2 = QtWidgets.QFrame(self.centralwidget)
 
-        self.frame_2 = QtWidgets.QFrame(Dialog)
 
         self.frame_2.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.frame_2.resize(1140, 833)
         effect = QGraphicsDropShadowEffect(
-            offset=QPoint(9, 9), blurRadius=100, color=QColor("black")
+            offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
         self.frame_2.setGraphicsEffect(effect)
-        self.frame_2.setGraphicsEffect(effect)
-        self.frame_2.setStyleSheet("background-color:#7996C3;\n"
+
+        self.frame_2.setStyleSheet("background-color: #f8f8f8;\n"
 "\n"
 "QPushButton{\n"
 " background-color: #333333;\n"
@@ -91,7 +93,7 @@ class Ui_Dialog(object):
         self.pushButton.setObjectName("pushButton")
         self.frame = QtWidgets.QFrame(self.frame_2)
         self.frame.setGeometry(QtCore.QRect(190, 290, 761, 161))
-        self.frame.setStyleSheet("background-color:#042940;\n"
+        self.frame.setStyleSheet("background-color:#2b3942;\n"
 "\n"
 "")
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -146,14 +148,15 @@ class Ui_Dialog(object):
         self.label_13.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_13.setObjectName("label_13")
         self.frame_3 = QtWidgets.QFrame(self.frame_2)
-        self.frame_3.setGeometry(QtCore.QRect(0, 0, 1300, 261))
-        self.frame_3.setStyleSheet("background-color: #03416E;\n"
-"")
+
+        self.frame_3.setGeometry(QtCore.QRect(0, 0, 1161, 111))
+        self.frame_3.setStyleSheet("background-color:#2b3942;")
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
         self.label = QtWidgets.QLabel(self.frame_3)
-        self.label.setGeometry(QtCore.QRect(470, 120, 371, 81))
+
+        self.label.setGeometry(QtCore.QRect(450, 40, 254, 46))
         font = QtGui.QFont()
         font.setFamily("Arial Black")
         font.setPointSize(20)
@@ -166,7 +169,6 @@ class Ui_Dialog(object):
         self.pushButton_2.raise_()
         self.pushButton.raise_()
         self.frame.raise_()
-
         self.retranslateUi(Dialog)
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 

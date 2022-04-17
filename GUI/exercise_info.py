@@ -66,6 +66,7 @@ class Ui_Frame(object):
             offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
         Frame.setGraphicsEffect(effect)
+        Frame.setStyleSheet("background-color: #f8f8f8;")
         self.squatButton = QtWidgets.QPushButton(Frame)
         self.squatButton.setGeometry(QtCore.QRect(110, 480, 221, 101))
         font = QtGui.QFont()

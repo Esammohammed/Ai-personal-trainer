@@ -24,11 +24,20 @@ class Ui_MainWindow1(object):
         effect = QGraphicsDropShadowEffect(
                 offset=QPoint(3,3), blurRadius=50, color=QColor("black")
         )
+
         self.frame_3.setGraphicsEffect(effect)
         self.frame_3.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_3.setObjectName("frame_3")
         self.frame_3.resize(1140, 833)
+
+        self.header = QtWidgets.QFrame(self.frame_3)
+        self.header.setGeometry(QtCore.QRect(0, 0, 1161, 111))
+        self.header.setStyleSheet("background-color:#2b3942;")
+        self.header.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.header.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.header.setObjectName("header")
+
         self.label = QtWidgets.QLabel(self.frame_3)
         self.label.setGeometry(QtCore.QRect(60, 140, 281, 51))
         font = QtGui.QFont()
@@ -351,7 +360,7 @@ class Ui_MainWindow1(object):
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
-        self.label_11 = QtWidgets.QLabel(self.frame_3)
+        self.label_11 = QtWidgets.QLabel(self.header)
         self.label_11.setGeometry(QtCore.QRect(520, 0, 191, 71))
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -359,7 +368,7 @@ class Ui_MainWindow1(object):
         font.setWeight(75)
         self.label_11.setFont(font)
         self.label_11.setObjectName("label_11")
-        self.label_12 = QtWidgets.QLabel(self.frame_3)
+        self.label_12 = QtWidgets.QLabel(self.header)
         self.label_12.setGeometry(QtCore.QRect(540, 50, 101, 51))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -375,11 +384,11 @@ class Ui_MainWindow1(object):
         font.setPointSize(14)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("QPushButton{\n"
-"background-color: rgb(0, 45, 67);\n"
+"background-color: #2b3942;\n"
 "border-radius:20px;\n"
 "color:rgb(255, 255, 255);}\n"
 "QPushButton:hover{\n"
-"background-color: rgb(10, 60, 75);\n"
+"background-color: #1f292f;\n"
 "}")
         self.pushButton.setObjectName("pushButton")
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -413,8 +422,11 @@ class Ui_MainWindow1(object):
         self.weight.setText(_translate("MainWindow", str(data[6])))
         self.level.setText(_translate("MainWindow", data[7]))
         self.gender.setText(_translate("MainWindow", data[8]))
-        self.label_11.setText(_translate("MainWindow", data[0]))
-        self.label_12.setText(_translate("MainWindow", data[1]))
+        self.label_11.setText(_translate("MainWindow", data[1]))
+        self.label_12.setText(_translate("MainWindow", data[0]))
+        self.label_11.setStyleSheet("color : white")
+        self.label_12.setStyleSheet("color : white")
+
     def calldatabase(self):
         up.Update(self.user.toPlainText()
                , self.name.toPlainText(), self.email.toPlainText(),
