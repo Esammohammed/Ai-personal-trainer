@@ -10,29 +10,50 @@ class Ui_Frame(object):
     def bicepsClicked(self):
 
         self.exnum = 'biceps'
-        self.textBrowser.setText('Sitting or standing, hold a pair of dumbbells by your side, palms facing forward. '
-                                 'Bend your elbow, pulling your hand(s) towards your shoulder slowly and with '
-                                 'control. Your upper arm and wrist should stay still; only move your forearm from '
-                                 'the elbow joint. Curl all the way up, leaving a little space between your hands and '
-                                 'shoulders. Pause, and lower down slowly all the way to the bottom.')
+        self.textBrowser.setText('What are used muscles for this exercise ?\n'
+                                 '-This exercise is for The biceps or biceps brachii muscle which is a large muscle that lies on the front of the upper arm between the shoulder and the elbow.\n'
+                                 '\nHow to do it ?\n'
+                                 '-With a dumbbell in hand, slowly curl the dumbbell upward at a controlled tempo,'
+                                 ' concentrating on contracting the biceps to move the load.'
+                                 'At the top of the movement, flex as hard as possible, then slowly lower the load.\n'
+                                 '*The key is not to lose tension on the biceps at any point in the range of motion.*\n'
+                                 '\nWhat are the benefits of this exercise?\n'
+                                 '-Apart from building muscle size, boosting athletic performance and facilitating daily activities, bicep curls build strength in the upper arm, train shoulder to be more stable.')
 
     def pushUpClicked(self):
         self.exnum = 'pushup'
-        self.textBrowser.setText('Get on the floor on all fours, positioning your hands slightly wider than your '
+        self.textBrowser.setText('What are used muscles for this exercise ?\n'
+                                 'Targets are Chest, arms, shoulders, and core\n'
+                                 '\nHow to do it ?\n'
+                                 'Get on the floor on all fours, positioning your hands slightly wider than your '
                                  'shoulders. Don\'t lock out the elbows; keep them slightly bent. Extend your legs '
-                                 'back so you are balanced on your hands and toes, your feet hip-width apart. '
-                                 'Contract your abs and tighten your core by pulling your belly button toward your '
-                                 'spine.  Inhale as you slowly bend your elbows and lower yourself to the floor, '
-                                 'until your elbows are at a 90-degree angle.Exhale while contracting your chest '
-                                 'muscles and pushing back up through your hands, returning to the start position. ')
+                                 'back so you are balanced on your hands and toes, your feet hip-width apart.'
+                                 '\n1- Contract your abs and tighten your core by pulling your belly button toward your spine.'
+                                 '\n2- Inhale as you slowly bend your elbows and lower yourself to the floor, until your elbows are at a 90-degree angle.'
+                                 '\n3- Exhale while contracting your chest muscles and pushing back up through your hands, returning to the start position.\n'
+                                 '\n What are the benefits of this exercise?\n'
+                                 '1. Increase Functional Strength via Full Body Activation\n'
+                                 '2. Muscle Stretching for Health and Vitality\n'
+                                 '3. Enhance Your Cardiovascular System\n'
+                                 '4. Increase Whole Body Muscle Definition – HGH Promotion\n'
+                                 '5. Protect Your Shoulders from Injury\n'
+                                 '6. Improve Your Posture\n'
+                                 '7. Prevent Lower Back Injuries\n')
 
     def shoulderPressClicked(self):
 
         self.exnum = 'ysa'
-        self.textBrowser.setText('Stand with feet shoulder-width apart and hold the dumbbells at shoulder height with '
-                                 'your elbows at a 90-degree angle.Slowly lift the dumbbells above your head without '
-                                 'fully straightening your arms. Pause at the top.Slowly return to the start '
-                                 'position. ')
+        self.textBrowser.setText('What are used muscles for this exercise ?\n'
+                                 'pectorals (chest), deltoids (shoulders),triceps (arms) and trapezius (upper back)\n'
+                                 '\nHow to do it ?\n'
+                                 'Hold the dumbbells by your shoulders with your palms facing forwards and your elbows out to the sides and bent at a 90° angle.'
+                                 ' Without leaning back, extend through your elbows to press the weights above your head. Then slowly return to the starting position.\n'
+                                 '\n What are the benefits of this exercise?\n'
+                                 '1- strength and size of the shoulder muscles\n'
+                                 '2- strength and size of the triceps muscles\n'
+                                 '3- strength and size of the trapezius muscle\n'
+                                 '4- strength in the core muscles, such as your obliques, transverse abdominal muscles, lower back, and spinal stabilizers, when performing the exercise while standing\n'
+                                 '5- improve performance of other exercises, like the bench press\n')
 
     def lateralRaisesClicked(self):
 
@@ -111,7 +132,7 @@ class Ui_Frame(object):
         self.shoulderPressButton.setFont(font)
         self.shoulderPressButton.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("ysa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("shoulder press logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.shoulderPressButton.setIcon(icon3)
         self.shoulderPressButton.setIconSize(QtCore.QSize(100, 100))
         self.shoulderPressButton.setObjectName("shoulderPressButton")
@@ -122,7 +143,7 @@ class Ui_Frame(object):
         self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.textBrowser.setObjectName("textBrowser")
         font = QtGui.QFont()
-        font.setPointSize(15)
+        font.setPointSize(14)
         self.textBrowser.setFont(font)
 
         self.lateralRaisesButton = QtWidgets.QPushButton(Frame)
@@ -166,7 +187,7 @@ class Ui_Frame(object):
         self.squatButton.setText(_translate("Frame", "Squat"))
         self.pushUpButton.setText(_translate("Frame", "push up"))
         self.bicepsButton.setText(_translate("Frame", "biceps curl"))
-        self.shoulderPressButton.setText(_translate("Frame", "Yoga Side "))
+        self.shoulderPressButton.setText(_translate("Frame", "shoulder press"))
         self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
         self.start.setText(_translate("Frame", "Start"))
 def Startexercise (exnum):
@@ -178,9 +199,9 @@ def Startexercise (exnum):
     if exnum == 'lateralRaise':
         import lateral_raises
         lateral_raises.main()
-    if exnum =='ysa':
-        import yoga_Side_angel
-        yoga_Side_angel.main()
+    if exnum =='lateral raises':
+        import Shoulder_Press
+        Shoulder_Press.main()
     if exnum =='squat':
         import squat
         squat.main()
