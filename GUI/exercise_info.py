@@ -58,27 +58,37 @@ class Ui_Frame(object):
     def lateralRaisesClicked(self):
 
         self.exnum = 'lateralRaise'
-        self.textBrowser.setText(
-            '1-The dumbbell lateral raise is a good exercise for building width in your upper body '
-            'which gives you the "V" shape. Grab a set of dumbbells and stand straight up with '
-            'the dumbbells at your sides.\n2-Your palms should be facing your body. You should be '
-            'holding the dumbbells slightly off your body, as this keeps the tension on the side '
-            'delts. This is your starting position for the exercise.\n3-To execute, slowly raise the '
-            'dumbbells up to around shoulder height. It\'s important that you do not let your '
-            'wrists go above your elbows while raising the weight, as this will take the work '
-            'off the side delts and put it on the front delts.\n4-Pause at the top of the movement, '
-            'and then slowly lower the weight back to the starting position.\n5- Do not let the '
-            'dumbbells touch your body, and then raise them for the next rep.')
+        self.textBrowser.setText('What are used muscles for this exercise ?\n'
+                                 'A lateral raise works your shoulder muscles as well as your triceps.\n'
+                                 '\nHow to do it ?\n'
+                                 'Stand or sit with a dumbbell in each hand at your sides.'
+                                 ' Keep your back straight, brace your core,'
+                                 ' and then slowly lift the weights out to the side until your arms are parallel with the floor, '
+                                 'with the elbow slightly bent. Then lower them back down, '
+                                 'again in measured fashion – you’ll find it all the harder if you avoid speeding up. '
+                                 'A lot of people will cheat by “shrugging” the weights up using their traps.'
+                                 ' Resist the urge to do that by not raising your shoulder blades during the rep – instead focus on the delts'
+                                 '\n What are the benefits of this exercise?\n'
+                                 'Strengthening your shoulder and upper back muscles helps build strength in your rear deltoids and upper body.'
+                                 ' On an aesthetic level, strong deltoids will help your upper body look bigger, stronger, and more toned.\n')
 
 
 
     def squatClicked(self):
         self.exnum = 'squat'
-        self.textBrowser.setText(
-            'The movement begins from a standing position. Weight is often added; typically in the form of a loaded barbell,'
-            ' but dumbbells and kettlebells may also be used. When a barbell is used, it may be braced across the upper trapezius muscle,'
-            ' which is termed a high bar squat, or held lower across the rear deltoids, termed a low bar squat.The movement is initiated'
-            ' by moving the hips back and bending the knees and hips to lower the torso and accompanying weight, then returning to the upright position.')
+        self.textBrowser.setText('What are used muscles for this exercise ?\n'
+                                 'The primary muscles involved include the gluteus maximus, hip flexors, and quadriceps.\n'
+                                 '\nHow to do it ?\n'
+                                 '1- Stand straight with feet hip-width apart.\n'
+                                 '2- Tighten your stomach muscles.\n'
+                                 '3- Lower down, as if sitting in an invisible chair.\n'
+                                 '4- Straighten your legs to lift back up.\n'
+                                 '5- Repeat the movement again and again.\n'
+                                 '\n What are the benefits of this exercise?\n'
+                                 'Squats burn calories and might help you lose weight.'
+                                 'They also lower your chances of injuring your knees and ankles. As you exercise,'
+                                 'the movement strengthens your tendons, bones, and ligaments around the leg muscles.\n'
+                                 'there are muscles that benefit from squats, too like Hip muscles, Calves, Hamstrings and Obliques.')
 
 
     def setupUi(self, Frame):
