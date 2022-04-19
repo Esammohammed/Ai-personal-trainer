@@ -85,7 +85,7 @@ class Ui_Form(object):
 
     def select_data(self):
         try:
-            con = pymysql.connect(host='localhost', user='root', password='1230A', )
+            con = pymysql.connect(host='localhost', user='root', password='1234', )
             cur = con.cursor()
             cur.execute('SELECT DISTINCT DATE(Date) FROM e_trainer.activity where idUser = %s;'
                         , (data[0]))
