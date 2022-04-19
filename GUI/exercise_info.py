@@ -67,7 +67,7 @@ class Ui_Frame(object):
                                  'with the elbow slightly bent. Then lower them back down, '
                                  'again in measured fashion – you’ll find it all the harder if you avoid speeding up. '
                                  'A lot of people will cheat by “shrugging” the weights up using their traps.'
-                                 ' Resist the urge to do that by not raising your shoulder blades during the rep – instead focus on the delts'
+                                 ' Resist the urge to do that by not raising your shoulder blades during the rep – instead focus on the delts\n'
                                  '\n What are the benefits of this exercise?\n'
                                  'Strengthening your shoulder and upper back muscles helps build strength in your rear deltoids and upper body.'
                                  ' On an aesthetic level, strong deltoids will help your upper body look bigger, stronger, and more toned.\n')
