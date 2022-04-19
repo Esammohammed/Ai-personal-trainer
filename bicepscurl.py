@@ -1,6 +1,4 @@
 
-
-
 def main ():
     import Pose_Estimation
     import cv2
@@ -14,7 +12,7 @@ def main ():
 
     cap = cv2.VideoCapture('bi.mp4')
     #cap = cv2.VideoCapture(0)
-
+    print(cap.isOpened())
     # Curl counter variables
     counter = 0
     stage = None
@@ -43,7 +41,7 @@ def main ():
 
                 # Visualize angle
                 cv2.putText(image, str(angle),
-                            tuple(np.multiply(elbow, [1280,720]).astype(int)),
+                            tuple(np.multiply(elbow, [640, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 

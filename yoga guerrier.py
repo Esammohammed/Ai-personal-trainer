@@ -102,11 +102,11 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
             # Visualize arms
             cv2.putText(image, str(angle1),
                         #for recorded live  dimentions are [640, 480]
-                        tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
+                        tuple(np.multiply(left_shoulder, [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 1,(225, 230, 0), 2, cv2.LINE_AA
                         )
             cv2.putText(image, str(angle2),
-                        tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
+                        tuple(np.multiply(right_shoulder, [640, 480]).astype(int)),
                         cv2.FONT_HERSHEY_SIMPLEX, 1,(225, 230, 0), 2, cv2.LINE_AA
                         )
 

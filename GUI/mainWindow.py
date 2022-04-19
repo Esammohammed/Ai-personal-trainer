@@ -13,7 +13,6 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
 from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
 from GUI.HistoryPage import Ui_Form

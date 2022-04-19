@@ -1,12 +1,11 @@
 import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
-from matplotlib import use
 
 from GUI import registration_form
 from PyQt5.QtWidgets import QMessageBox
 from Database import DBoperation
 import mainWindow
-import sys
+
 
 DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
