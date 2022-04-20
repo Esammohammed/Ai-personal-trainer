@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 class Ui_Frame(object):
     exnum =''
     def bicepsClicked(self):
-
         self.exnum = 'biceps'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  '-This exercise is for The biceps or biceps brachii muscle which is a large muscle that lies on the front of the upper arm between the shoulder and the elbow.\n'
@@ -42,7 +41,7 @@ class Ui_Frame(object):
 
     def shoulderPressClicked(self):
 
-        self.exnum = 'ysa'
+        self.exnum = 'shoulder_press'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  'pectorals (chest), deltoids (shoulders),triceps (arms) and trapezius (upper back)\n'
                                  '\nHow to do it ?\n'
@@ -209,7 +208,7 @@ def Startexercise (exnum):
     if exnum == 'lateralRaise':
         import lateral_raises
         lateral_raises.main()
-    if exnum =='lateral raises':
+    if exnum =='shoulder_press':
         import Shoulder_Press
         Shoulder_Press.main()
     if exnum =='squat':
