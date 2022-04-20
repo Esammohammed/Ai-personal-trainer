@@ -7,42 +7,50 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
 class Ui_Frame(object):
     exnum =''
-    def bicepsClicked(self):
 
-        self.exnum = 'biceps'
-        self.textBrowser.setText('What are used muscles for this exercise ?\n'
-                                 '-This exercise is for The biceps or biceps brachii muscle which is a large muscle that lies on the front of the upper arm between the shoulder and the elbow.\n'
+    def YogaSAClicked(self):
+        self.exnum = 'YSA'
+        self.textBrowser.setText('What is this yoga pose ?\n'
+                                 '-Side Angle Pose is a yoga pose that engages the legs, shoulders and abdominals.'
+                                 ' This lengthening pose helps reduce stiffness in the shoulders and back, '
+                                 'and it’s easily modifiable to accommodate varying levels of flexibility.\n'
                                  '\nHow to do it ?\n'
-                                 '-With a dumbbell in hand, slowly curl the dumbbell upward at a controlled tempo,'
-                                 ' concentrating on contracting the biceps to move the load.'
-                                 'At the top of the movement, flex as hard as possible, then slowly lower the load.\n'
-                                 '*The key is not to lose tension on the biceps at any point in the range of motion.*\n'
-                                 '\nWhat are the benefits of this exercise?\n'
-                                 '-Apart from building muscle size, boosting athletic performance and facilitating daily activities, bicep curls build strength in the upper arm, train shoulder to be more stable.')
+                                 '*Step 1*\n'
+                                 '-Standing tall, position your legs in a wide parallel stance and raise your arms straight out at your sides.'
+                                 ' Rotate your left leg outward so the center of your kneecap aligns with the center of your left ankle.'
+                                 ' Bend the left knee and keep your right leg straight.\n'
+                                 '*Step 2*\n'
+                                 '-Lower your left hand to the floor in front of your left foot.'
+                                 ' Raise your right arm overhead and lengthen the entire right side of your body,'
+                                 ' gazing toward your extended arm. Repeat on the other side.\n'
+                                 '\nWhat are the benefits of this pose?\n'
+                                 '1-Leg Stretch.\n'
+                                 '2-Core Strength.\n'
+                                 '3-Full-body Strength.\n')
 
-    def pushUpClicked(self):
-        self.exnum = 'pushup'
-        self.textBrowser.setText('What are used muscles for this exercise ?\n'
-                                 'Targets are Chest, arms, shoulders, and core\n'
+    def YogaGurrierClicked(self):
+        self.exnum = 'YG'
+        self.textBrowser.setText('What is this yoga pose ?\n'
+                                 'Yoga gurriuer pose (Warrior II pose) is a physical, mental and emotional workout. '
+                                 'As one of the most widely practiced postures in yoga, it’s suitable for yogis of all levels\n'
                                  '\nHow to do it ?\n'
-                                 'Get on the floor on all fours, positioning your hands slightly wider than your '
-                                 'shoulders. Don\'t lock out the elbows; keep them slightly bent. Extend your legs '
-                                 'back so you are balanced on your hands and toes, your feet hip-width apart.'
-                                 '\n1- Contract your abs and tighten your core by pulling your belly button toward your spine.'
-                                 '\n2- Inhale as you slowly bend your elbows and lower yourself to the floor, until your elbows are at a 90-degree angle.'
-                                 '\n3- Exhale while contracting your chest muscles and pushing back up through your hands, returning to the start position.\n'
-                                 '\n What are the benefits of this exercise?\n'
-                                 '1. Increase Functional Strength via Full Body Activation\n'
-                                 '2. Muscle Stretching for Health and Vitality\n'
-                                 '3. Enhance Your Cardiovascular System\n'
-                                 '4. Increase Whole Body Muscle Definition – HGH Promotion\n'
-                                 '5. Protect Your Shoulders from Injury\n'
-                                 '6. Improve Your Posture\n'
-                                 '7. Prevent Lower Back Injuries\n')
+                                 '1-The back foot points outward at 90 degrees.\n'
+                                 '2-The outer side of the rear foot remains well on the ground, the leg is fully extended.\n'
+                                 '3-The hips are facing outward.\n'
+                                 '4-The front knee forms a right angle and a line with the ankle (whether seen from above or from the side).\n'
+                                 '5-The upper body is centered over the hips and directed to the side.\n'
+                                 '6-The navel is pulled towards the spine, the lower back is long, the pelvis is active.\n'
+                                 '7-The shoulders are relaxed.\n'
+                                 '8-The arms are stretched at the same level, they form a line.\n'
+                                 '9-The gaze goes to the middle finger of the front hand.\n'
+                                 '\n What are the benefits of this pose?\n'
+                                 'This pose work nearly all your muscles. '
+                                 'It strengthens your legs, glutes, hips, core, chest, shoulders and arms.'
+                                 ' Holding the pose for an extended period of time will also help develop endurance.')
 
-    def shoulderPressClicked(self):
+    def YogaCobraClicked(self):
 
-        self.exnum = 'ysa'
+        self.exnum = 'YCS'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  'pectorals (chest), deltoids (shoulders),triceps (arms) and trapezius (upper back)\n'
                                  '\nHow to do it ?\n'
@@ -55,41 +63,6 @@ class Ui_Frame(object):
                                  '4- strength in the core muscles, such as your obliques, transverse abdominal muscles, lower back, and spinal stabilizers, when performing the exercise while standing\n'
                                  '5- improve performance of other exercises, like the bench press\n')
 
-    def lateralRaisesClicked(self):
-
-        self.exnum = 'lateralRaise'
-        self.textBrowser.setText('What are used muscles for this exercise ?\n'
-                                 'A lateral raise works your shoulder muscles as well as your triceps.\n'
-                                 '\nHow to do it ?\n'
-                                 'Stand or sit with a dumbbell in each hand at your sides.'
-                                 ' Keep your back straight, brace your core,'
-                                 ' and then slowly lift the weights out to the side until your arms are parallel with the floor, '
-                                 'with the elbow slightly bent. Then lower them back down, '
-                                 'again in measured fashion – you’ll find it all the harder if you avoid speeding up. '
-                                 'A lot of people will cheat by “shrugging” the weights up using their traps.'
-                                 ' Resist the urge to do that by not raising your shoulder blades during the rep – instead focus on the delts\n'
-                                 '\n What are the benefits of this exercise?\n'
-                                 'Strengthening your shoulder and upper back muscles helps build strength in your rear deltoids and upper body.'
-                                 ' On an aesthetic level, strong deltoids will help your upper body look bigger, stronger, and more toned.\n')
-
-
-
-    def squatClicked(self):
-        self.exnum = 'squat'
-        self.textBrowser.setText('What are used muscles for this exercise ?\n'
-                                 'The primary muscles involved include the gluteus maximus, hip flexors, and quadriceps.\n'
-                                 '\nHow to do it ?\n'
-                                 '1- Stand straight with feet hip-width apart.\n'
-                                 '2- Tighten your stomach muscles.\n'
-                                 '3- Lower down, as if sitting in an invisible chair.\n'
-                                 '4- Straighten your legs to lift back up.\n'
-                                 '5- Repeat the movement again and again.\n'
-                                 '\n What are the benefits of this exercise?\n'
-                                 'Squats burn calories and might help you lose weight.'
-                                 'They also lower your chances of injuring your knees and ankles. As you exercise,'
-                                 'the movement strengthens your tendons, bones, and ligaments around the leg muscles.\n'
-                                 'there are muscles that benefit from squats, too like Hip muscles, Calves, Hamstrings and Obliques.')
-
 
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
@@ -99,54 +72,45 @@ class Ui_Frame(object):
         )
         Frame.setGraphicsEffect(effect)
         Frame.setStyleSheet("background-color: #f8f8f8;")
-        self.squatButton = QtWidgets.QPushButton(Frame)
-        self.squatButton.setGeometry(QtCore.QRect(110, 480, 221, 101))
+
+        self.YSAButton = QtWidgets.QPushButton(Frame)
+        self.YSAButton.setGeometry(QtCore.QRect(110, 70, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.squatButton.setFont(font)
-        self.squatButton.setLayoutDirection(QtCore.Qt.LeftToRight)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.squatButton.setIcon(icon)
-        self.squatButton.setIconSize(QtCore.QSize(100, 100))
-        self.squatButton.setObjectName("squatButton")
-        self.squatButton.clicked.connect(lambda :self.squatClicked())
-        self.pushUpButton = QtWidgets.QPushButton(Frame)
-        self.pushUpButton.setGeometry(QtCore.QRect(110, 170, 221, 91))
+        self.YSAButton.setFont(font)
+        self.YSAButton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("ysa.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.YSAButton.setIcon(icon2)
+        self.YSAButton.setIconSize(QtCore.QSize(100, 100))
+        self.YSAButton.setObjectName("YSAButton")
+        self.YSAButton.clicked.connect(lambda :self.YogaSAClicked())
+
+        self.YGButton = QtWidgets.QPushButton(Frame)
+        self.YGButton.setGeometry(QtCore.QRect(110, 170, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.pushUpButton.setFont(font)
-        self.pushUpButton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.YGButton.setFont(font)
+        self.YGButton.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("pushUp logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.pushUpButton.setIcon(icon1)
-        self.pushUpButton.setIconSize(QtCore.QSize(100, 100))
-        self.pushUpButton.setObjectName("pushUpButton")
-        self.pushUpButton.clicked.connect(lambda :self.pushUpClicked())
-        self.bicepsButton = QtWidgets.QPushButton(Frame)
-        self.bicepsButton.setGeometry(QtCore.QRect(110, 70, 221, 91))
+        self.YGButton.setIcon(icon1)
+        self.YGButton.setIconSize(QtCore.QSize(100, 100))
+        self.YGButton.setObjectName("YGButton")
+        self.YGButton.clicked.connect(lambda :self.YogaGurrierClicked())
+
+        self.YCSButton = QtWidgets.QPushButton(Frame)
+        self.YCSButton.setGeometry(QtCore.QRect(110, 270, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.bicepsButton.setFont(font)
-        self.bicepsButton.setLayoutDirection(QtCore.Qt.LeftToRight)
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("biceps logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.bicepsButton.setIcon(icon2)
-        self.bicepsButton.setIconSize(QtCore.QSize(100, 100))
-        self.bicepsButton.setObjectName("bicepsButton")
-        self.bicepsButton.clicked.connect(lambda :self.bicepsClicked())
-        self.shoulderPressButton = QtWidgets.QPushButton(Frame)
-        self.shoulderPressButton.setGeometry(QtCore.QRect(110, 270, 221, 91))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.shoulderPressButton.setFont(font)
-        self.shoulderPressButton.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.YCSButton.setFont(font)
+        self.YCSButton.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap("shoulder press logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.shoulderPressButton.setIcon(icon3)
-        self.shoulderPressButton.setIconSize(QtCore.QSize(100, 100))
-        self.shoulderPressButton.setObjectName("shoulderPressButton")
-        self.shoulderPressButton.clicked.connect(lambda:self.shoulderPressClicked())
+        self.YCSButton.setIcon(icon3)
+        self.YCSButton.setIconSize(QtCore.QSize(100, 100))
+        self.YCSButton.setObjectName("YCSButton")
+        self.YCSButton.clicked.connect(lambda:self.YogaCobraClicked())
 
         self.textBrowser = QtWidgets.QTextBrowser(Frame)
         self.textBrowser.setGeometry(QtCore.QRect(380, 50, 641, 660))
@@ -155,19 +119,6 @@ class Ui_Frame(object):
         font = QtGui.QFont()
         font.setPointSize(14)
         self.textBrowser.setFont(font)
-
-        self.lateralRaisesButton = QtWidgets.QPushButton(Frame)
-        self.lateralRaisesButton.setGeometry(QtCore.QRect(110, 370, 221, 101))
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.lateralRaisesButton.setFont(font)
-        self.lateralRaisesButton.setLayoutDirection(QtCore.Qt.LeftToRight)
-        icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("lateral raises logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.lateralRaisesButton.setIcon(icon4)
-        self.lateralRaisesButton.setIconSize(QtCore.QSize(100, 100))
-        self.lateralRaisesButton.setObjectName("lateralRaisesButton")
-        self.lateralRaisesButton.clicked.connect(lambda :self.lateralRaisesClicked())
 
         self.start = QtWidgets.QPushButton(Frame)
         self.start.setGeometry(QtCore.QRect(110, 660, 221, 50))
@@ -182,10 +133,10 @@ class Ui_Frame(object):
         font.setPointSize(12)
         self.start.setFont(font)
         self.start.setLayoutDirection(QtCore.Qt.LeftToRight)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        'icon = QtGui.QIcon()'
+        'icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)'
 
-        self.start.setObjectName("squatButton")
+        self.start.setObjectName("startButton")
         self.start.clicked.connect(lambda: Startexercise(self.exnum))
 
         self.retranslateUi(Frame)
@@ -194,30 +145,22 @@ class Ui_Frame(object):
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
-        self.squatButton.setText(_translate("Frame", "Lateral Raises"))
-        self.pushUpButton.setText(_translate("Frame", "Warrior Pose"))
-        self.bicepsButton.setText(_translate("Frame", "Side Angel"))
-        self.shoulderPressButton.setText(_translate("Frame", "Cobra Stretch"))
-        self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
+        self.YSAButton.setText(_translate("Frame", "Side Angel"))
+        self.YGButton.setText(_translate("Frame", "Warrior Pose"))
+        self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
 def Startexercise (exnum):
     print (exnum)
 
-    if exnum=='biceps' :
-        import bicepscurl
-        bicepscurl.main()
-    if exnum == 'lateralRaise':
-        import lateral_raises
-        lateral_raises.main()
-    if exnum =='lateral raises':
-        import Shoulder_Press
-        Shoulder_Press.main()
-    if exnum =='squat':
-        import squat
-        squat.main()
-    if exnum == 'pushup':
-        import push_up
-        push_up.main()
+    if exnum=='YSA' :
+        import yoga_Side_angel
+        yoga_Side_angel.main()
+    if exnum =='YG':
+        import yoga_guerrier
+        yoga_guerrier.main()
+    if exnum == 'YCS':
+        import yoga_stretch
+        yoga_stretch.main()
 
 if __name__ == "__main__":
     import sys
