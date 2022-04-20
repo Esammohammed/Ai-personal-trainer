@@ -17,6 +17,7 @@ from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
+from GUI import exercise2
 #data = ('5', '2', '3', '4', None, None, None, None, None)
 
 import sys
@@ -133,8 +134,7 @@ class Ui_MainWindow(object):
         self.EXIT.setObjectName("EXIT")
         self.exFrame = QtWidgets.QFrame(self.centralwidget)
         self.exFrame.setGeometry(QtCore.QRect(460, 120, 0, 0))
-        self.exFrame.setStyleSheet("background-color:white;\n"
-"display:none;")
+
         self.exFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exFrame.setObjectName("exFrame")
@@ -190,7 +190,7 @@ class Ui_MainWindow(object):
         self.achFrame.hide()
 
     def showEx(self):
-        ui = Ui_Frame()
+        ui = exercise2.Ui_MainWindow()
         ui.setupUi(self.exFrame)
         self.exFrame.show()
         self.hisframe.hide()

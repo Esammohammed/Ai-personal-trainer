@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 class Ui_Frame(object):
     exnum =''
     def bicepsClicked(self):
+
         self.exnum = 'biceps'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  '-This exercise is for The biceps or biceps brachii muscle which is a large muscle that lies on the front of the upper arm between the shoulder and the elbow.\n'
@@ -41,7 +42,7 @@ class Ui_Frame(object):
 
     def shoulderPressClicked(self):
 
-        self.exnum = 'shoulder_press'
+        self.exnum = 'ysa'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  'pectorals (chest), deltoids (shoulders),triceps (arms) and trapezius (upper back)\n'
                                  '\nHow to do it ?\n'
@@ -193,10 +194,10 @@ class Ui_Frame(object):
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
-        self.squatButton.setText(_translate("Frame", "Squat"))
-        self.pushUpButton.setText(_translate("Frame", "push up"))
-        self.bicepsButton.setText(_translate("Frame", "biceps curl"))
-        self.shoulderPressButton.setText(_translate("Frame", "shoulder press"))
+        self.squatButton.setText(_translate("Frame", "Lateral Raises"))
+        self.pushUpButton.setText(_translate("Frame", "Warrior Pose"))
+        self.bicepsButton.setText(_translate("Frame", "Side Angel"))
+        self.shoulderPressButton.setText(_translate("Frame", "Cobra Stretch"))
         self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
         self.start.setText(_translate("Frame", "Start"))
 def Startexercise (exnum):
@@ -208,7 +209,7 @@ def Startexercise (exnum):
     if exnum == 'lateralRaise':
         import lateral_raises
         lateral_raises.main()
-    if exnum =='shoulder_press':
+    if exnum =='lateral raises':
         import Shoulder_Press
         Shoulder_Press.main()
     if exnum =='squat':
