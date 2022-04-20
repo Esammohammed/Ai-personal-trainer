@@ -51,17 +51,19 @@ class Ui_Frame(object):
     def YogaCobraClicked(self):
 
         self.exnum = 'YCS'
-        self.textBrowser.setText('What are used muscles for this exercise ?\n'
-                                 'pectorals (chest), deltoids (shoulders),triceps (arms) and trapezius (upper back)\n'
+        self.textBrowser.setText('What is this yoga pose ?\n'
+                                 'It\'s a stretch pose that targets the hip flexors, which are the muscles along the front of the thigh and pelvis.\n'
                                  '\nHow to do it ?\n'
-                                 'Hold the dumbbells by your shoulders with your palms facing forwards and your elbows out to the sides and bent at a 90° angle.'
-                                 ' Without leaning back, extend through your elbows to press the weights above your head. Then slowly return to the starting position.\n'
+                                 '1- Start by lying flat on your stomach.\n'
+                                 '2- Point your toes behind you and place your hands under your shoulders.\n'
+                                 '3- Keep your elbows close to your ribs.\n'
+                                 '4- Inhale and press your palms into the floor as you lift your chest off the ground.\n'
+                                 '5- Slightly bend your elbows and hug them into your sides.\n'
+                                 '6- Pull your belly in and roll your shoulders down and back.\n'
+                                 '7- Keep your neck neutral and gaze upward.\n'
+                                 '8- Exhale and return to start.\n'
                                  '\n What are the benefits of this exercise?\n'
-                                 '1- strength and size of the shoulder muscles\n'
-                                 '2- strength and size of the triceps muscles\n'
-                                 '3- strength and size of the trapezius muscle\n'
-                                 '4- strength in the core muscles, such as your obliques, transverse abdominal muscles, lower back, and spinal stabilizers, when performing the exercise while standing\n'
-                                 '5- improve performance of other exercises, like the bench press\n')
+                                 'It increases flexibility and strength in your back, arms, and shoulders.')
 
 
     def setupUi(self, Frame):
