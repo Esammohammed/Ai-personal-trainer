@@ -13,9 +13,9 @@ import mediapipe as mp
 import numpy as np
 
 from pyqt5_plugins.examplebutton import QtWidgets
-global textBrowser
 
-class App(QWidget,QThread):
+class App(QWidget):
+
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Qt live label demo")
@@ -27,7 +27,7 @@ class App(QWidget,QThread):
 
         # create a text label
         self.textLabel = QLabel('Hints')
-        textBrowser= QtWidgets.QTextBrowser()
+        self.textBrowser = QLabel('label')
 
         font = QtGui.QFont()
         font.setPointSize(16)
@@ -45,14 +45,15 @@ class App(QWidget,QThread):
         vbox.addWidget(self.image_label)
         vbox.addWidget(self.textLabel)
         vbox.addWidget(self.label)
-        vbox.addWidget(textBrowser)
+        vbox.addWidget(self.textBrowser)
 
         # set the vbox layout as the widgets layout
         self.setLayout(vbox)
         self.setGeometry(100, 60, 950, 950)
         # create the video capture thread
 
-        self.thread = VideoThread(textBrowser)
+
+        self.thread = VideoThread(self.textBrowser)
         # connect its signal to the update_image slot
         self.thread.change_pixmap_signal.connect(self.update_image)
         # start the thread
@@ -68,6 +69,8 @@ class App(QWidget,QThread):
         qt_img = self.convert_cv_qt(cv_img)
         self.image_label.setPixmap(qt_img)
 
+    def showhints(self, zz):
+        self.textBrowser.setText(zz)
     def convert_cv_qt(self, cv_img):
         """Convert from an opencv image to QPixmap"""
         rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
@@ -76,15 +79,17 @@ class App(QWidget,QThread):
         convert_to_Qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
         p = convert_to_Qt_format.scaled(self.disply_width, self.display_height, Qt.KeepAspectRatio)
         return QPixmap.fromImage(p)
+
 class VideoThread(QThread):
     change_pixmap_signal = pyqtSignal(np.ndarray)
-    def __init__(self, text ):
-        super(QThread, self).__init__()
-        self.do_create_data = text
+    def __init__(self,xx):
+        self.__xx = xx
+        super().__init__()
 
     def run(self):
+        self.__xx.setText('asdas')
         try:
-            self.do_create_data.setText('sdf')
+            pass
         except Exception as EX:
             print (EX)
         mp_drawing = mp.solutions.drawing_utils
@@ -184,13 +189,11 @@ class VideoThread(QThread):
 
 
 
+
 if __name__ == "__main__":
 
     app = QApplication(sys.argv)
 
-
-
-    global a
     a= App()
 
     a.show()
