@@ -6,7 +6,7 @@ def main ():
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('letral.mpeg')
+    cap = cv2.VideoCapture('letral.mp4')
 
     # Curl counter variables
     counter = 0

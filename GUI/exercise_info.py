@@ -4,9 +4,12 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
+from GUI import exercise2
+
 
 class Ui_Frame(object):
     exnum =''
+
     def bicepsClicked(self):
         self.exnum = 'biceps'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
@@ -184,12 +187,37 @@ class Ui_Frame(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
-        self.start.setObjectName("squatButton")
+
         self.start.clicked.connect(lambda: Startexercise(self.exnum))
 
+        self.back = QtWidgets.QPushButton(Frame)
+        self.back.setGeometry(QtCore.QRect(110, 720, 221, 50))
+        self.back.setStyleSheet(" ")
+
+        self.back.setStyleSheet("QPushButton{\n"
+                                "background-color:#2b3942;\n"
+                                "color:white;\n;border-radius: 5px;font-size: 17px; "
+                                "font-family: 'Source Sans Pro', sans-serif;padding: 6px 18px;font-weight: bold}\n"
+
+                                "\n"
+                                "QPushButton:hover {\n"
+                                "  background-color: #1f292f;\n"
+                                "}")
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.back.setFont(font)
+        self.back.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.back.clicked.connect(lambda: self.back)
         self.retranslateUi(Frame)
         QtCore.QMetaObject.connectSlotsByName(Frame)
 
+    def back (self):
+        ui = exercise2.Ui_MainWindow()
+        ui.setupUi(self.exFrame)
+        self.exFrame.show()
+        self.hisframe.hide()
+        self.achFrame.hide()
+        self.usFrame.hide()
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
@@ -198,7 +226,9 @@ class Ui_Frame(object):
         self.bicepsButton.setText(_translate("Frame", "biceps curl"))
         self.shoulderPressButton.setText(_translate("Frame", "shoulder press"))
         self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
+        self.back.setText(_translate("Frame", "Back"))
         self.start.setText(_translate("Frame", "Start"))
+
 def Startexercise (exnum):
     print (exnum)
 

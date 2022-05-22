@@ -11,14 +11,35 @@ def main ():
     #for recorded vidoe
 
     cap = cv2.VideoCapture('bi.mp4')
-    #cap = cv2.VideoCapture(0)
+   # cap = cv2.VideoCapture(0)
     print(cap.isOpened())
     # Curl counter variables
     counter = 0
     stage = None
+    oldhints = ''
+    new_hints = ''
+    new_hints+="Stand straight with a dumbbell in  hand,\nyour feet shoulder-width apart, and hands by your sides."
+    oldhints = new_hints
+
+    def drawhints (image):
+        print (oldhints)
+        # for recorded 1280 x 720  video
+        """
+        image = cv2.rectangle(image, (0, 650), (100 + 2000, 900), (0, 0, 0), -1)
+        cv2.putText(image,  oldhints, (230,  680 ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
+        """
+
+        # for live  1280 x 720  video
+        image = cv2.rectangle(image, (0, 650), (100 + 2000, 900), (0, 0, 0), -1)
+        for i, line in enumerate(oldhints.split('\n')):
+            cv2.putText(image, line, (0, 670+(i*30)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
 
-    ## Setup mediapipe instance
+
+
+    # for recorded vidoe
+    # for recorded vidoe
+
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
@@ -48,8 +69,14 @@ def main ():
                 # Curl counter logic
                 if angle > 160:
                     stage = "down"
+                    if new_hints!='':
+                        new_hints +='\n'
+                    new_hints +="Great jop, Squeeze the biceps and lift the dumbbells.\nKeep the elbows close to your body"
                 if angle < 35 and stage == 'down':
                     stage = "up"
+                    if new_hints!='':
+                        new_hints +='\n'
+                    new_hints +="nice, slowly lower the arms to the starting position"
                     counter += 1
                     print(counter)
 
@@ -58,6 +85,7 @@ def main ():
 
             # Render curl counter
             # Setup status box
+
             cv2.rectangle(image, (0, 0), (225, 73), (245, 117, 16), -1)
 
             # Rep data
@@ -79,7 +107,10 @@ def main ():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
-
+            if new_hints!= oldhints and new_hints != '':
+                oldhints = new_hints
+            drawhints(image)
+            new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -87,4 +118,6 @@ def main ():
 
         cap.release()
         cv2.destroyAllWindows()
+
+
 main()
