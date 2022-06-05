@@ -13,7 +13,7 @@ class database_operations:
 
         cur = con.cursor()
         cur.execute(
-            "INSERT INTO `e_trainer`.`userr` (`idUser`, `name`, `Email`, `Password`, `Age`, `height`, `weight`, `Level`, `Gender`) "
+        "INSERT INTO `e_trainer`.`userr` (`idUser`, `name`, `Email`, `Password`, `Age`, `height`, `weight`, `Level`, `Gender`) "
             " values(%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             , (id, name, email, password, age, height, weight, level, gender))
         con.commit()

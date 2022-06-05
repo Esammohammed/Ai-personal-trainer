@@ -6,10 +6,6 @@ def main ():
     import numpy as np
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
-
-
-    #for recorded vidoe
-
     cap = cv2.VideoCapture('bi.mp4')
    # cap = cv2.VideoCapture(0)
     print(cap.isOpened())

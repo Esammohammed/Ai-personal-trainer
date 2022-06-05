@@ -94,8 +94,11 @@ class Ui_Frame(object):
 
 
     def setupUi(self, Frame):
+
         Frame.setObjectName("Frame")
         Frame.resize(1140, 833)
+        self.centralwidget = QtWidgets.QWidget(Frame)
+        self.centralwidget.setObjectName("centralwidget")
         effect = QGraphicsDropShadowEffect(
             offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
@@ -188,7 +191,7 @@ class Ui_Frame(object):
         icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
 
-        self.start.clicked.connect(lambda: Startexercise(self.exnum))
+        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,Frame))
 
         self.back = QtWidgets.QPushButton(Frame)
         self.back.setGeometry(QtCore.QRect(110, 720, 221, 50))
@@ -229,24 +232,36 @@ class Ui_Frame(object):
         self.back.setText(_translate("Frame", "Back"))
         self.start.setText(_translate("Frame", "Start"))
 
-def Startexercise (exnum):
-    print (exnum)
+    def Startexercise (self,exnum,Frame):
+        print (exnum)
+        if exnum=='biceps' :
+            import drawhint
+            import sys
+            self.drawhintfr = QtWidgets.QFrame(self.centralwidget)
+            self.drawhintfr.setGeometry(QtCore.QRect(80, 60, 0, 0))
 
-    if exnum=='biceps' :
-        import bicepscurl
-        bicepscurl.main()
-    if exnum == 'lateralRaise':
-        import lateral_raises
-        lateral_raises.main()
-    if exnum =='shoulder_press':
-        import Shoulder_Press
-        Shoulder_Press.main()
-    if exnum =='squat':
-        import squat
-        squat.main()
-    if exnum == 'pushup':
-        import push_up
-        push_up.main()
+            self.drawhintfr.setFrameShape(QtWidgets.QFrame.StyledPanel)
+            self.drawhintfr.setFrameShadow(QtWidgets.QFrame.Raised)
+            self.drawhintfr.setObjectName("drawhintfr")
+
+            ui = drawhint.Ui_MainWindow()
+            ui.setupUi(self.drawhintfr)
+            self.drawhintfr.show()
+
+            Frame.hide()
+
+        if exnum == 'lateralRaise':
+            import lateral_raises
+            lateral_raises.main()
+        if exnum =='shoulder_press':
+            import Shoulder_Press
+            Shoulder_Press.main()
+        if exnum =='squat':
+            import squat
+            squat.main()
+        if exnum == 'pushup':
+            import push_up
+            push_up.main()
 
 if __name__ == "__main__":
     import sys

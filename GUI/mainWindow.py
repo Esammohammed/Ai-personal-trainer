@@ -15,9 +15,11 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
+from GUI.drawhint import Ui_MainWindow
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
 from GUI import exercise2
+import drawhint
 #data = ('5', '2', '3', '4', None, None, None, None, None)
 
 import sys
@@ -54,6 +56,7 @@ class Ui_MainWindow(object):
 "}")
         self.exercises.setObjectName("exercises")
         self.exercises.clicked.connect(self.showEx)
+
 
         self.listView = QtWidgets.QListView(self.centralwidget)
         self.listView.setGeometry(QtCore.QRect(0, 0, 301, 1050))
@@ -138,7 +141,16 @@ class Ui_MainWindow(object):
         self.exFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exFrame.setObjectName("exFrame")
+##########
+        self.drawhintfr = QtWidgets.QFrame(self.centralwidget)
+        self.drawhintfr.setGeometry(QtCore.QRect(460, 120, 0, 0))
 
+        self.drawhintfr.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.drawhintfr.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.drawhintfr.setObjectName("drawhintfr")
+
+
+############
         self.usFrame = QtWidgets.QFrame(self.centralwidget)
         self.usFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
 
@@ -165,6 +177,7 @@ class Ui_MainWindow(object):
 
         self.EXIT.clicked.connect(sys.exit)
         self.exFrame.raise_()
+        self.drawhintfr.raise_()
         self.listView.raise_()
         self.exercises.raise_()
         self.userInfo.raise_()
@@ -179,6 +192,7 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+
         self.exercises.setText(_translate("MainWindow", "Exercises"))
         self.userInfo.setText(_translate("MainWindow", "Show User Info"))
         self.history.setText(_translate("MainWindow", "History"))
@@ -188,7 +202,7 @@ class Ui_MainWindow(object):
         self.usFrame.hide()
         self.hisframe.hide()
         self.achFrame.hide()
-
+        self.drawhintfr.hide()
     def showEx(self):
         ui = exercise2.Ui_MainWindow()
         ui.setupUi(self.exFrame)
@@ -196,7 +210,7 @@ class Ui_MainWindow(object):
         self.hisframe.hide()
         self.achFrame.hide()
         self.usFrame.hide()
-
+        self.drawhintfr.hide()
     def showUs(self):
 
         ui = Ui_MainWindow1(data)
@@ -205,6 +219,7 @@ class Ui_MainWindow(object):
         self.hisframe.hide()
         self.achFrame.hide()
         self.exFrame.hide()
+        self.drawhintfr.hide()
 
 
     def showHis(self):
@@ -214,15 +229,24 @@ class Ui_MainWindow(object):
         self.achFrame.hide()
         self.usFrame.hide()
         self.exFrame.hide()
+        self.drawhintfr.hide()
 
     def showAch(self):
+
+        ui = drawhint.Ui_MainWindow()
+        ui.setupUi(self.drawhintfr)
+        self.drawhintfr.show()
+        self.hisframe.hide()
+        self.usFrame.hide()
+        self.exFrame.hide()
+        '''
         ui = Ui_Dialog(data)
         ui.setupUi(self.achFrame)
         self.achFrame.show()
         self.hisframe.hide()
         self.usFrame.hide()
         self.exFrame.hide()
-
+  '''
 
 if __name__ == "__main__":
     import sys
