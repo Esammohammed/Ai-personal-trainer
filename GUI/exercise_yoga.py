@@ -67,14 +67,21 @@ class Ui_Frame(object):
 
     def setupUi(self, Frame):
         Frame.setObjectName("Frame")
+        Frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
+        self.centralwidget = QtWidgets.QWidget(Frame)
+        self.centralwidget.setObjectName("centralwidget")
         Frame.resize(1140, 833)
+        self.frame_4 = QtWidgets.QFrame(self.centralwidget)
+
+        self.frame_4.setGeometry(QtCore.QRect(0, 0, 1161, 111))
+        self.frame_4.setStyleSheet("background-color: #f8f8f8;")
         effect = QGraphicsDropShadowEffect(
             offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
-        Frame.setGraphicsEffect(effect)
-        Frame.setStyleSheet("background-color: #f8f8f8;")
-
-        self.YSAButton = QtWidgets.QPushButton(Frame)
+        self.frame_4.setGraphicsEffect(effect)
+        self.frame_4.setStyleSheet("background-color: #f8f8f8;")
+        self.frame_4.resize(1140, 833)
+        self.YSAButton = QtWidgets.QPushButton(self.frame_4)
         self.YSAButton.setGeometry(QtCore.QRect(110, 70, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -87,7 +94,7 @@ class Ui_Frame(object):
         self.YSAButton.setObjectName("YSAButton")
         self.YSAButton.clicked.connect(lambda :self.YogaSAClicked())
 
-        self.YGButton = QtWidgets.QPushButton(Frame)
+        self.YGButton = QtWidgets.QPushButton(self.frame_4)
         self.YGButton.setGeometry(QtCore.QRect(110, 170, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -100,7 +107,7 @@ class Ui_Frame(object):
         self.YGButton.setObjectName("YGButton")
         self.YGButton.clicked.connect(lambda :self.YogaGurrierClicked())
 
-        self.YCSButton = QtWidgets.QPushButton(Frame)
+        self.YCSButton = QtWidgets.QPushButton(self.frame_4)
         self.YCSButton.setGeometry(QtCore.QRect(110, 270, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -113,7 +120,7 @@ class Ui_Frame(object):
         self.YCSButton.setObjectName("YCSButton")
         self.YCSButton.clicked.connect(lambda:self.YogaCobraClicked())
 
-        self.textBrowser = QtWidgets.QTextBrowser(Frame)
+        self.textBrowser = QtWidgets.QTextBrowser(self.frame_4)
         self.textBrowser.setGeometry(QtCore.QRect(380, 50, 641, 660))
         self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.textBrowser.setObjectName("textBrowser")
@@ -121,7 +128,7 @@ class Ui_Frame(object):
         font.setPointSize(14)
         self.textBrowser.setFont(font)
 
-        self.start = QtWidgets.QPushButton(Frame)
+        self.start = QtWidgets.QPushButton(self.frame_4)
         self.start.setGeometry(QtCore.QRect(110, 660, 221, 50))
         self.start.setStyleSheet(" ")
 
@@ -140,8 +147,8 @@ class Ui_Frame(object):
         self.start.setObjectName("startButton")
         self.start.clicked.connect(lambda: Startexercise(self.exnum))
 
-        self.retranslateUi(Frame)
-        QtCore.QMetaObject.connectSlotsByName(Frame)
+        self.retranslateUi(self.frame_4)
+        QtCore.QMetaObject.connectSlotsByName(self.frame_4)
 
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate

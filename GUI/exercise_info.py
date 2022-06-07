@@ -4,7 +4,7 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
-from GUI import exercise2
+from GUI import exercise2, test
 
 
 class Ui_Frame(object):
@@ -96,15 +96,27 @@ class Ui_Frame(object):
     def setupUi(self, Frame):
 
         Frame.setObjectName("Frame")
-        Frame.resize(1140, 833)
+
+        Frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.centralwidget = QtWidgets.QWidget(Frame)
         self.centralwidget.setObjectName("centralwidget")
+        Frame.resize(1140, 833)
+        self.frame_4 = QtWidgets.QFrame(self.centralwidget)
+
+        self.frame_4.setGeometry(QtCore.QRect(0, 0, 1161, 111))
+        self.frame_4.setStyleSheet("background-color: #f8f8f8;")
         effect = QGraphicsDropShadowEffect(
             offset=QPoint(3, 3), blurRadius=50, color=QColor("black")
         )
-        Frame.setGraphicsEffect(effect)
-        Frame.setStyleSheet("background-color: #f8f8f8;")
-        self.squatButton = QtWidgets.QPushButton(Frame)
+
+        self.frame_4.setGraphicsEffect(effect)
+        self.frame_4.setStyleSheet("background-color: #f8f8f8;")
+        self.frame_4.setGraphicsEffect(effect)
+        self.frame_4.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.frame_4.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.frame_4.setObjectName("frame_4")
+        self.frame_4.resize(1140, 833)
+        self.squatButton = QtWidgets.QPushButton(self.frame_4)
         self.squatButton.setGeometry(QtCore.QRect(110, 480, 221, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -116,7 +128,7 @@ class Ui_Frame(object):
         self.squatButton.setIconSize(QtCore.QSize(100, 100))
         self.squatButton.setObjectName("squatButton")
         self.squatButton.clicked.connect(lambda :self.squatClicked())
-        self.pushUpButton = QtWidgets.QPushButton(Frame)
+        self.pushUpButton = QtWidgets.QPushButton(self.frame_4)
         self.pushUpButton.setGeometry(QtCore.QRect(110, 170, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -128,7 +140,7 @@ class Ui_Frame(object):
         self.pushUpButton.setIconSize(QtCore.QSize(100, 100))
         self.pushUpButton.setObjectName("pushUpButton")
         self.pushUpButton.clicked.connect(lambda :self.pushUpClicked())
-        self.bicepsButton = QtWidgets.QPushButton(Frame)
+        self.bicepsButton = QtWidgets.QPushButton(self.frame_4)
         self.bicepsButton.setGeometry(QtCore.QRect(110, 70, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -140,7 +152,7 @@ class Ui_Frame(object):
         self.bicepsButton.setIconSize(QtCore.QSize(100, 100))
         self.bicepsButton.setObjectName("bicepsButton")
         self.bicepsButton.clicked.connect(lambda :self.bicepsClicked())
-        self.shoulderPressButton = QtWidgets.QPushButton(Frame)
+        self.shoulderPressButton = QtWidgets.QPushButton(self.frame_4)
         self.shoulderPressButton.setGeometry(QtCore.QRect(110, 270, 221, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -153,7 +165,7 @@ class Ui_Frame(object):
         self.shoulderPressButton.setObjectName("shoulderPressButton")
         self.shoulderPressButton.clicked.connect(lambda:self.shoulderPressClicked())
 
-        self.textBrowser = QtWidgets.QTextBrowser(Frame)
+        self.textBrowser = QtWidgets.QTextBrowser(self.frame_4)
         self.textBrowser.setGeometry(QtCore.QRect(380, 50, 641, 660))
         self.textBrowser.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.textBrowser.setObjectName("textBrowser")
@@ -161,7 +173,7 @@ class Ui_Frame(object):
         font.setPointSize(14)
         self.textBrowser.setFont(font)
 
-        self.lateralRaisesButton = QtWidgets.QPushButton(Frame)
+        self.lateralRaisesButton = QtWidgets.QPushButton(self.frame_4)
         self.lateralRaisesButton.setGeometry(QtCore.QRect(110, 370, 221, 101))
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -174,7 +186,7 @@ class Ui_Frame(object):
         self.lateralRaisesButton.setObjectName("lateralRaisesButton")
         self.lateralRaisesButton.clicked.connect(lambda :self.lateralRaisesClicked())
 
-        self.start = QtWidgets.QPushButton(Frame)
+        self.start = QtWidgets.QPushButton(self.frame_4)
         self.start.setGeometry(QtCore.QRect(110, 660, 221, 50))
         self.start.setStyleSheet(" ")
 
@@ -191,9 +203,9 @@ class Ui_Frame(object):
         icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
 
-        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,Frame))
+        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4))
 
-        self.back = QtWidgets.QPushButton(Frame)
+        self.back = QtWidgets.QPushButton(self.frame_4)
         self.back.setGeometry(QtCore.QRect(110, 720, 221, 50))
         self.back.setStyleSheet(" ")
 
@@ -211,8 +223,8 @@ class Ui_Frame(object):
         self.back.setFont(font)
         self.back.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.back.clicked.connect(lambda: self.back)
-        self.retranslateUi(Frame)
-        QtCore.QMetaObject.connectSlotsByName(Frame)
+        self.retranslateUi(self.frame_4)
+        QtCore.QMetaObject.connectSlotsByName(self.frame_4)
 
     def back (self):
         ui = exercise2.Ui_MainWindow()
@@ -235,19 +247,15 @@ class Ui_Frame(object):
     def Startexercise (self,exnum,Frame):
         print (exnum)
         if exnum=='biceps' :
-            import drawhint
-            import sys
-            self.drawhintfr = QtWidgets.QFrame(self.centralwidget)
-            self.drawhintfr.setGeometry(QtCore.QRect(80, 60, 0, 0))
+            self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
+            self.exFrame2.setGeometry(QtCore.QRect(300, -10, 591, 631))
 
-            self.drawhintfr.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            self.drawhintfr.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.drawhintfr.setObjectName("drawhintfr")
-
-            ui = drawhint.Ui_MainWindow()
-            ui.setupUi(self.drawhintfr)
-            self.drawhintfr.show()
-
+            self.exFrame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+            self.exFrame2.setFrameShadow(QtWidgets.QFrame.Raised)
+            self.exFrame2.setObjectName("exFrame2")
+            ui = test.Ui_MainWindow()
+            ui.setupUi(self.exFrame2)
+            self.exFrame2.show()
             Frame.hide()
 
         if exnum == 'lateralRaise':
@@ -265,7 +273,10 @@ class Ui_Frame(object):
 
 if __name__ == "__main__":
     import sys
-    Frame = QtWidgets.QFrame()
+
+    app = QtWidgets.QApplication(sys.argv)
+    Form = QtWidgets.QWidget()
     ui = Ui_Frame()
-    ui.setupUi(Frame)
-    Frame.show()
+    ui.setupUi(Form)
+    Form.show()
+    sys.exit(app.exec_())

@@ -103,7 +103,7 @@ class Ui_MainWindow(object):
     def workout_ex(self ,frame):
 
         self.exinfoFrame = QtWidgets.QFrame(self.centralwidget)
-        self.exinfoFrame.setGeometry(QtCore.QRect(80, 60, 0, 0))
+        self.exinfoFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
 
         self.exinfoFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exinfoFrame.setFrameShadow(QtWidgets.QFrame.Raised)
