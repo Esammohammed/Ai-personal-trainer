@@ -1,9 +1,11 @@
+from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
+import cv2
+import mediapipe as mp
+import numpy as np
+import Pose_Estimation
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QLineEdit, QWidget, QPlainTextEdit, QTextEdit
+def main (textbox):
 
-def main ():
-    import Pose_Estimation
-    import cv2
-    import mediapipe as mp
-    import numpy as np
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     cap = cv2.VideoCapture('bi.mp4')
@@ -15,27 +17,9 @@ def main ():
     oldhints = ''
     new_hints = ''
     new_hints+="Stand straight with a dumbbell in  hand,\nyour feet shoulder-width apart, and hands by your sides."
-    oldhints = new_hints
-
-    def drawhints (image):
+    def drawhints ():
         print (oldhints)
-        # for recorded 1280 x 720  video
-        """
-        image = cv2.rectangle(image, (0, 650), (100 + 2000, 900), (0, 0, 0), -1)
-        cv2.putText(image,  oldhints, (230,  680 ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
-        """
-
-        # for live  1280 x 720  video
-        image = cv2.rectangle(image, (0, 650), (100 + 2000, 900), (0, 0, 0), -1)
-        for i, line in enumerate(oldhints.split('\n')):
-            cv2.putText(image, line, (0, 670+(i*30)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-
-
-
-
-    # for recorded vidoe
-    # for recorded vidoe
-
+        textbox.setPlainText(oldhints);
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
@@ -105,7 +89,7 @@ def main ():
                                       )
             if new_hints!= oldhints and new_hints != '':
                 oldhints = new_hints
-            drawhints(image)
+                drawhints()
             new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
@@ -114,6 +98,3 @@ def main ():
 
         cap.release()
         cv2.destroyAllWindows()
-
-
-main()

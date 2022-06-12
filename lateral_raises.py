@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import Pose_Estimation
-def main ():
+def main (textbox):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     #cap = cv2.VideoCapture(0)
@@ -11,7 +11,15 @@ def main ():
     # Curl counter variables
     counter = 0
     stage = 'down'
+    oldhints = ''
+    new_hints = ''
+    new_hints += "Stand tall, a dumbbell in each hand"
+    oldhints = new_hints
 
+    def drawhints():
+
+        print(oldhints)
+        textbox.setPlainText(oldhints);
     ## Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
@@ -55,10 +63,17 @@ def main ():
                 # Curl counter logic
                 if angle1 > 85 and angle2 >85 and stage == 'down':
                     stage = "up"
+                    if new_hints!='':
+                        new_hints +='\n'
+                    new_hints +="Raise your arms simultaneously just a couple inches out to each side and pause."
                 if (angle1 < 45 and  angle2<45 and stage == "up"):
                     counter += 1
                     print(counter)
                     stage = "down"
+                    if new_hints != '':
+                        new_hints += '\n'
+                    new_hints += "Lower the weights slowly bringing your arms back to your sides. Breathe out as you lower the dumbbells"
+
 
             except:
                 pass
@@ -86,7 +101,10 @@ def main ():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
-
+            if new_hints != oldhints and new_hints != '':
+                oldhints = new_hints
+                drawhints()
+            new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):

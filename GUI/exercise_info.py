@@ -1,10 +1,20 @@
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+import bicepscurl
+import lateral_raises
+import squat
+import threading
+import Pose_Estimation
+import cv2
+import mediapipe as mp
+import numpy as np
+import Timer
 
-from GUI import exercise2, test
+from GUI import exercise2, Hints
 
 
 class Ui_Frame(object):
@@ -226,6 +236,15 @@ class Ui_Frame(object):
         self.retranslateUi(self.frame_4)
         QtCore.QMetaObject.connectSlotsByName(self.frame_4)
 
+        #hint frame
+    def Frame_hint (self):
+        self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
+        self.exFrame2.setGeometry(QtCore.QRect(300, -10, 591, 631))
+        self.exFrame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.exFrame2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.exFrame2.setObjectName("exFrame2")
+        self.ui = Hints.Ui_MainWindow()
+        self.ui.setupUi(self.exFrame2)
     def back (self):
         ui = exercise2.Ui_MainWindow()
         ui.setupUi(self.exFrame)
@@ -245,28 +264,27 @@ class Ui_Frame(object):
         self.start.setText(_translate("Frame", "Start"))
 
     def Startexercise (self,exnum,Frame):
-        print (exnum)
-        if exnum=='biceps' :
-            self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
-            self.exFrame2.setGeometry(QtCore.QRect(300, -10, 591, 631))
-
-            self.exFrame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
-            self.exFrame2.setFrameShadow(QtWidgets.QFrame.Raised)
-            self.exFrame2.setObjectName("exFrame2")
-            ui = test.Ui_MainWindow()
-            ui.setupUi(self.exFrame2)
+        if exnum == 'biceps':
+            self.Frame_hint()
+            a_thread = threading.Thread(target=bicepscurl.main, args=(self.ui.textbox,))
+            a_thread.start()
             self.exFrame2.show()
             Frame.hide()
-
         if exnum == 'lateralRaise':
-            import lateral_raises
-            lateral_raises.main()
+            self.Frame_hint()
+            a_thread = threading.Thread(target=lateral_raises.main, args=(self.ui.textbox,))
+            a_thread.start()
+            self.exFrame2.show()
+            Frame.hide()
         if exnum =='shoulder_press':
             import Shoulder_Press
             Shoulder_Press.main()
         if exnum =='squat':
-            import squat
-            squat.main()
+            self.Frame_hint()
+            a_thread = threading.Thread(target=squat.main, args=(self.ui.textbox,))
+            a_thread.start()
+            self.exFrame2.show()
+            Frame.hide()
         if exnum == 'pushup':
             import push_up
             push_up.main()

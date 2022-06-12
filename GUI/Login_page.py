@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QMessageBox
 from Database import DBoperation
 import mainWindow
 
-
 DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
 
@@ -69,6 +68,7 @@ class Ui_MainWindow(object):
                                       "background-color: #1f292f;\n"
                                       "}")
         self.Login.setObjectName("Login")
+
         self.label = QtWidgets.QLabel(self.widget)
         self.label.setGeometry(QtCore.QRect(30, 50, 281, 51))
         font = QtGui.QFont()

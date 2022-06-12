@@ -18,7 +18,7 @@ from GUI.userInfo import Ui_MainWindow1
 from GUI.drawhint import Ui_MainWindow
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
-from GUI import exercise2, test
+from GUI import exercise2, Hints
 import drawhint
 #data = ('5', '2', '3', '4', None, None, None, None, None)
 

@@ -1,10 +1,9 @@
 import cv2
 import mediapipe as mp
 import numpy as np
-
+from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
 import Pose_Estimation
-def main ():
-
+def main (textbox):
 
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
@@ -14,12 +13,9 @@ def main ():
     oldhints = ''
     new_hints = ''
     new_hints += "Stand straight with feet hip-width apart."
-    def drawhints(image):
+    def drawhints():
         print(oldhints)
-        image = cv2.rectangle(image, (0, 770), (100 + 2000, 900), (0, 0, 0), -1)
-
-        for i, line in enumerate(oldhints.split('\n')):
-            cv2.putText(image, line, (550, 790+(i*30)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+        textbox.setPlainText(oldhints);
 
     '''
     # for live 
@@ -29,7 +25,7 @@ def main ():
     '''
     #for recorded vidoe
     #
-    cap = cv2.VideoCapture('Squat.mp4')
+    cap = cv2.VideoCapture('squat.mp4')
     #cap = cv2.VideoCapture(0)
 
     ##setup mediapipe instance
@@ -60,9 +56,9 @@ def main ():
                 angle2 = Pose_Estimation.calculate_angle(left_hip, left_knee, left_ankel)
 
                 # visualize angle
-                cv2.putText(image, str(angle1), tuple(np.multiply(right_knee, [1280,720]).astype(int)),
+                cv2.putText(image, str(angle1), tuple(np.multiply(right_knee, [854,480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
-                cv2.putText(image, str(angle2), tuple(np.multiply(left_knee, [1280,720]).astype(int)),
+                cv2.putText(image, str(angle2), tuple(np.multiply(left_knee, [854,480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
 
                 # CURL COUNTER LOGIC
@@ -70,7 +66,7 @@ def main ():
                     stage = 'up'
                     new_hints += "Tighten your stomach muscles"
                     new_hints += "\nLower down, as if sitting in an invisible chair."
-                if angle1 > 90 and angle1 < 110 and angle2 > 90 and angle2 < 110 and stage == 'up':
+                if angle1 > 90 and angle1 < 110 and angle1 > 90 and angle1 < 110 and stage == 'up':
                     stage = 'down'
                     counter += 1
                     new_hints += 'Straighten your legs to lift back up.'
@@ -101,7 +97,7 @@ def main ():
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2))
             if new_hints != oldhints and new_hints != '':
                 oldhints = new_hints
-            drawhints(image)
+                drawhints()
             new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
@@ -109,4 +105,3 @@ def main ():
                 break;
         cap.release()
         cv2.destroyAllWindows()
-main()

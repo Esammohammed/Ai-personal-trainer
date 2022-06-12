@@ -4,17 +4,26 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import Timer
-def main ():
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QPoint
+from PyQt5.QtGui import QColor, QFont
+from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
+def main (textbox):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
 
     Firsttime=True
     flag = False
 
-
+    oldhints = ''
+    new_hints = ''
+    new_hints += "Exhale and step your left foot behind towards the back of the mat with front foot staying at the top."
+    def drawhints():
+        print(oldhints)
+        textbox.setPlainText(oldhints);
 
     #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('yogaS_A.mpeg')
+    cap = cv2.VideoCapture('ysa.mp4')
     # Curl counter variables
     counter = 0
     stage = None
@@ -78,74 +87,62 @@ def main ():
                 # Visualize arms
                 cv2.putText(image, str(angle1),
                             #for recorded live  dimentions are [640, 480]
-                            tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_shoulder, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1,(225, 230, 0), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle2),
-                            tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_shoulder, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle3),
-                            tuple(np.multiply(left_knee, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_knee, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle4),
-                            tuple(np.multiply(right_knee, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_knee, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str( angle5),
-                            tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_hip, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA)
                 cv2.putText(image, str(angle6),
-                            tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_hip, [640, 360]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA)
 
 
                 # Curl counter logic for arms
-                if angle1 > 40 or angle1 < 25:
-                    stage = "put your left elbow on your left thigh to create 35 degree with your body"
-                if angle2 < 175 or angle2 > 185:
-                    stage = "raise your right arm up to create 180 degree with your body right side"
 
                 if ((130 <= angle1 and angle1 <= 150) and ( 55 <= angle2  and angle2<= 75)):
-                    stage = "keep you arms at this pose"
                     a1 = 1
+                else :
+                    new_hints += 'Lift and extend your arms out horizontally from your sides, with palms down.\n' \
+                                 'Angle your right heel toward the center of your mat\n'
 
-                    # counter += 1   put timer
-                    # print(counter)
 
-                # Visualize knees
 
-                # Curl counter logic for knees
-                if angle3 > 95:
-                    stage = "make your ankle closer to your body to make 90 degree angle with your thigh"
-                if angle4 < 175:
-                    stage = "make your leg straight  to make 180 degree angle between your thigh and ankle"
-                if angle3 < 85:
-                    stage = "take step away with your left ankle to make 90 degree angle with your thigh"
                 if 100 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
-                    stage = "keep you legs at this pose"
                     a2 = 1
+                else :
+                    new_hints += 'make your ankle closer to your body to make 90 degree angle with your thigh\n' \
+                                 'make your leg straight  to make 180 degree angle between your thigh and ankle\n'
+
                     # Visualize sides
 
                     # Curl counter logic for body sides
-                if angle5 > 45 or angle5 < 25:
-                    stage = "go with your left side to make 35 degree angle with your  thigh"
-                if angle6 < 170 or angle6 > 180:
-                    stage = "make your right side straight  to make 180 degree angle between your thigh and right side"
 
                 if 60 <= angle6 <= 80 and  (0 <= angle5 <= 10 or 170 <= angle5 <= 180 ):
-                    stage = "keep you body at this pose"
-                    a3 = 1
 
-                print(a2)
+                    a3 = 1
+                else:
+                    new_hints+= "go with your left side to make 35 degree angle with your  thigh\n" \
+                                "make your right side straight  to make 180 degree angle between your thigh and right side\n"
+
                 if a1 == 1 and a2 == 1 and a3 == 1:
-                    stage = "timer starts"
+                    new_hints = "keep your body at this pose"
                     if Firsttime:
                         t1 = threading.Thread(target=Timer.lol)
                         t1.start()
                         Firsttime = False
-
                     if flag :
                         Timer.app.start()
                         flag = True
@@ -179,7 +176,10 @@ def main ():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
-
+            if new_hints != oldhints and new_hints != '':
+                oldhints = new_hints
+                drawhints()
+            new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -187,4 +187,3 @@ def main ():
 
         cap.release()
         cv2.destroyAllWindows()
-main()
