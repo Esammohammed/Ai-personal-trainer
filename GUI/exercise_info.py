@@ -13,6 +13,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import Timer
+import yoga_Side_angel
 
 from GUI import exercise2, Hints
 
@@ -272,7 +273,7 @@ class Ui_Frame(object):
             Frame.hide()
         if exnum == 'lateralRaise':
             self.Frame_hint()
-            a_thread = threading.Thread(target=lateral_raises.main, args=(self.ui.textbox,))
+            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.ui.textbox,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()

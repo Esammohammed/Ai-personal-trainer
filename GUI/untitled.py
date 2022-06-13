@@ -1,15 +1,14 @@
 import sys
+import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
+import yoga_Side_angel
+import yoga_guerrier
 from GUI import drawhint
-
-app = QtWidgets.QApplication(sys.argv)
-MainWindow = QtWidgets.QMainWindow()
-ui = drawhint.Ui_MainWindow()
-ui.setupUi(MainWindow)
-MainWindow.show()
-sys.exit(app.exec_())
+a_thread = threading.Thread(target=yoga_Side_angel.main, args=())
+a_thread.start()
+print("dasda")

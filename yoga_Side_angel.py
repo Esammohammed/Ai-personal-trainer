@@ -8,10 +8,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
-def main (textbox):
+def main ():
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
-
+    cap = cv2.VideoCapture('ysa.mp4')
+    print(cap.isOpened())
     Firsttime=True
     flag = False
 
@@ -20,16 +21,15 @@ def main (textbox):
     new_hints += "Exhale and step your left foot behind towards the back of the mat with front foot staying at the top."
     def drawhints():
         print(oldhints)
-        textbox.setPlainText(oldhints);
+        #textbox.setPlainText(oldhints);
 
     #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('ysa.mp4')
+
     # Curl counter variables
     counter = 0
     stage = None
 
-    ## Setup mediapipe instance
-    with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    with mp_pose.Pose(min_detection_confidence=.5, min_tracking_confidence=.5) as pose:
         while cap.isOpened():
             a1=0
             a2=0
@@ -137,7 +137,7 @@ def main (textbox):
                     new_hints+= "go with your left side to make 35 degree angle with your  thigh\n" \
                                 "make your right side straight  to make 180 degree angle between your thigh and right side\n"
 
-                if a1 == 1 and a2 == 1 and a3 == 1:
+                if (((a1 == 1) and( a2 == 1 ))and (a3 == 1)):
                     new_hints = "keep your body at this pose"
                     if Firsttime:
                         t1 = threading.Thread(target=Timer.lol)
@@ -145,8 +145,10 @@ def main (textbox):
                         Firsttime = False
                     if flag :
                         Timer.app.start()
-                        flag = True
-                if a1 != 1 or a2 != 1 or a3 != 1:
+                        flag = False
+
+                if ((Firsttime == False) and (a1 != 1 or a2 != 1 or a3 != 1)):
+
                     Timer.app.pause()
                     flag = True
 

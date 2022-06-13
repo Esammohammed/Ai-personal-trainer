@@ -1,8 +1,9 @@
 import pymysql
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QMessageBox
 
 from GUI import registration_form
-from PyQt5.QtWidgets import QMessageBox
+
 from Database import DBoperation
 import mainWindow
 
