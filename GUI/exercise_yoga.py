@@ -6,6 +6,7 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
 import yoga_Side_angel
+import yoga_guerrier
 from GUI import Hints
 
 
@@ -99,6 +100,7 @@ class Ui_Frame(object):
         self.YSAButton.setObjectName("YSAButton")
         self.YSAButton.clicked.connect(lambda :self.YogaSAClicked())
 
+
         self.YGButton = QtWidgets.QPushButton(self.frame_4)
         self.YGButton.setGeometry(QtCore.QRect(110, 170, 221, 91))
         font = QtGui.QFont()
@@ -166,7 +168,7 @@ class Ui_Frame(object):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
         self.YSAButton.setText(_translate("Frame", "Side Angel"))
-        self.YGButton.setText(_translate("Frame", "Warrior Pose"))
+        self.YGButton.setText(_translate("Frame", "yoga guerrier"))
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
     def Startexercise (self,exnum,Frame):
@@ -178,8 +180,11 @@ class Ui_Frame(object):
             self.exFrame2.show()
             Frame.hide()
         if exnum =='YG':
-            import yoga_guerrier
-            yoga_guerrier.main()
+            self.Frame_hint()
+            a_thread = threading.Thread(target=yoga_guerrier.main, args=(self.ui.textbox,))
+            a_thread.start()
+            self.exFrame2.show()
+            Frame.hide()
         if exnum == 'YCS':
             import yoga_stretch
             yoga_stretch.main()

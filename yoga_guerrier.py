@@ -1,4 +1,4 @@
-def main():
+def main(textbox):
     import threading
     import Pose_Estimation
     import cv2
@@ -23,20 +23,26 @@ def main():
             angle = 360 - angle
 
         return angle
-    
+
     # cap = cv2.VideoCapture(0)
     cap = cv2.VideoCapture('Warrior_Pose_2.mp4')
     # Curl counter variables
     counter = 0
     stage = None
+    oldhints = ''
+    new_hints = ''
+    new_hints += ""
 
+    def drawhints():
+        print(oldhints)
+        textbox.setText(oldhints);
     ## Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
             a1 = 0
             a2 = 0
             a3 = 0
-            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap)
+            results, _ = Pose_Estimation.MakedetectionandExtract(pose, cap)
 
             ret, frame = cap.read()
 
@@ -110,11 +116,11 @@ def main():
 
                 # Curl counter logic for arms
                 if angle1 > 115 or angle2 > 115:
-                    stage = "your arm down to create 90 degree with your body"
+                    new_hints += "your arm down to create 90 \ndegree with your body.\n"
                 if angle1 < 85 or angle2 < 85:
-                    stage = "raise your arm up to create 90 degree with your body"
+                    new_hints += "raise your arm up to create 90 \ndegree with your body.\n"
                 if 115 >= angle1 >= 85 and 115 >= angle2 >= 85:
-                    stage = "keep you arms at this pose"
+
                     a1 = 1
                     # counter += 1   put timer
                     # print(counter)
@@ -131,13 +137,12 @@ def main():
 
                 # Curl counter logic for knees
                 if angle3 > 115:
-                    stage = "make your ankle closer to your body to make 90 degree angle with your thigh"
+                    new_hints += "make your ankle closer to your \nbody to make 90 degree angle with your thigh.\n"
                 if angle4 < 170:
-                    stage = "make your leg straight  to make 180 degree angle between your thigh and ankle"
+                    new_hints += "make your leg straight to make\n180 degree angle between your thigh and ankle.\n"
                 if angle3 < 90:
-                    stage = "take step away with your left ankle to make 90 degree angle with your thigh"
+                    new_hints += "take step away with your left \nankle to make 90  degree angle with your thigh.\n"
                 if 90 <= angle3 <= 115 and (170 <= angle4 <= 180 or 0 <= angle4 <= 10):
-                    stage = "keep you legs at this pose"
                     a2 = 1
 
                 # Visualize sides
@@ -152,13 +157,12 @@ def main():
 
                 # Curl counter logic for body sides
                 if angle5 > 25:
-                    stage = "go down with your thigh to make 90 degree angle with your body"
+                    new_hints += "go down with your thigh to make 90\ndegree angle with your body. \n"
                 if angle6 < 10 or angle6 > 20:
-                    stage = "make your back straight  to make 135 degree angle between your thigh and back"
+                    new_hints += "make your back straight  to make 135\ndegree angle between your thigh and back.\n"
                 if angle5 < 20:
-                    stage = "go up with your thigh to make 90 degree angle with your body"
+                    new_hints += "go up with your thigh to make 90 \ndegree angle with your body.\n"
                 if 25 >= angle5 >= 20 and 20 >= angle6 >= 10:
-                    stage = "keep you body at this pose"
                     a3 = 1
 
                 print(a2)
@@ -183,8 +187,6 @@ def main():
             except:
                 pass
 
-                # Render curl counter
-                # Setup status box
             cv2.rectangle(image, (0, 0), (225, 73), (245, 117, 16), -1)
 
             # Rep data
@@ -206,7 +208,10 @@ def main():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
-
+            if new_hints != oldhints and new_hints != '':
+                oldhints = new_hints
+                drawhints()
+            new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -214,5 +219,3 @@ def main():
 
         cap.release()
         cv2.destroyAllWindows()
-
-main()
