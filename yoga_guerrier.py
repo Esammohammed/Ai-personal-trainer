@@ -23,7 +23,7 @@ def main():
             angle = 360 - angle
 
         return angle
-
+    
     # cap = cv2.VideoCapture(0)
     cap = cv2.VideoCapture('Warrior_Pose_2.mp4')
     # Curl counter variables
@@ -162,19 +162,23 @@ def main():
                     a3 = 1
 
                 print(a2)
-                if a1 == 1 and a2 == 1 and a3 == 1:
-                    stage = "timer starts"
+                if (((a1 == 1) and (a2 == 1)) and (a3 == 1)):
+                    new_hints = "keep your body at this pose"
                     if Firsttime:
                         t1 = threading.Thread(target=Timer.lol)
                         t1.start()
                         Firsttime = False
-
+                        flag = False
+                        print("first")
                     if flag:
+                        print("start")
                         Timer.app.start()
-                        flag = True
-                if a1 != 1 or a2 != 1 or a3 != 1:
-                    Timer.app.pause()
+                        flag = False
+
+                elif ((flag == False) and (a1 != 1 or a2 != 1 or a3 != 1)):
+                    print("pause")
                     flag = True
+                    Timer.app.pause()
 
             except:
                 pass
@@ -211,3 +215,4 @@ def main():
         cap.release()
         cv2.destroyAllWindows()
 
+main()

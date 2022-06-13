@@ -1,7 +1,12 @@
+import threading
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+
+import yoga_Side_angel
+from GUI import Hints
 
 
 class Ui_Frame(object):
@@ -145,11 +150,18 @@ class Ui_Frame(object):
         'icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)'
 
         self.start.setObjectName("startButton")
-        self.start.clicked.connect(lambda: Startexercise(self.exnum))
+        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4))
 
         self.retranslateUi(self.frame_4)
         QtCore.QMetaObject.connectSlotsByName(self.frame_4)
-
+    def Frame_hint (self):
+        self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
+        self.exFrame2.setGeometry(QtCore.QRect(300, -10, 591, 631))
+        self.exFrame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.exFrame2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.exFrame2.setObjectName("exFrame2")
+        self.ui = Hints.Ui_MainWindow()
+        self.ui.setupUi(self.exFrame2)
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
@@ -157,18 +169,20 @@ class Ui_Frame(object):
         self.YGButton.setText(_translate("Frame", "Warrior Pose"))
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
-def Startexercise (exnum):
-    print (exnum)
-
-    if exnum=='YSA' :
-        import yoga_Side_angel
-        yoga_Side_angel.main()
-    if exnum =='YG':
-        import yoga_guerrier
-        yoga_guerrier.main()
-    if exnum == 'YCS':
-        import yoga_stretch
-        yoga_stretch.main()
+    def Startexercise (self,exnum,Frame):
+        print (exnum)
+        if exnum=='YSA' :
+            self.Frame_hint()
+            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.ui.textbox,))
+            a_thread.start()
+            self.exFrame2.show()
+            Frame.hide()
+        if exnum =='YG':
+            import yoga_guerrier
+            yoga_guerrier.main()
+        if exnum == 'YCS':
+            import yoga_stretch
+            yoga_stretch.main()
 
 if __name__ == "__main__":
     import sys

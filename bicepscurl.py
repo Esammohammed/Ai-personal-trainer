@@ -19,7 +19,7 @@ def main (textbox):
     new_hints+="Stand straight with a dumbbell in  hand,\nyour feet shoulder-width apart, and hands by your sides."
     def drawhints ():
         print (oldhints)
-        textbox.setPlainText(oldhints);
+        textbox.setTextq(oldhints);
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():

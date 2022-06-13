@@ -8,20 +8,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
-def main ():
+def main (textbox):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     cap = cv2.VideoCapture('ysa.mp4')
     print(cap.isOpened())
     Firsttime=True
-    flag = False
+    flag = True
 
     oldhints = ''
     new_hints = ''
     new_hints += "Exhale and step your left foot behind towards the back of the mat with front foot staying at the top."
     def drawhints():
+
         print(oldhints)
-        #textbox.setPlainText(oldhints);
+        textbox.setText(oldhints);
 
     #cap = cv2.VideoCapture(0)
 
@@ -123,8 +124,8 @@ def main ():
                 if 100 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
                     a2 = 1
                 else :
-                    new_hints += 'make your ankle closer to your body to make 90 degree angle with your thigh\n' \
-                                 'make your leg straight  to make 180 degree angle between your thigh and ankle\n'
+                    new_hints += 'make your ankle closer to your body to make 90 \ndegree angle with your thigh\n' \
+                                 'make your leg straight  to make 180 degree angle \nbetween your thigh and ankle\n'
 
                     # Visualize sides
 
@@ -134,23 +135,9 @@ def main ():
 
                     a3 = 1
                 else:
-                    new_hints+= "go with your left side to make 35 degree angle with your  thigh\n" \
-                                "make your right side straight  to make 180 degree angle between your thigh and right side\n"
+                    new_hints+= "go with your left side to make 35 \ndegree angle with your  thigh\n" \
+                                "make your right side straight  to\nq make 180 degree angle between your thigh and right side\n"
 
-                if (((a1 == 1) and( a2 == 1 ))and (a3 == 1)):
-                    new_hints = "keep your body at this pose"
-                    if Firsttime:
-                        t1 = threading.Thread(target=Timer.lol)
-                        t1.start()
-                        Firsttime = False
-                    if flag :
-                        Timer.app.start()
-                        flag = False
-
-                if ((Firsttime == False) and (a1 != 1 or a2 != 1 or a3 != 1)):
-
-                    Timer.app.pause()
-                    flag = True
 
             except:
                 pass
@@ -182,6 +169,25 @@ def main ():
                 oldhints = new_hints
                 drawhints()
             new_hints = ''
+            if (((a1 == 1) and (a2 == 1)) and (a3 == 1)):
+                new_hints = "keep your body at this pose"
+                if Firsttime:
+                    t1 = threading.Thread(target=Timer.lol)
+                    t1.start()
+                    Firsttime = False
+                    flag =False
+                    print("first")
+                if flag:
+                    print("start")
+                    Timer.app.start()
+                    flag = False
+
+            elif ((flag == False) and (a1 != 1 or a2 != 1 or a3 != 1)):
+                print("pause")
+                flag = True
+                Timer.app.pause()
+
+
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
