@@ -4,7 +4,7 @@ import mediapipe as mp
 import numpy as np
 import Pose_Estimation
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QLineEdit, QWidget, QPlainTextEdit, QTextEdit
-def main (textbox):
+def main (ui):
 
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
@@ -19,7 +19,7 @@ def main (textbox):
     new_hints+="Stand straight with a dumbbell in  hand,\nyour feet shoulder-width apart, and hands by your sides."
     def drawhints ():
         print (oldhints)
-        textbox.setTextq(oldhints);
+        ui.textbox.setText(oldhints);
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
@@ -91,6 +91,7 @@ def main (textbox):
                 oldhints = new_hints
                 drawhints()
             new_hints = ''
+
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
@@ -98,3 +99,4 @@ def main (textbox):
 
         cap.release()
         cv2.destroyAllWindows()
+        ui.report()

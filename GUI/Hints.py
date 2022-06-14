@@ -63,6 +63,11 @@ class Ui_MainWindow(QMainWindow):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        #frame
+    def report (self,f):
+        print("to report frame ")
+        f.hide()
+
 
     def retranslateUi(self, MainWindow):
 

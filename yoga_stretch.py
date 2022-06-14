@@ -1,4 +1,7 @@
-def main():
+import Pose_Estimation
+
+
+def main(ui):
     import cv2
     import mediapipe as mp
     import numpy as np
@@ -12,26 +15,17 @@ def main():
     mp_pose = mp.solutions.pose
     Firsttime=True
     flag = False
-    counter = 0
+    oldhints = ''
+    new_hints = ''
+    def drawhints():
 
-    def calculate_angle(a, b, c):
-        a = np.array(a)  # First
-        b = np.array(b)  # Mid
-        c = np.array(c)  # End
-
-        radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-        angle = np.abs(radians * 180.0 / np.pi)
-
-        if angle > 180.0:
-            angle = 360 - angle
-
-        return angle
+        print(oldhints)
+        ui.textbox.setText(oldhints);
 
 
 
-
-    #cap = cv2.VideoCapture('Cobra_Stretch.mp4')
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture('coprastrch.mp4')
+    #cap = cv2.VideoCapture(0)
 
     # Curl counter variables
     counter = 0
@@ -47,6 +41,9 @@ def main():
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
             ret, frame = cap.read()
+            a1 = 0
+            a2 = 0
+            a3 = 0
 
             # Recolor image to RGB
             image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -111,47 +108,47 @@ def main():
                               landmarks[mp_pose.PoseLandmark.RIGHT_FOOT_INDEX.value].y]
 
                 # Calculate angle (hand)
-                first_angle_hand = calculate_angle(left_shoulder, left_elbow, left_wrist)
-                second_angle_hand = calculate_angle(right_shoulder, right_elbow, right_wrist)
+                first_angle_hand = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
+                second_angle_hand = Pose_Estimation.calculate_angle(right_shoulder, right_elbow, right_wrist)
 
                 # Calculate angle (body)
 
-                first_angle_body = calculate_angle(left_shoulder,left_hip, left_knee)
-                second_angle_body = calculate_angle(right_shoulder, right_hip, right_knee)
+                first_angle_body = Pose_Estimation.calculate_angle(left_shoulder,left_hip, left_knee)
+                second_angle_body = Pose_Estimation.calculate_angle(right_shoulder, right_hip, right_knee)
 
                 # Calculate angle (leg)
 
-                first_angle_leg = calculate_angle(left_ankle, left_heel, left_foot_index)
-                second_angle_leg = calculate_angle(right_ankle, right_heel, right_foot_index)
+                first_angle_leg = Pose_Estimation.calculate_angle(left_ankle, left_heel, left_foot_index)
+                second_angle_leg = Pose_Estimation.calculate_angle(right_ankle, right_heel, right_foot_index)
 
                 # Visualize angle
                 #hand
                 cv2.putText(image, str(first_angle_hand),
-                            tuple(np.multiply(left_elbow, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_elbow, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(second_angle_hand),
-                            tuple(np.multiply(right_elbow, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_elbow, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
                 #body
                 cv2.putText(image, str(first_angle_body),
-                           tuple(np.multiply(left_hip, [1280, 720]).astype(int)),
+                           tuple(np.multiply(left_hip, [850, 480]).astype(int)),
                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                            )
                 cv2.putText(image, str(second_angle_body),
-                            tuple(np.multiply(right_hip, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_hip, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
                 #leg
                 cv2.putText(image, str(first_angle_leg),
-                            tuple(np.multiply(left_heel, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_heel, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(second_angle_leg),
-                            tuple(np.multiply(right_heel, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_heel, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
@@ -159,35 +156,48 @@ def main():
 
                 # Curl counter logic
                 if  180 >= first_angle_hand >= 165 and 180 >= second_angle_hand >= 165:
-                    stage = "correct hand"
-                    hand_right = 1
+                    a1 = 1
                 else:
-                    hand_right = 0
-                if  125 >= first_angle_body >= 115 and 125 >= second_angle_body >= 115 :
-                    stage = "correct body"
-                    body_right = 1
-                else:
-                    body_right = 0
-                if  55 >= first_angle_leg >= 45 and 55 >= second_angle_leg >= 45 :
-                    stage = "correct leg"
-                    leg_right = 1
-                else:
-                    leg_right = 0
+                    new_hints += 'Place your palms flat on the ground directly under your shoulders.\n' \
+                                 'Bend your elbows straight back and hug them into your sides\n'
 
 
-                if hand_right == 1 and body_right == 1 and leg_right == 1:
-                    stage = "timer starts"
+                if  140 >= first_angle_body >= 100 and 140 >= second_angle_body >= 100 :
+                    a2 = 1
+                else:
+                    new_hints += 'Inhale to lift your chest off the floor. Roll your shoulders back and keep your low ribs on the floor.\n' \
+                                 'Make sure your elbows continue hugging your sides.\n' \
+
+
+
+                if  70 >= first_angle_leg >= 40 and 70 >= second_angle_leg >= 40 :
+                    a3 = 1
+                else:
+                    new_hints += 'Make sure that your pelvis and legs are firmly rooted into the floor.\n' \
+                                 'They act as the anchor that allows your upper body to rise\n' \
+
+
+                if new_hints != oldhints and new_hints != '':
+                    oldhints = new_hints
+                    drawhints()
+                new_hints = ''
+                if (((a1 == 1) and (a2 == 1)) and (a3 == 1)):
+                    new_hints = "keep your body at this pose"
                     if Firsttime:
                         t1 = threading.Thread(target=Timer.lol)
                         t1.start()
                         Firsttime = False
-                        if flag:
-                            Timer.app.start()
-                            flag = True
-                    if hand_right != 1 or body_right != 1 or leg_right != 1:
-                        stage = "timer pause"
-                        Timer.app.pause()
-                        flag = True
+                        flag = False
+                        print("first")
+                    if flag:
+                        print("start")
+                        Timer.app.start()
+                        flag = False
+
+                elif ((flag == False) and (a1 != 1 or a2 != 1 or a3 != 1)):
+                    print("pause")
+                    flag = True
+                    Timer.app.pause()
 
 
             except:
@@ -222,10 +232,10 @@ def main():
                                       )
 
             cv2.imshow('Mediapipe Feed', image)
-
+            cv2.moveWindow('Mediapipe Feed', 550, 30)
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
 
         cap.release()
         cv2.destroyAllWindows()
-main()
+        ui.report()

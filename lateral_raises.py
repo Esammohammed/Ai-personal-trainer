@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import Pose_Estimation
-def main (textbox):
+def main (ui,exFrame2):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     #cap = cv2.VideoCapture(0)
@@ -19,7 +19,7 @@ def main (textbox):
     def drawhints():
 
         print(oldhints)
-        textbox.setPlainText(oldhints);
+        ui.textbox.setText(oldhints);
     ## Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
@@ -112,3 +112,4 @@ def main (textbox):
 
         cap.release()
         cv2.destroyAllWindows()
+        ui.report(exFrame2)

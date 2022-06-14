@@ -1,4 +1,4 @@
-def main(textbox):
+def main(ui):
     import threading
     import Pose_Estimation
     import cv2
@@ -35,7 +35,7 @@ def main(textbox):
 
     def drawhints():
         print(oldhints)
-        textbox.setText(oldhints);
+        ui.textbox.setText(oldhints);
     ## Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
@@ -219,3 +219,4 @@ def main(textbox):
 
         cap.release()
         cv2.destroyAllWindows()
+        ui.report()

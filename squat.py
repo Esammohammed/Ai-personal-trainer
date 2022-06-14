@@ -3,7 +3,7 @@ import mediapipe as mp
 import numpy as np
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
 import Pose_Estimation
-def main (textbox):
+def main (ui):
 
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
@@ -15,7 +15,7 @@ def main (textbox):
     new_hints += "Stand straight with feet hip-width apart."
     def drawhints():
         print(oldhints)
-        textbox.setPlainText(oldhints);
+        ui.textbox.setText(oldhints);
 
     '''
     # for live 
@@ -105,3 +105,4 @@ def main (textbox):
                 break;
         cap.release()
         cv2.destroyAllWindows()
+        ui.report()

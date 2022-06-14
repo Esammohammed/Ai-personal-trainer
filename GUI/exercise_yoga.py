@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
 import yoga_Side_angel
 import yoga_guerrier
+import yoga_stretch
 from GUI import Hints
 
 
@@ -175,19 +176,23 @@ class Ui_Frame(object):
         print (exnum)
         if exnum=='YSA' :
             self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.ui.textbox,))
+            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.uiq,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()
         if exnum =='YG':
             self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_guerrier.main, args=(self.ui.textbox,))
+            a_thread = threading.Thread(target=yoga_guerrier.main, args=(self.ui,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()
         if exnum == 'YCS':
-            import yoga_stretch
-            yoga_stretch.main()
+            self.Frame_hint()
+            a_thread = threading.Thread(target=yoga_stretch.main, args=(self.ui,))
+            a_thread.start()
+            self.exFrame2.show()
+            Frame.hide()
+
 
 if __name__ == "__main__":
     import sys

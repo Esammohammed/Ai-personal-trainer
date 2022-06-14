@@ -267,28 +267,34 @@ class Ui_Frame(object):
     def Startexercise (self,exnum,Frame):
         if exnum == 'biceps':
             self.Frame_hint()
-            a_thread = threading.Thread(target=bicepscurl.main, args=(self.ui.textbox,))
+            global a_thread
+            a_thread = threading.Thread(target=bicepscurl.main, args=(self.ui,))
             a_thread.start()
+
             self.exFrame2.show()
             Frame.hide()
+
         if exnum == 'lateralRaise':
             self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.ui.textbox,))
-            a_thread.start()
             self.exFrame2.show()
+            a_thread = threading.Thread(target=lateral_raises.main, args=(self.ui,self.exFrame2,))
+            a_thread.start()
+
             Frame.hide()
         if exnum =='shoulder_press':
             import Shoulder_Press
             Shoulder_Press.main()
         if exnum =='squat':
             self.Frame_hint()
-            a_thread = threading.Thread(target=squat.main, args=(self.ui.textbox,))
+            a_thread = threading.Thread(target=squat.main, args=(self.ui,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()
         if exnum == 'pushup':
             import push_up
             push_up.main()
+
+
 
 if __name__ == "__main__":
     import sys
@@ -298,4 +304,5 @@ if __name__ == "__main__":
     ui = Ui_Frame()
     ui.setupUi(Form)
     Form.show()
+
     sys.exit(app.exec_())

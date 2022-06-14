@@ -8,7 +8,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
-def main (textbox):
+def main (ui):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     cap = cv2.VideoCapture('ysa.mp4')
@@ -22,7 +22,7 @@ def main (textbox):
     def drawhints():
 
         print(oldhints)
-        textbox.setText(oldhints);
+        ui.textbox.setText(oldhints);
 
     #cap = cv2.VideoCapture(0)
 
@@ -195,3 +195,4 @@ def main (textbox):
 
         cap.release()
         cv2.destroyAllWindows()
+        ui.report()
