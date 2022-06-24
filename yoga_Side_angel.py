@@ -1,4 +1,6 @@
 import threading
+from datetime import datetime
+
 import Pose_Estimation
 import cv2
 import mediapipe as mp
@@ -15,7 +17,6 @@ def main (ui):
     print(cap.isOpened())
     Firsttime=True
     flag = True
-
     oldhints = ''
     new_hints = ''
     new_hints += "Exhale and step your left foot behind towards the back of the mat with front foot staying at the top."
@@ -24,9 +25,6 @@ def main (ui):
         print(oldhints)
         ui.textbox.setText(oldhints);
 
-    #cap = cv2.VideoCapture(0)
-
-    # Curl counter variables
     counter = 0
     stage = None
 
@@ -172,6 +170,7 @@ def main (ui):
             if (((a1 == 1) and (a2 == 1)) and (a3 == 1)):
                 new_hints = "keep your body at this pose"
                 if Firsttime:
+
                     t1 = threading.Thread(target=Timer.lol)
                     t1.start()
                     Firsttime = False
@@ -188,11 +187,23 @@ def main (ui):
                 Timer.app.pause()
 
 
+
+
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
+                Timer.app.quit()
+
                 break
 
         cap.release()
         cv2.destroyAllWindows()
-        ui.report()
+
+        ui.textbox.setText("Great job, generate report for more details");
+        time=str(Timer.app.hours)+':'+str(Timer.app.minutes)+':'+str(Timer.app.seconds)
+        d = datetime.strptime(time, "%H:%M:%S")
+
+        ui.Rmtime =d.time()
+        ui.Trainingname='Yoga side angle'
+        t1.join()
+

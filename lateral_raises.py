@@ -1,8 +1,10 @@
+from datetime import datetime
+
 import cv2
 import mediapipe as mp
 import numpy as np
 import Pose_Estimation
-def main (ui,exFrame2):
+def main (ui):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
     #cap = cv2.VideoCapture(0)
@@ -14,13 +16,12 @@ def main (ui,exFrame2):
     oldhints = ''
     new_hints = ''
     new_hints += "Stand tall, a dumbbell in each hand"
-    oldhints = new_hints
-
     def drawhints():
 
         print(oldhints)
         ui.textbox.setText(oldhints);
     ## Setup mediapipe instance
+    dt1 = datetime.now()
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
 
@@ -59,20 +60,20 @@ def main (ui,exFrame2):
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
-                print(angle1)
+
                 # Curl counter logic
                 if angle1 > 85 and angle2 >85 and stage == 'down':
                     stage = "up"
                     if new_hints!='':
                         new_hints +='\n'
-                    new_hints +="Raise your arms simultaneously just a couple inches out to each side and pause."
+                    new_hints +="Raise your arms simultaneously just a couple inches out to each side\n and pause."
                 if (angle1 < 45 and  angle2<45 and stage == "up"):
                     counter += 1
                     print(counter)
                     stage = "down"
                     if new_hints != '':
                         new_hints += '\n'
-                    new_hints += "Lower the weights slowly bringing your arms back to your sides. Breathe out as you lower the dumbbells"
+                    new_hints += "Lower the weights slowly bringing your arms back to your sides.\n Breathe out as you lower the dumbbells"
 
 
             except:
@@ -112,4 +113,11 @@ def main (ui,exFrame2):
 
         cap.release()
         cv2.destroyAllWindows()
-        ui.report(exFrame2)
+        dt2 = datetime.now()
+        Remainingtime = dt2 - dt1
+        d = datetime.strptime(Remainingtime, "%H:%M:%S")
+        ui.Rmtime = d.time()
+        ui.Repscount = counter
+        ui.textbox.setText("Great job, generate report for more details");
+        ui.getexersiceinformation()
+        ui.Trainingname = 'lateral raises'

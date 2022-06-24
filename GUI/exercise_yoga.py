@@ -5,6 +5,7 @@ from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 
+import Startexercise
 import yoga_Side_angel
 import yoga_guerrier
 import yoga_stretch
@@ -15,7 +16,7 @@ class Ui_Frame(object):
     exnum =''
 
     def YogaSAClicked(self):
-        self.exnum = 'YSA'
+        self.exnum = 'Yoga side angle'
         self.textBrowser.setText('What is this yoga pose ?\n'
                                  '-Side Angle Pose is a yoga pose that engages the legs, shoulders and abdominals.'
                                  ' This lengthening pose helps reduce stiffness in the shoulders and back, '
@@ -35,7 +36,7 @@ class Ui_Frame(object):
                                  '3-Full-body Strength.\n')
 
     def YogaGurrierClicked(self):
-        self.exnum = 'YG'
+        self.exnum = 'Yoga Guerrier'
         self.textBrowser.setText('What is this yoga pose ?\n'
                                  'Yoga gurriuer pose (Warrior II pose) is a physical, mental and emotional workout. '
                                  'As one of the most widely practiced postures in yoga, it’s suitable for yogis of all levels\n'
@@ -56,7 +57,7 @@ class Ui_Frame(object):
 
     def YogaCobraClicked(self):
 
-        self.exnum = 'YCS'
+        self.exnum = 'Yoga stretch'
         self.textBrowser.setText('What is this yoga pose ?\n'
                                  'It\'s a stretch pose that targets the hip flexors, which are the muscles along the front of the thigh and pelvis.\n'
                                  '\nHow to do it ?\n'
@@ -173,26 +174,11 @@ class Ui_Frame(object):
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
     def Startexercise (self,exnum,Frame):
-        print (exnum)
-        if exnum=='YSA' :
             self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_Side_angel.main, args=(self.uiq,))
+            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()
-        if exnum =='YG':
-            self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_guerrier.main, args=(self.ui,))
-            a_thread.start()
-            self.exFrame2.show()
-            Frame.hide()
-        if exnum == 'YCS':
-            self.Frame_hint()
-            a_thread = threading.Thread(target=yoga_stretch.main, args=(self.ui,))
-            a_thread.start()
-            self.exFrame2.show()
-            Frame.hide()
-
 
 if __name__ == "__main__":
     import sys

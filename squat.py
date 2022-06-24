@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import cv2
 import mediapipe as mp
 import numpy as np
@@ -29,8 +31,11 @@ def main (ui):
     #cap = cv2.VideoCapture(0)
 
     ##setup mediapipe instance
+    dt1 = datetime.now()
+    framenumber=0;
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
+            framenumber=framenumber+1
             results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
             try:
                 landmarks = results.pose_landmarks.landmark
@@ -103,6 +108,20 @@ def main (ui):
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break;
+        fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
+        duration = framenumber / fps
+        minutes = int(duration / 60)
+        seconds = duration % 60
+        print('duration (M:S) = ' + str(minutes) + ':' + str(seconds))
         cap.release()
         cv2.destroyAllWindows()
-        ui.report()
+        dt2 = datetime.now()
+
+
+        Remainingtime = str(dt2 - dt1)
+        timeh_m_sformat = Remainingtime.split('.')
+        ui.Rmtime = timeh_m_sformat[0]
+        print(timeh_m_sformat[0])
+        ui.Repscount = counter
+        ui.textbox.setText("Great job, generate report for more details");
+        ui.Trainingname = 'squat'

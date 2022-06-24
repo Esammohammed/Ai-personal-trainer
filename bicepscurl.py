@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
 import cv2
 import mediapipe as mp
@@ -20,6 +22,9 @@ def main (ui):
     def drawhints ():
         print (oldhints)
         ui.textbox.setText(oldhints);
+
+    #start time
+    dt1 = datetime.now()
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
@@ -87,6 +92,7 @@ def main (ui):
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
+
             if new_hints!= oldhints and new_hints != '':
                 oldhints = new_hints
                 drawhints()
@@ -99,4 +105,11 @@ def main (ui):
 
         cap.release()
         cv2.destroyAllWindows()
-        ui.report()
+        dt2 = datetime.now()
+        Remainingtime = str(dt2 - dt1)
+        timeh_m_sformat = Remainingtime.split('.')
+        ui.Rmtime = timeh_m_sformat[0]
+        ui.Repscount = counter
+        ui.textbox.setText("Great job, generate report for more details");
+        ui.getexersiceinformation()
+        ui.Trainingname = 'bicepscurl'

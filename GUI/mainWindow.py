@@ -21,12 +21,16 @@ from GUI.exercise_info import Ui_Frame
 from GUI import exercise2, Hints
 import drawhint
 #data = ('5', '2', '3', '4', None, None, None, None, None)
-
+import pickle
 import sys
 class Ui_MainWindow(object):
+
     def __init__(self, u):
         global data
         data = u
+        f = open('store.pckl', 'wb')
+        pickle.dump(u, f)
+        f.close()
 
 
     def setupUi(self, MainWindow):
@@ -234,20 +238,14 @@ class Ui_MainWindow(object):
 
     def showAch(self):
 
-        ui = drawhint.Ui_MainWindow()
-        ui.setupUi(self.drawhintfr)
-        self.drawhintfr.show()
-        self.hisframe.hide()
-        self.usFrame.hide()
-        self.exFrame.hide()
-        '''
+
         ui = Ui_Dialog(data)
         ui.setupUi(self.achFrame)
         self.achFrame.show()
         self.hisframe.hide()
         self.usFrame.hide()
         self.exFrame.hide()
-  '''
+
 
 if __name__ == "__main__":
     import sys

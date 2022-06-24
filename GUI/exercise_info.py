@@ -1,9 +1,14 @@
 import threading
+from datetime import datetime
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+
+
+
+import Startexercise
 import bicepscurl
 import lateral_raises
 import squat
@@ -19,10 +24,11 @@ from GUI import exercise2, Hints
 
 
 class Ui_Frame(object):
+
     exnum =''
 
     def bicepsClicked(self):
-        self.exnum = 'biceps'
+        self.exnum = 'bicepscurl'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  '-This exercise is for The biceps or biceps brachii muscle which is a large muscle that lies on the front of the upper arm between the shoulder and the elbow.\n'
                                  '\nHow to do it ?\n'
@@ -70,7 +76,7 @@ class Ui_Frame(object):
 
     def lateralRaisesClicked(self):
 
-        self.exnum = 'lateralRaise'
+        self.exnum = 'lateral raises'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
                                  'A lateral raise works your shoulder muscles as well as your triceps.\n'
                                  '\nHow to do it ?\n'
@@ -265,35 +271,11 @@ class Ui_Frame(object):
         self.start.setText(_translate("Frame", "Start"))
 
     def Startexercise (self,exnum,Frame):
-        if exnum == 'biceps':
             self.Frame_hint()
-            global a_thread
-            a_thread = threading.Thread(target=bicepscurl.main, args=(self.ui,))
-            a_thread.start()
-
-            self.exFrame2.show()
-            Frame.hide()
-
-        if exnum == 'lateralRaise':
-            self.Frame_hint()
-            self.exFrame2.show()
-            a_thread = threading.Thread(target=lateral_raises.main, args=(self.ui,self.exFrame2,))
-            a_thread.start()
-
-            Frame.hide()
-        if exnum =='shoulder_press':
-            import Shoulder_Press
-            Shoulder_Press.main()
-        if exnum =='squat':
-            self.Frame_hint()
-            a_thread = threading.Thread(target=squat.main, args=(self.ui,))
+            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()
-        if exnum == 'pushup':
-            import push_up
-            push_up.main()
-
 
 
 if __name__ == "__main__":

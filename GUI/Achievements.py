@@ -23,7 +23,7 @@ class Ui_Dialog(object):
         global data
         global result
         global counter
-        self.counter = 1
+        self.counter = 0
         data = u
         result = DBoperation.database_operations.GetAchievements(data[0])
         print(result)
@@ -181,7 +181,7 @@ class Ui_Dialog(object):
         self.label_4.setText(_translate("Dialog", "Name"))
         self.label_10.setText(_translate("Dialog", "Best Score"))
         self.label_11.setText(_translate("Dialog", "Score"))
-        self.label_12.setText(_translate("Dialog", "Date"))
+        self.label_12.setText(_translate("Dialog", "Type"))
         if len(result) == 0:
             self.label_4.setText(_translate("Dialog", "-"))
             self.label_11.setText(_translate("Dialog", "-"))

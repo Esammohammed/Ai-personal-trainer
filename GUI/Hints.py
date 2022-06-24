@@ -1,19 +1,25 @@
+from datetime import datetime
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QLineEdit, QWidget, QPlainTextEdit, QTextEdit
 
-import bicepscurl
-
 import yoga_Side_angel
-from GUI import exercise_info
+from GUI import exercise_info, rpframe, userInfo
 from GUI import exercise_yoga
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pymysql
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QMessageBox, QTableWidgetItem, QGraphicsDropShadowEffect
+
+
 class Ui_MainWindow(QMainWindow):
+    Trainingname=''
+    Rmtime = datetime.now()
+    Repscount = 0
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setGeometry(QtCore.QRect(0, 0, 1161, 761))
@@ -56,26 +62,59 @@ class Ui_MainWindow(QMainWindow):
         font.setWeight(75)
         self.label.setFont(font)
         self.label.setObjectName("label")
+
         self.textbox =  QtWidgets.QLabel(self.frame_4)
-        self.textbox.setGeometry(QtCore.QRect(20, 450, 1101, 350))
+        self.textbox.setGeometry(QtCore.QRect(20, 450, 1101, 320))
         self.textbox.setFont(QFont("Arial", 20))
+        self.textbox.setStyleSheet('padding :5px')
+        effect = QGraphicsDropShadowEffect(
+            offset=QPoint(0,0), blurRadius=100, color=QColor("#333333")
+        )
 
+        self.textbox.setGraphicsEffect(effect)
+        self.pushButton_2 = QtWidgets.QPushButton(self.frame_4)
+        self.pushButton_2.setGeometry(QtCore.QRect(930, 780, 200 , 40))
+        self.pushButton_2.clicked.connect(lambda:(self.frame_4))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.pushButton_2.setFont(font)
 
+        self.pushButton_2.setStyleSheet("QPushButton{\n"
+                                        "background-color:#2b3942;\n"
+                                        "color:white;\n"
+                                        "border-radius:20px\n"
+                                        "}\n"
+                                        "\n"
+                                        "QPushButton:hover {\n"
+                                        "  background-color: #1f292f;\n"
+                                        "}")
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.pushButton_2.clicked.connect(lambda: self.report(self.frame_4))
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         #frame
-    def report (self,f):
-        print("to report frame ")
-        f.hide()
-
-
     def retranslateUi(self, MainWindow):
-
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Hints"))
+        self.pushButton_2.setText(_translate("MainWindow", "Generate report"))
+        print ("asd");
+    def report (self,f):
+        self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
+        self.exFrame2.setGeometry(QtCore.QRect(0, -10, 591, 631))
+        self.exFrame2.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        self.exFrame2.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.exFrame2.setObjectName("exFrame2")
+        self.ui = rpframe.Ui_Form(self.Trainingname,self.Rmtime,self.Repscount)
+        self.ui.setupUi(self.exFrame2)
+        self.exFrame2.show()
+        f.hide()
 
-
+    def getexersiceinformation(self):
+        print (self.Repscount)
+        print(self.Rmtime)
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

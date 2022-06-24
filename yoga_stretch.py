@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import Pose_Estimation
 
 
@@ -234,8 +236,15 @@ def main(ui):
             cv2.imshow('Mediapipe Feed', image)
             cv2.moveWindow('Mediapipe Feed', 550, 30)
             if cv2.waitKey(10) & 0xFF == ord('q'):
+                Timer.app.quit()
                 break
 
         cap.release()
         cv2.destroyAllWindows()
-        ui.report()
+        ui.textbox.setText("Great job, generate report for more details");
+        time = str(Timer.app.hours) + ':' + str(Timer.app.minutes) + ':' + str(Timer.app.seconds)
+        d = datetime.strptime(time, "%H:%M:%S")
+        ui.Trainingname = 'Yoga stretch'
+        ui.Rmtime = d.time()
+
+        t1.join()
