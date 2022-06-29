@@ -60,7 +60,7 @@ class database_operations:
             cur.execute(
                 "INSERT INTO e_trainer.bestscore (exename, username, bestscore, exType)"
                 " values(%s,%s,%s,%s)"
-                , (exerciseName, id, newscore, extype))
+                , (exerciseName, id, newscore, "Workout"))
             con.commit()
             con.close()
         elif (row[3]== 'work'):

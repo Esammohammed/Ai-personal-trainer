@@ -61,14 +61,14 @@ class Ui_Dialog(object):
         font.setPointSize(12)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:white;\n"
 "border-radius: 10px;\n"
 "box-shadow: 5px 10px #888888;\n"
 "}\n"
 "\n"
 "*:hover {\n"
-"    background-color: #042940;\n"
+"    background-color: #2b3942;\n"
 "    transition-duration: 2s;\n"
 "}\n"
 "")
@@ -80,14 +80,14 @@ class Ui_Dialog(object):
         font.setPointSize(12)
         self.pushButton.setFont(font)
         self.pushButton.setStyleSheet("*{\n"
-"background-color:#03416E;\n"
+"background-color:#2b3942;\n"
 "color:white;\n"
 "border-radius: 10px;\n"
 "box-shadow: 5px 10px #888888;\n"
 "}\n"
 "\n"
 "*:hover {\n"
-"    background-color: #042940;\n"
+"    background-color: #2b3942;\n"
 "}\n"
 "")
         self.pushButton.setObjectName("pushButton")
@@ -140,7 +140,7 @@ class Ui_Dialog(object):
         self.label_12.setStyleSheet("color: rgb(255, 255, 255);")
         self.label_12.setObjectName("label_12")
         self.label_13 = QtWidgets.QLabel(self.frame)
-        self.label_13.setGeometry(QtCore.QRect(580, 70, 171, 51))
+        self.label_13.setGeometry(QtCore.QRect(600, 70, 171, 51))
         font = QtGui.QFont()
         font.setFamily("Impact")
         font.setPointSize(12)
@@ -192,7 +192,7 @@ class Ui_Dialog(object):
             self.label_4.setText(_translate("Dialog", str(result[0][0])))
             self.label_11.setText(_translate("Dialog", str(result[0][2])))
             self.label_13.setText(_translate("Dialog", str(result[0][3])))
-        self.label_13.setText(_translate("Dialog", "20/3/2022"))
+
         self.label.setText(_translate("Dialog", "Achievements"))
 
     def getPrevious(self):
