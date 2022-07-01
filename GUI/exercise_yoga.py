@@ -10,6 +10,12 @@ import yoga_Side_angel
 import yoga_guerrier
 import yoga_stretch
 from GUI import Hints
+from Database import  DBoperation
+from datetime import date
+
+today = date.today()
+
+DBoperations = DBoperation.database_operations
 
 
 class Ui_Frame(object):
@@ -226,6 +232,7 @@ class Ui_Frame(object):
         self.UploadVid.setText(_translate("Frame", "Upload video"))
         self.back.setText(_translate("Frame", "Back"))
     def Startexercise (self,exnum,Frame,filepath):
+            DBoperations.insert_activity(data[0], today, exnum)
             self.Frame_hint()
             a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()

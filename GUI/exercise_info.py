@@ -5,6 +5,12 @@ from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 import Startexercise
 import threading
+from Database import  DBoperation
+from datetime import date
+
+
+today = date.today()
+DBoperations = DBoperation.database_operations
 
 from GUI import exercise2, Hints
 class Ui_Frame(object):
@@ -279,6 +285,7 @@ class Ui_Frame(object):
             filepath = os.path.abspath(file.name)
             self.Startexercise(exnum,Frame,filepath)
     def Startexercise (self,exnum,Frame,filepath):
+            DBoperations.insert_activity(data[0], today, exnum)
             self.Frame_hint()
             a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()

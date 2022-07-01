@@ -2,7 +2,7 @@ import pymysql
 from PyQt5.QtWidgets import QMessageBox
 class database_operations:
     global con
-    con = pymysql.connect(host='localhost', user='root', password='1230A', )
+    con = pymysql.connect(host='localhost', user='root', password='1234', )
     def select_user(id, password):
                 cur = con.cursor()
                 cur.execute('select * from e_trainer.userr where idUser=%s and password=%s'
@@ -18,7 +18,15 @@ class database_operations:
             , (id, name, email, password, age, height, weight, level, gender))
         con.commit()
         con.close()
+    def insert_activity(id,date , exername):
 
+        cur = con.cursor()
+        cur.execute(
+        "INSERT INTO `e_trainer`.`activity` (`IDUser`,Date, `Exername`) "
+            " values(%s,%s,%s)"
+            , (id,date,exername))
+        con.commit()
+        con.close()
 
     def Update(id, name, email, password, age, height, weight, level, gender):
         try:
@@ -38,7 +46,7 @@ class database_operations:
             msg.exec_()
 
     def GetAchievements(id):
-        con = pymysql.connect(host='localhost', user='root', password='1230A', )
+        con = pymysql.connect(host='localhost', user='root', password='1234', )
         cur = con.cursor()
         cur.execute('select * from e_trainer.bestscore where username=%s'
                     , (id))
