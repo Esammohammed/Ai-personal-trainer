@@ -25,9 +25,9 @@ def Startex(Exersicename,ui,filepath):
     if Exersicename =='squat':
         squat.main(ui,cap)
     if Exersicename == 'shoulder_press':
-        Shoulder_Press.main()
+        Shoulder_Press.main(ui,cap)
     if Exersicename == 'pushup':
-        push_up.main()
+        push_up.main(ui,cap)
     if Exersicename == 'Yoga side angle':
        yoga_Side_angel.main(ui,cap)
     if Exersicename == 'Yoga Guerrier':

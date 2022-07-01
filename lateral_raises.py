@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import cv2
 import mediapipe as mp
@@ -12,16 +12,16 @@ def main (ui,cap):
     stage = 'down'
     oldhints = ''
     new_hints = ''
-    new_hints += "Stand tall, a dumbbell in each hand"
+    new_hints += "Stand tall, a dumbbell in each hand\nRaise your arms simultaneously just a couple inches out to each side\nand pause."
     def drawhints():
 
-        print(oldhints)
         ui.textbox.setText(oldhints);
     ## Setup mediapipe instance
-    dt1 = datetime.now()
+
+    framenumber = 0
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
-
+            framenumber = framenumber + 1
             results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
 
             try:
@@ -61,18 +61,12 @@ def main (ui,cap):
                 # Curl counter logic
                 if angle1 > 85 and angle2 >85 and stage == 'down':
                     stage = "up"
-                    if new_hints!='':
-                        new_hints +='\n'
-                    new_hints +="Raise your arms simultaneously just a couple inches out to each side\n and pause."
+                    new_hints += "Lower the weights slowly bringing your arms back to your sides.\nBreathe out as you lower the dumbbells"
                 if (angle1 < 45 and  angle2<45 and stage == "up"):
                     counter += 1
                     print(counter)
                     stage = "down"
-                    if new_hints != '':
-                        new_hints += '\n'
-                    new_hints += "Lower the weights slowly bringing your arms back to your sides.\n Breathe out as you lower the dumbbells"
-
-
+                    new_hints += "Raise your arms simultaneously just a couple inches out to each side\nand pause."
             except:
                 pass
 
@@ -107,13 +101,13 @@ def main (ui,cap):
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
-
+        fps = cap.get(cv2.CAP_PROP_FPS)
         cap.release()
         cv2.destroyAllWindows()
-        dt2 = datetime.now()
-        Remainingtime = dt2 - dt1
-        d = datetime.strptime(Remainingtime, "%H:%M:%S")
-        ui.Rmtime = d.time()
+
+        duration = framenumber / fps
+        Remainingtime = str(timedelta(seconds=duration)).split('.')[0]
+        ui.Rmtime = Remainingtime
         ui.Repscount = counter
         ui.textbox.setText("Great job, generate report for more details");
         ui.getexersiceinformation()

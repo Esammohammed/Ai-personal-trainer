@@ -1,73 +1,49 @@
+from datetime import timedelta
+
 import cv2
 import mediapipe as mp
 import numpy as np
-def main():
+
+import Pose_Estimation
+
+
+def main(ui,cap):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
 
 
-    def calculate_angle(a, b, c):
-        a = np.array(a)  # First
-        b = np.array(b)  # Mid
-        c = np.array(c)  # End
-
-        radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
-        angle = np.abs(radians * 180.0 / np.pi)
-
-        if angle > 180.0:
-            angle = 360 - angle
-
-        return angle
-
-
-    cap = cv2.VideoCapture(0)
-    #cap = cv2.VideoCapture('pushup.mp4')
-
-    # Curl counter variables
     counter = 0
     stage = None
-    a1 = 0
-    a2 = 0
-    a3 = 0
-    ## Setup mediapipe instance
+    oldhints = ''
+    new_hints = ''
+    new_hints += "Stand straight with feet hip-width apart."
+
+    def drawhints():
+        print(oldhints)
+        ui.textbox.setText(oldhints);
+
+    framenumber = 0;
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
-            ret, frame = cap.read()
-
-            # Recolor image to RGB
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            image.flags.writeable = False
-
-            # Make detection
-            results = pose.process(image)
-
-            # Recolor back to BGR
-            image.flags.writeable = True
-            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            framenumber = framenumber + 1
+            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
 
             # Extract landmarks
             try:
                 landmarks = results.pose_landmarks.landmark
 
-                # Get coordinates
-                left_shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,
-                            landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
                 left_elbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,
                          landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
                 left_wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,
                          landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
 
 
-                right_shoulder = [landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].x,
-                                 landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value].y]
+
                 right_elbow = [landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value].x,
                               landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value].y]
                 right_wrist = [landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].x,
                               landmarks[mp_pose.PoseLandmark.RIGHT_WRIST.value].y]
 
-
-
-                #body
 
                 left_shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,
                                  landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
@@ -84,12 +60,12 @@ def main():
                               landmarks[mp_pose.PoseLandmark.RIGHT_KNEE.value].y]
 
                 # Calculate angle
-                first_angle = calculate_angle(left_shoulder, left_elbow, left_wrist)
-                second_angle = calculate_angle(right_shoulder, right_elbow, right_wrist)
+                first_angle = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
+                second_angle = Pose_Estimation.calculate_angle(right_shoulder, right_elbow, right_wrist)
                 #body
 
-                first_angle_body = calculate_angle(left_shoulder, left_hip, left_knee)
-                second_angle_body = calculate_angle(right_shoulder, right_hip, right_knee)
+                first_angle_body = Pose_Estimation.calculate_angle(left_shoulder, left_hip, left_knee)
+                second_angle_body = Pose_Estimation.calculate_angle(right_shoulder, right_hip, right_knee)
 
                 # Visualize angle
                 cv2.putText(image, str(first_angle),
@@ -114,21 +90,14 @@ def main():
                 # Curl counter logic
                 if  170 >=first_angle >= 160 and 170 >= second_angle >= 160:
                     stage = "up"
+                    new_hints+='Lower your body until your chest nearly touches the floor.\n' \
+                               'Pause, then push yourself back up. Repeat.'
 
                 if 70 >=first_angle >= 50 and 70 >= second_angle >= 50 and stage == 'up':
                     stage = "down"
                     if 180 >= first_angle_body >= 160 and 180 >= second_angle_body >= 160:
                         counter += 1
-
-
-
-
-
-
-
-
-
-
+                        new_hints+="Get down on all fours, placing your hands slightly wider than your shoulders.\nStraighten your arms and legs."
 
             except:
                 pass
@@ -156,11 +125,20 @@ def main():
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                       )
-
+            if new_hints != oldhints and new_hints != '':
+                oldhints = new_hints
+                drawhints()
+            new_hints = ''
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
-
+        fps = cap.get(cv2.CAP_PROP_FPS)
         cap.release()
         cv2.destroyAllWindows()
+        duration = framenumber / fps
+        Remainingtime = str(timedelta(seconds=duration)).split('.')[0]
+        ui.Rmtime = Remainingtime
+        ui.Repscount = counter
+        ui.textbox.setText("Great job, generate report for more details");
+        ui.Trainingname = 'push up'

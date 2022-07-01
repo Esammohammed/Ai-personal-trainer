@@ -1,9 +1,8 @@
-from datetime import datetime
-
+from datetime import datetime, timedelta
 import cv2
 import mediapipe as mp
 import numpy as np
-from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
+
 import Pose_Estimation
 def main (ui,cap):
 
@@ -11,15 +10,12 @@ def main (ui,cap):
     mp_pose = mp.solutions.pose
     counter = 0
     stage = None
-
     oldhints = ''
     new_hints = ''
     new_hints += "Stand straight with feet hip-width apart."
     def drawhints():
         print(oldhints)
         ui.textbox.setText(oldhints);
-
-    dt1 = datetime.now()
     framenumber=0;
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
@@ -96,20 +92,13 @@ def main (ui,cap):
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break;
-        fps = cap.get(cv2.CAP_PROP_FPS)  # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
-        duration = framenumber / fps
-        minutes = int(duration / 60)
-        seconds = duration % 60
-        print('duration (M:S) = ' + str(minutes) + ':' + str(seconds))
+        fps = cap.get(cv2.CAP_PROP_FPS)
         cap.release()
         cv2.destroyAllWindows()
-        dt2 = datetime.now()
 
-
-        Remainingtime = str(dt2 - dt1)
-        timeh_m_sformat = Remainingtime.split('.')
-        ui.Rmtime = timeh_m_sformat[0]
-        print(timeh_m_sformat[0])
+        duration = framenumber / fps
+        Remainingtime = str(timedelta(seconds=duration)).split('.')[0]
+        ui.Rmtime = Remainingtime
         ui.Repscount = counter
         ui.textbox.setText("Great job, generate report for more details");
         ui.Trainingname = 'squat'

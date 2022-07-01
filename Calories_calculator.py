@@ -20,9 +20,9 @@ def Cl_cal (Exersicename, reps , time):
         caloriesburned = .32 * reps;
         ex_info = ' One Squat burns 0.32 calorie which means you have to do 100 squat to burn 32 calories'
 
-    if Exersicename == 'shoulder_press':
+    if Exersicename == 'shoulder press':
         pass
-    if Exersicename == 'pushup':
+    if Exersicename == 'push up':
         pass
     if Exersicename == 'Yoga side angle':
         caloriesburned = (Timeinmins/60) * 477;

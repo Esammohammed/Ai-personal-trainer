@@ -73,7 +73,7 @@ class Ui_Frame(object):
                                  'It increases flexibility and strength in your back, arms, and shoulders.')
 
 
-    def setupUi(self, Frame):
+    def setupUi(self, Frame,Exercise_type):
         Frame.setObjectName("Frame")
         Frame.setGeometry(QtCore.QRect(80, 60, 1161, 761))
         self.centralwidget = QtWidgets.QWidget(Frame)
@@ -175,12 +175,29 @@ class Ui_Frame(object):
 
         self.start.setObjectName("startButton")
         self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4,''))
+        self.back = QtWidgets.QPushButton(self.frame_4)
+        self.back.setGeometry(QtCore.QRect(110, 720, 221, 50))
+        self.back.setStyleSheet(" ")
 
+        self.back.setStyleSheet("QPushButton{\n"
+                                "background-color:#2b3942;\n"
+                                "color:white;\n;border-radius: 5px;font-size: 17px; "
+                                "font-family: 'Source Sans Pro', sans-serif;padding: 6px 18px;font-weight: bold}\n"
+
+                                "\n"
+                                "QPushButton:hover {\n"
+                                "  background-color: #1f292f;\n"
+                                "}")
+
+        self.back.setFont(font)
+        self.back.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.back.clicked.connect(lambda: self.back_button(Frame, Exercise_type))
         self.retranslateUi(self.frame_4)
         QtCore.QMetaObject.connectSlotsByName(self.frame_4)
 
-
-
+    def back_button(self, currentframe, Exercise_type):
+        Exercise_type.show()
+        currentframe.hide()
     def Upload_vid(self, exnum, Frame):
         import os
         import tkinter
@@ -207,7 +224,7 @@ class Ui_Frame(object):
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
         self.UploadVid.setText(_translate("Frame", "Upload video"))
-
+        self.back.setText(_translate("Frame", "Back"))
     def Startexercise (self,exnum,Frame,filepath):
             self.Frame_hint()
             a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))

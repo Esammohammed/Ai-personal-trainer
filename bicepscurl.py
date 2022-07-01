@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
 import cv2
@@ -20,11 +20,11 @@ def main (ui,cap):
         print (oldhints)
         ui.textbox.setText(oldhints);
 
-    #start time
-    dt1 = datetime.now()
+    framenumber = 0
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
+            framenumber= framenumber+1
             # Extract landmarks
             results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
 
@@ -99,13 +99,13 @@ def main (ui,cap):
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break
-
+        fps = cap.get(cv2.CAP_PROP_FPS)
         cap.release()
         cv2.destroyAllWindows()
-        dt2 = datetime.now()
-        Remainingtime = str(dt2 - dt1)
-        timeh_m_sformat = Remainingtime.split('.')
-        ui.Rmtime = timeh_m_sformat[0]
+
+        duration = framenumber / fps
+        Remainingtime = str(timedelta(seconds=duration)).split('.')[0]
+        ui.Rmtime = Remainingtime
         ui.Repscount = counter
         ui.textbox.setText("Great job, generate report for more details");
         ui.getexersiceinformation()

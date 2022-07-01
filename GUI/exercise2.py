@@ -104,26 +104,23 @@ class Ui_MainWindow(object):
 
         self.exinfoFrame = QtWidgets.QFrame(self.centralwidget)
         self.exinfoFrame.setGeometry(QtCore.QRect(300, -10, 591, 631))
-
         self.exinfoFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exinfoFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exinfoFrame.setObjectName("exinfoFrame")
-
         ui = exercise_info.Ui_Frame()
-        ui.setupUi(self.exinfoFrame)
+        ui.setupUi(self.exinfoFrame,frame)
         self.exinfoFrame.show()
         frame.hide()
     def yoga_ex(self ,frame):
 
         self.exyogaFrame = QtWidgets.QFrame(self.centralwidget)
         self.exyogaFrame.setGeometry(QtCore.QRect(80, 60, 0, 0))
-
         self.exyogaFrame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.exyogaFrame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.exyogaFrame.setObjectName("exyogaFrame")
 
         ui = exercise_yoga.Ui_Frame()
-        ui.setupUi(self.exyogaFrame)
+        ui.setupUi(self.exyogaFrame,frame)
         self.exyogaFrame.show()
         frame.hide()
 

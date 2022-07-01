@@ -94,7 +94,7 @@ class Ui_Frame(object):
                                  'there are muscles that benefit from squats, too like Hip muscles, Calves, Hamstrings and Obliques.')
 
 
-    def setupUi(self, Frame):
+    def setupUi(self, Frame,Exercise_type):
 
         Frame.setObjectName("Frame")
 
@@ -240,7 +240,7 @@ class Ui_Frame(object):
         font.setPointSize(12)
         self.back.setFont(font)
         self.back.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.back.clicked.connect(lambda: self.back)
+        self.back.clicked.connect(lambda: self.back_button(Frame,Exercise_type))
         self.retranslateUi(self.frame_4)
         QtCore.QMetaObject.connectSlotsByName(self.frame_4)
 
@@ -253,13 +253,10 @@ class Ui_Frame(object):
         self.exFrame2.setObjectName("exFrame2")
         self.ui = Hints.Ui_MainWindow()
         self.ui.setupUi(self.exFrame2)
-    def back (self):
-        ui = exercise2.Ui_MainWindow()
-        ui.setupUi(self.exFrame)
-        self.exFrame.show()
-        self.hisframe.hide()
-        self.achFrame.hide()
-        self.usFrame.hide()
+    def back_button (self,currentframe,Exercise_type ):
+        Exercise_type.show()
+        currentframe.hide()
+
     def retranslateUi(self, Frame):
         _translate = QtCore.QCoreApplication.translate
         Frame.setWindowTitle(_translate("Frame", "Frame"))
