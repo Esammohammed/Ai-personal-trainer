@@ -1,30 +1,28 @@
-import threading
-from datetime import datetime
 
-import Pose_Estimation
-import cv2
-import mediapipe as mp
-import numpy as np
-import Timer
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
-def main (ui):
+def main (ui,cap):
+    import threading
+    from datetime import datetime
+
+    import Pose_Estimation
+    import cv2
+    import mediapipe as mp
+    import numpy as np
+    import Timer
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
-    cap = cv2.VideoCapture('ysa.mp4')
-    print(cap.isOpened())
+
     Firsttime=True
     flag = True
     oldhints = ''
     new_hints = ''
     new_hints += "Exhale and step your left foot behind towards the back of the mat with front foot staying at the top."
     def drawhints():
-
         print(oldhints)
         ui.textbox.setText(oldhints);
-
     counter = 0
     stage = None
 

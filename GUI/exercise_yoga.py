@@ -137,6 +137,26 @@ class Ui_Frame(object):
         font.setPointSize(14)
         self.textBrowser.setFont(font)
 
+        self.UploadVid = QtWidgets.QPushButton(self.frame_4)
+        self.UploadVid.setGeometry(QtCore.QRect(110, 600, 221, 50))
+        self.UploadVid.setStyleSheet(" ")
+
+        self.UploadVid.setStyleSheet(
+            "QPushButton{color : white ;background-color: #04AA6D!important;border-radius: 5px;font-size: 17px; "
+            "font-family: 'Source Sans Pro', sans-serif;padding: 6px 18px;font-weight: bold}\n"
+            "QPushButton:hover{\n"
+            "background-color: #059861;\n"
+            "}")
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.UploadVid.setFont(font)
+        self.UploadVid.setLayoutDirection(QtCore.Qt.LeftToRight)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+        self.UploadVid.clicked.connect(lambda: self.Upload_vid(self.exnum, self.frame_4))
+
+
         self.start = QtWidgets.QPushButton(self.frame_4)
         self.start.setGeometry(QtCore.QRect(110, 660, 221, 50))
         self.start.setStyleSheet(" ")
@@ -154,10 +174,23 @@ class Ui_Frame(object):
         'icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)'
 
         self.start.setObjectName("startButton")
-        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4))
+        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4,''))
 
         self.retranslateUi(self.frame_4)
         QtCore.QMetaObject.connectSlotsByName(self.frame_4)
+
+
+
+    def Upload_vid(self, exnum, Frame):
+        import os
+        import tkinter
+        from tkinter import filedialog
+        root = tkinter.Tk()
+        root.withdraw()
+        file = filedialog.askopenfile(mode='r', filetypes=[("All files", "*")])
+        if file:
+            filepath = os.path.abspath(file.name)
+            self.Startexercise(exnum, Frame, filepath)
     def Frame_hint (self):
         self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
         self.exFrame2.setGeometry(QtCore.QRect(300, -10, 591, 631))
@@ -173,9 +206,11 @@ class Ui_Frame(object):
         self.YGButton.setText(_translate("Frame", "yoga guerrier"))
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
         self.start.setText(_translate("Frame", "Start"))
-    def Startexercise (self,exnum,Frame):
+        self.UploadVid.setText(_translate("Frame", "Upload video"))
+
+    def Startexercise (self,exnum,Frame,filepath):
             self.Frame_hint()
-            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,))
+            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()

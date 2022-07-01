@@ -1,32 +1,16 @@
-import threading
-from datetime import datetime
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
 from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
-
-
-
 import Startexercise
-import bicepscurl
-import lateral_raises
-import squat
 import threading
-import Pose_Estimation
-import cv2
-import mediapipe as mp
-import numpy as np
-import Timer
-import yoga_Side_angel
 
 from GUI import exercise2, Hints
-
-
 class Ui_Frame(object):
 
     exnum =''
-
+    live =False
     def bicepsClicked(self):
         self.exnum = 'bicepscurl'
         self.textBrowser.setText('What are used muscles for this exercise ?\n'
@@ -203,6 +187,24 @@ class Ui_Frame(object):
         self.lateralRaisesButton.setObjectName("lateralRaisesButton")
         self.lateralRaisesButton.clicked.connect(lambda :self.lateralRaisesClicked())
 
+        self.UploadVid = QtWidgets.QPushButton(self.frame_4)
+        self.UploadVid.setGeometry(QtCore.QRect(110, 600, 221, 50))
+        self.UploadVid.setStyleSheet(" ")
+
+        self.UploadVid.setStyleSheet(
+            "QPushButton{color : white ;background-color: #04AA6D!important;border-radius: 5px;font-size: 17px; "
+            "font-family: 'Source Sans Pro', sans-serif;padding: 6px 18px;font-weight: bold}\n"
+            "QPushButton:hover{\n"
+            "background-color: #059861;\n"
+            "}")
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        self.UploadVid.setFont(font)
+        self.UploadVid.setLayoutDirection(QtCore.Qt.LeftToRight)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+
+        self.UploadVid.clicked.connect(lambda: self.Upload_vid(self.exnum, self.frame_4))
         self.start = QtWidgets.QPushButton(self.frame_4)
         self.start.setGeometry(QtCore.QRect(110, 660, 221, 50))
         self.start.setStyleSheet(" ")
@@ -212,15 +214,14 @@ class Ui_Frame(object):
                                  "QPushButton:hover{\n"
                                  "background-color: #059861;\n"
                                  "}")
-        font = QtGui.QFont()
-        font.setPointSize(12)
+
         self.start.setFont(font)
         self.start.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
 
-        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4))
+        self.start.clicked.connect(lambda: self.Startexercise(self.exnum,self.frame_4 ,''))
 
         self.back = QtWidgets.QPushButton(self.frame_4)
         self.back.setGeometry(QtCore.QRect(110, 720, 221, 50))
@@ -269,10 +270,20 @@ class Ui_Frame(object):
         self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
         self.back.setText(_translate("Frame", "Back"))
         self.start.setText(_translate("Frame", "Start"))
-
-    def Startexercise (self,exnum,Frame):
+        self.UploadVid.setText(_translate("Frame", "Upload video"))
+    def Upload_vid(self,exnum,Frame):
+        import os
+        import tkinter
+        from tkinter import filedialog
+        root = tkinter.Tk()
+        root.withdraw()
+        file = filedialog.askopenfile(mode='r', filetypes=[("All files", "*")])
+        if file:
+            filepath = os.path.abspath(file.name)
+            self.Startexercise(exnum,Frame,filepath)
+    def Startexercise (self,exnum,Frame,filepath):
             self.Frame_hint()
-            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,))
+            a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()
             self.exFrame2.show()
             Frame.hide()

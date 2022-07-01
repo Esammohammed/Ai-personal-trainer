@@ -6,14 +6,11 @@ import mediapipe as mp
 import numpy as np
 import Pose_Estimation
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMainWindow, QLineEdit, QWidget, QPlainTextEdit, QTextEdit
-def main (ui):
+def main (ui,cap):
+
 
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
-    cap = cv2.VideoCapture('bi.mp4')
-   # cap = cv2.VideoCapture(0)
-    print(cap.isOpened())
-    # Curl counter variables
     counter = 0
     stage = None
     oldhints = ''

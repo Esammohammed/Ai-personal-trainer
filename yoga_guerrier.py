@@ -1,7 +1,7 @@
 from datetime import datetime
 
 
-def main(ui):
+def main(ui,cap):
     import threading
     import Pose_Estimation
     import cv2
@@ -27,9 +27,7 @@ def main(ui):
 
         return angle
 
-    # cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('Warrior_Pose_2.mp4')
-    # Curl counter variables
+
     counter = 0
     stage = None
     oldhints = ''
@@ -45,7 +43,7 @@ def main(ui):
             a1 = 0
             a2 = 0
             a3 = 0
-            results, _ = Pose_Estimation.MakedetectionandExtract(pose, cap)
+            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap)
 
             ret, frame = cap.read()
 

@@ -3,7 +3,7 @@ from datetime import datetime
 import Pose_Estimation
 
 
-def main(ui):
+def main(ui,cap):
     import cv2
     import mediapipe as mp
     import numpy as np
@@ -25,11 +25,6 @@ def main(ui):
         ui.textbox.setText(oldhints);
 
 
-
-    cap = cv2.VideoCapture('coprastrch.mp4')
-    #cap = cv2.VideoCapture(0)
-
-    # Curl counter variables
     counter = 0
     stage = None
     hand_right = 0

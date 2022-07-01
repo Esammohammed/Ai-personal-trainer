@@ -4,12 +4,9 @@ import cv2
 import mediapipe as mp
 import numpy as np
 import Pose_Estimation
-def main (ui):
+def main (ui,cap):
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
-    #cap = cv2.VideoCapture(0)
-    cap = cv2.VideoCapture('letral.mp4')
-
     # Curl counter variables
     counter = 0
     stage = 'down'

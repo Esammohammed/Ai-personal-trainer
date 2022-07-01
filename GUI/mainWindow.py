@@ -29,7 +29,7 @@ class Ui_MainWindow(object):
         global data
         data = u
         f = open('store.pckl', 'wb')
-        pickle.dump(u, f)
+        pickle.dump(data, f)
         f.close()
 
 

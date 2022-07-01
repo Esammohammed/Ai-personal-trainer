@@ -5,7 +5,7 @@ import mediapipe as mp
 import numpy as np
 from PyQt5.QtWidgets import QMainWindow, QWidget, QPlainTextEdit
 import Pose_Estimation
-def main (ui):
+def main (ui,cap):
 
     mp_drawing = mp.solutions.drawing_utils
     mp_pose = mp.solutions.pose
@@ -19,18 +19,6 @@ def main (ui):
         print(oldhints)
         ui.textbox.setText(oldhints);
 
-    '''
-    # for live 
-        image = cv2.rectangle(image, (0, 400), (100 + 2000, 900), (0, 0, 0), -1)
-        for i, line in enumerate(oldhints.split('\n')):
-            cv2.putText(image, line, (0, 420+(i*30)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-    '''
-    #for recorded vidoe
-    #
-    cap = cv2.VideoCapture('squat.mp4')
-    #cap = cv2.VideoCapture(0)
-
-    ##setup mediapipe instance
     dt1 = datetime.now()
     framenumber=0;
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:

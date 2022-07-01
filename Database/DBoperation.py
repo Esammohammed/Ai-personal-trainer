@@ -19,8 +19,7 @@ class database_operations:
         con.commit()
         con.close()
 
-    def test (self):
-        print("aaa")
+
     def Update(id, name, email, password, age, height, weight, level, gender):
         try:
 

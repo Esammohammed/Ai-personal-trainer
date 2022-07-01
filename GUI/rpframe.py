@@ -109,6 +109,7 @@ class Ui_Form(object):
         obj = pickle.load(f)
         DBoperation.database_operations.insertBestScore(self.Trainingname, str(obj[0]), self.Repscount, 'work')
         f.close()
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
