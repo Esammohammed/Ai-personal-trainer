@@ -1,3 +1,4 @@
+import pickle
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QPoint
@@ -285,7 +286,9 @@ class Ui_Frame(object):
             filepath = os.path.abspath(file.name)
             self.Startexercise(exnum,Frame,filepath)
     def Startexercise (self,exnum,Frame,filepath):
-            DBoperations.insert_activity(data[0], today, exnum)
+            f = open('store.pckl', 'rb')
+            obj = pickle.load(f)
+            DBoperations.insert_activity(obj[0], today, exnum)
             self.Frame_hint()
             a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()

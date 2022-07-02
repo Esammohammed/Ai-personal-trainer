@@ -1,3 +1,4 @@
+import pickle
 import threading
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -232,7 +233,9 @@ class Ui_Frame(object):
         self.UploadVid.setText(_translate("Frame", "Upload video"))
         self.back.setText(_translate("Frame", "Back"))
     def Startexercise (self,exnum,Frame,filepath):
-            DBoperations.insert_activity(data[0], today, exnum)
+            f = open('store.pckl', 'rb')
+            obj = pickle.load(f)
+            DBoperations.insert_activity(obj[0], today, exnum)
             self.Frame_hint()
             a_thread = threading.Thread(target=Startexercise.Startex, args=(exnum,self.ui,filepath,))
             a_thread.start()

@@ -6,6 +6,8 @@ from PyQt5.QtWidgets import QMessageBox
 
 
 from Database import DBoperation
+import hashlib
+import os
 
 DBoperations = DBoperation.database_operations
 class Ui_MainWindow(object):
@@ -149,7 +151,7 @@ class Ui_MainWindow(object):
 
             try:
 
-                con = pymysql.connect(host="localhost", user="root", password="1230A",)
+                con = pymysql.connect(host="localhost", user="root", password="1234",)
                 cur = con.cursor()
                 cur.execute("select * from e_trainer.userr where idUser=%s"
                             , self.lineEdit_4.text())
@@ -162,6 +164,8 @@ class Ui_MainWindow(object):
                     msg.setWindowTitle("Error")
                     msg.exec_()
                 else:
+
+
                     DBoperations.insert(self.lineEdit_4.text() ,self.lineEdit.text(), self.lineEdit_5.text(),
 
                                    self.lineEdit_2.text(), int(self.lineEdit_3.text()), None,None,None,None)
