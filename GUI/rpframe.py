@@ -107,7 +107,7 @@ class Ui_Form(object):
         self.textEdit.setText(str(calories))
         f = open('store.pckl', 'rb')
         obj = pickle.load(f)
-        DBoperation.database_operations.insertBestScore(self.Trainingname, str(obj[0]), self.Repscount, 'work')
+        DBoperation.database_operations.insertBestScore(self.Trainingname, str(obj[0]), self.Repscount, 'Workout')
         f.close()
 
 if __name__ == "__main__":

@@ -15,11 +15,11 @@ from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5 import QtCore, QtGui, QtWidgets
 from GUI.Achievements import Ui_Dialog
 from GUI.userInfo import Ui_MainWindow1
-from GUI.drawhint import Ui_MainWindow
+
 from GUI.HistoryPage import Ui_Form
 from GUI.exercise_info import Ui_Frame
 from GUI import exercise2, Hints
-import drawhint
+
 #data = ('5', '2', '3', '4', None, None, None, None, None)
 import pickle
 import sys

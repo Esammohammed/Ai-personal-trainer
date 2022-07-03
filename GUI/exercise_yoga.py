@@ -110,7 +110,7 @@ class Ui_Frame(object):
         self.YGButton.setFont(font)
         self.YGButton.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("pushUp logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("yg.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.YGButton.setIcon(icon1)
         self.YGButton.setIconSize(QtCore.QSize(100, 100))
         self.YGButton.setObjectName("YGButton")
@@ -123,7 +123,7 @@ class Ui_Frame(object):
         self.YCSButton.setFont(font)
         self.YCSButton.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("shoulder press logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("ycs.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.YCSButton.setIcon(icon3)
         self.YCSButton.setIconSize(QtCore.QSize(100, 100))
         self.YCSButton.setObjectName("YCSButton")
@@ -151,9 +151,6 @@ class Ui_Frame(object):
         font.setPointSize(12)
         self.UploadVid.setFont(font)
         self.UploadVid.setLayoutDirection(QtCore.Qt.LeftToRight)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("squat logo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-
         self.UploadVid.clicked.connect(lambda: self.Upload_vid(self.exnum, self.frame_4))
 
 
@@ -222,7 +219,7 @@ class Ui_Frame(object):
         self.YSAButton.setText(_translate("Frame", "Side Angel"))
         self.YGButton.setText(_translate("Frame", "yoga guerrier"))
         self.YCSButton.setText(_translate("Frame", "Cobra Stretch"))
-        self.start.setText(_translate("Frame", "Start"))
+        self.start.setText(_translate("Frame", "Start live"))
         self.UploadVid.setText(_translate("Frame", "Upload video"))
         self.back.setText(_translate("Frame", "Back"))
     def Startexercise (self,exnum,Frame,filepath):

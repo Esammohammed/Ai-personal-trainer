@@ -416,7 +416,7 @@ class Ui_MainWindow1(object):
         self.user.setText(_translate("MainWindow", data[0]))
         self.name.setText(_translate("MainWindow", data[1]))
         self.email.setText(_translate("MainWindow", data[2]))
-        self.password.setText(_translate("MainWindow", data[3]))
+        self.password.setText(_translate("MainWindow", '****'))
         self.age.setText(_translate("MainWindow", data[4]))
         self.height.setText(_translate("MainWindow", str(data[5])))
         self.weight.setText(_translate("MainWindow", str(data[6])))
@@ -430,7 +430,7 @@ class Ui_MainWindow1(object):
     def calldatabase(self):
         up.Update(self.user.toPlainText()
                , self.name.toPlainText(), self.email.toPlainText(),
-               self.password.toPlainText(), int(self.age.toPlainText()), self.height.toPlainText(), self.weight.toPlainText(),
+                  data[3], int(self.age.toPlainText()), self.height.toPlainText(), self.weight.toPlainText(),
                   self.level.toPlainText(),
                self.gender.toPlainText())
 if __name__ == "__main__":

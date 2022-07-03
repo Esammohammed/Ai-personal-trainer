@@ -24,9 +24,13 @@ def main (ui,cap):
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
 
         while cap.isOpened():
+
             framenumber= framenumber+1
             # Extract landmarks
-            results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
 
             try:
                 landmarks = results.pose_landmarks.landmark
@@ -44,7 +48,7 @@ def main (ui,cap):
 
                 # Visualize angle
                 cv2.putText(image, str(angle),
-                            tuple(np.multiply(elbow, [640, 480]).astype(int)),
+                            tuple(np.multiply(elbow, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
@@ -54,7 +58,7 @@ def main (ui,cap):
                     if new_hints!='':
                         new_hints +='\n'
                     new_hints +="Great jop, Squeeze the biceps and lift the dumbbells.\nKeep the elbows close to your body"
-                if angle < 35 and stage == 'down':
+                if angle < 40 and stage == 'down':
                     stage = "up"
                     if new_hints!='':
                         new_hints +='\n'
@@ -95,7 +99,10 @@ def main (ui,cap):
                 drawhints()
             new_hints = ''
 
-            cv2.imshow('Mediapipe Feed', image)
+            winname = 'Mediapipe Feed'
+            cv2.namedWindow(winname)
+            cv2.moveWindow(winname, 600, 35)
+            cv2.imshow(winname, image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 break

@@ -23,37 +23,19 @@ def main(ui,cap):
 
         print(oldhints)
         ui.textbox.setText(oldhints);
-
-
-    counter = 0
     stage = None
-    hand_right = 0
-    body_right = 0
-    leg_right = 0
 
 
-
-
-    ## Setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
-            ret, frame = cap.read()
             a1 = 0
             a2 = 0
             a3 = 0
 
-            # Recolor image to RGB
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            image.flags.writeable = False
-
-            # Make detection
-            results = pose.process(image)
-
-            # Recolor back to BGR
-            image.flags.writeable = True
-            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-
-            # Extract landmarks
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
             try:
                 landmarks = results.pose_landmarks.landmark
 
@@ -132,7 +114,7 @@ def main(ui,cap):
                 #body
                 cv2.putText(image, str(first_angle_body),
                            tuple(np.multiply(left_hip, [850, 480]).astype(int)),
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, 2, cv2.LINE_AA
                            )
                 cv2.putText(image, str(second_angle_body),
                             tuple(np.multiply(right_hip, [850, 480]).astype(int)),
@@ -152,7 +134,7 @@ def main(ui,cap):
 
 
                 # Curl counter logic
-                if  180 >= first_angle_hand >= 165 and 180 >= second_angle_hand >= 165:
+                if  180 >= first_angle_hand >= 160 and 180 >= second_angle_hand >= 160:
                     a1 = 1
                 else:
                     new_hints += 'Place your palms flat on the ground directly under your shoulders.\n' \
@@ -162,12 +144,12 @@ def main(ui,cap):
                 if  140 >= first_angle_body >= 100 and 140 >= second_angle_body >= 100 :
                     a2 = 1
                 else:
-                    new_hints += 'Inhale to lift your chest off the floor. Roll your shoulders back and keep your low ribs on the floor.\n' \
+                    new_hints += 'Inhale to lift your chest off the floor. Roll your \nshoulders back and keep your low ribs on the floor.\n' \
                                  'Make sure your elbows continue hugging your sides.\n' \
 
 
 
-                if  70 >= first_angle_leg >= 40 and 70 >= second_angle_leg >= 40 :
+                if  80 >= first_angle_leg >= 40 and 80 >= second_angle_leg >= 40 :
                     a3 = 1
                 else:
                     new_hints += 'Make sure that your pelvis and legs are firmly rooted into the floor.\n' \
@@ -199,30 +181,6 @@ def main(ui,cap):
 
             except:
                 pass
-
-
-
-
-
-            # Render curl counter
-            # Setup status box
-            cv2.rectangle(image, (0, 0), (225, 73), (245, 117, 16), -1)
-
-            # Rep data
-            cv2.putText(image, 'REPS', (15, 12),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-            cv2.putText(image, str(stage),
-                        (10, 60),
-                        cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
-
-            # Stage data
-           # cv2.putText(image, 'STAGE', (65, 12),
-                     #   cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-            #cv2.putText(image, stage,
-                       # (60, 60),
-                       # cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 2, cv2.LINE_AA)
-
-            # Render detections
             mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
                                       mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                       mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)

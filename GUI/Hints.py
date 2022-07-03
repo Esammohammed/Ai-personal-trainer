@@ -73,14 +73,18 @@ class Ui_MainWindow(QMainWindow):
 
         self.textbox.setGraphicsEffect(effect)
         self.pushButton_2 = QtWidgets.QPushButton(self.frame_4)
-        self.pushButton_2.setGeometry(QtCore.QRect(930, 780, 200 , 40))
+        self.pushButton_2.setGeometry(QtCore.QRect(930, 785, 200 , 40))
         self.pushButton_2.clicked.connect(lambda:(self.frame_4))
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
+        self.label2=QtWidgets.QLabel(self.frame_4)
+        self.label2.setGeometry(QtCore.QRect(20, 785, 170, 35))
+        self.label2.setFont(QFont("Arial", 20))
+        self.label2.setStyleSheet('padding :5px')
+        self.label2.setFont(font)
         self.pushButton_2.setFont(font)
-
         self.pushButton_2.setStyleSheet("QPushButton{\n"
                                         "background-color:#2b3942;\n"
                                         "color:white;\n"
@@ -100,7 +104,7 @@ class Ui_MainWindow(QMainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Hints"))
         self.pushButton_2.setText(_translate("MainWindow", "Generate report"))
-        print ("asd");
+        self.label2.setText('Press Q to quit')
     def report (self,f):
         self.exFrame2 = QtWidgets.QFrame(self.centralwidget)
         self.exFrame2.setGeometry(QtCore.QRect(0, -10, 591, 631))

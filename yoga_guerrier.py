@@ -43,21 +43,10 @@ def main(ui,cap):
             a1 = 0
             a2 = 0
             a3 = 0
-            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap)
-
-            ret, frame = cap.read()
-
-            # Recolor image to RGB
-            image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            image.flags.writeable = False
-
-            # Make detection
-            results = pose.process(image)
-
-            # Recolor back to BGR
-            image.flags.writeable = True
-            image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
             # Extract landmarks
             try:
                 landmarks = results.pose_landmarks.landmark

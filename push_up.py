@@ -25,9 +25,14 @@ def main(ui,cap):
     framenumber = 0;
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
+            ret, ll = cap.read()
+            if (ret == False):
+                break
             framenumber = framenumber + 1
-            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
-
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
             # Extract landmarks
             try:
                 landmarks = results.pose_landmarks.landmark
@@ -129,6 +134,7 @@ def main(ui,cap):
                 oldhints = new_hints
                 drawhints()
             new_hints = ''
+            cv2.moveWindow(image, 40, 30)
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):

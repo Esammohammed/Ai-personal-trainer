@@ -2,15 +2,16 @@ import pymysql
 from PyQt5.QtWidgets import QMessageBox
 class database_operations:
     global con
-    con = pymysql.connect(host='localhost', user='root', password='1230A', )
+
     def select_user(id, password):
+                con = pymysql.connect(host='localhost', user='root', password='1230A', )
                 cur = con.cursor()
                 cur.execute('select * from e_trainer.userr where idUser=%s and password=%s'
                             , (id, password ))
                 row = cur.fetchone()
                 return row
     def insert (id , name ,email  , password ,age,height,weight ,level,gender):
-
+        con = pymysql.connect(host='localhost', user='root', password='1230A', )
         cur = con.cursor()
         cur.execute(
         "INSERT INTO `e_trainer`.`userr` (`idUser`, `name`, `Email`, `Password`, `Age`, `height`, `weight`, `Level`, `Gender`) "
@@ -21,6 +22,7 @@ class database_operations:
 
 
     def Update(id, name, email, password, age, height, weight, level, gender):
+        con = pymysql.connect(host='localhost', user='root', password='1230A', )
         try:
 
             cur = con.cursor()
@@ -50,6 +52,7 @@ class database_operations:
 
 
     def insertBestScore(exerciseName, id, newscore, extype):
+        con = pymysql.connect(host='localhost', user='root', password='1230A', )
         cur = con.cursor()
         cur.execute('select * from e_trainer.bestscore where username=%s and exename=%s'
                     , (id, exerciseName))
@@ -62,7 +65,7 @@ class database_operations:
                 , (exerciseName, id, newscore, "Workout"))
             con.commit()
             con.close()
-        elif (row[3]== 'work'):
+        else:
             bestscore = row[2]
 
             if (str(newscore) >= bestscore):
@@ -71,10 +74,6 @@ class database_operations:
                 cur.execute(statment, (newscore, id, exerciseName))
             con.commit()
             con.close()
-
-
-        else :
-            pass
 
 
 

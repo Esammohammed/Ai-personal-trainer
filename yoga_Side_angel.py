@@ -31,7 +31,10 @@ def main (ui,cap):
             a1=0
             a2=0
             a3=0
-            results,image = Pose_Estimation.MakedetectionandExtract(pose,cap)
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
 
             # Extract landmarks
             try:
@@ -84,27 +87,27 @@ def main (ui,cap):
                 # Visualize arms
                 cv2.putText(image, str(angle1),
                             #for recorded live  dimentions are [640, 480]
-                            tuple(np.multiply(left_shoulder, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1,(225, 230, 0), 2, cv2.LINE_AA
+                            tuple(np.multiply(left_shoulder, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX, .7,(0, 100, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle2),
-                            tuple(np.multiply(right_shoulder, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
+                            tuple(np.multiply(right_shoulder, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX,.7, (0, 100, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle3),
-                            tuple(np.multiply(left_knee, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA
+                            tuple(np.multiply(left_knee, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX,.7, (0, 100, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle4),
-                            tuple(np.multiply(right_knee, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA
+                            tuple(np.multiply(right_knee, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX, .7, (0, 100, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str( angle5),
-                            tuple(np.multiply(left_hip, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 1, (225, 230, 0), 2, cv2.LINE_AA)
+                            tuple(np.multiply(left_hip, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX, .7, (0, 100, 255), 2, cv2.LINE_AA)
                 cv2.putText(image, str(angle6),
-                            tuple(np.multiply(right_hip, [640, 360]).astype(int)),
-                            cv2.FONT_HERSHEY_SIMPLEX,1, (225, 230, 0), 2, cv2.LINE_AA)
+                            tuple(np.multiply(right_hip, [850, 480]).astype(int)),
+                            cv2.FONT_HERSHEY_SIMPLEX,.7, (0, 100, 255), 2, cv2.LINE_AA)
 
 
                 # Curl counter logic for arms
@@ -113,15 +116,15 @@ def main (ui,cap):
                     a1 = 1
                 else :
                     new_hints += 'Lift and extend your arms out horizontally from your sides, with palms down.\n' \
-                                 'Angle your right heel toward the center of your mat\n'
+                                 'Angle your right heel toward the center of your mat.\n'
 
 
 
                 if 100 <= angle4 <= 125 and (170 <= angle3 <= 180 or 0 <= angle3 <= 10 ):
                     a2 = 1
                 else :
-                    new_hints += 'make your ankle closer to your body to make 90 \ndegree angle with your thigh\n' \
-                                 'make your leg straight  to make 180 degree angle \nbetween your thigh and ankle\n'
+                    new_hints += 'make your ankle closer to your body to make 90 \ndegree angle with your thigh.\n' \
+                                 'make your leg straight to make 180 degree angle \nbetween your thigh and ankle.\n'
 
                     # Visualize sides
 
@@ -131,8 +134,8 @@ def main (ui,cap):
 
                     a3 = 1
                 else:
-                    new_hints+= "go with your left side to make 35 \ndegree angle with your  thigh\n" \
-                                "make your right side straight  to\nq make 180 degree angle between your thigh and right side\n"
+                    new_hints+= "go with your left side to make 35 \ndegree angle with your thigh.\n" \
+                                "make your right side straight to \nmake 180 degree angle between your thigh and right side.\n"
 
 
             except:
@@ -184,10 +187,10 @@ def main (ui,cap):
                 flag = True
                 Timer.app.pause()
 
-
-
-
-            cv2.imshow('Mediapipe Feed', image)
+            winname = 'Mediapipe Feed'
+            cv2.namedWindow(winname)
+            cv2.moveWindow(winname, 600, 35)
+            cv2.imshow(winname, image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
                 Timer.app.quit()

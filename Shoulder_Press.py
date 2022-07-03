@@ -24,8 +24,14 @@ def main (ui,cap):
     ##setup mediapipe instance
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
+            ret, ll = cap.read()
+            if (ret == False):
+                break
             framenumber=framenumber+1
-            results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
 
 
 
@@ -53,9 +59,9 @@ def main (ui,cap):
                 angle2 = Pose_Estimation.calculate_angle(left_shoulder, left_elbow, left_wrist)
 
                 # visualize angle
-                cv2.putText(image, str(angle1), tuple(np.multiply(right_elbow, [1280, 720]).astype(int)),
+                cv2.putText(image, str(angle1), tuple(np.multiply(right_elbow,  [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                cv2.putText(image, str(angle2), tuple(np.multiply(left_elbow, [1280, 720]).astype(int)),
+                cv2.putText(image, str(angle2), tuple(np.multiply(left_elbow,  [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
                 # CURL COUNTER LOGIC

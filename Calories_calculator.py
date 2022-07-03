@@ -8,8 +8,8 @@ def Cl_cal (Exersicename, reps , time):
     caloriesburned = 0.0
     ex_info=''
     if Exersicename == 'bicepscurl':
-        caloriesburned= 11 *reps;
-        ex_info='Bicep curl burns average 11 calories per rep'
+        caloriesburned= .11 *reps;
+        ex_info='Bicep curl burns average .11 calories per rep'
 
     if Exersicename == 'lateral raises':
         caloriesburned =(Timeinmins/10)*100
@@ -18,12 +18,14 @@ def Cl_cal (Exersicename, reps , time):
 
     if Exersicename =='squat':
         caloriesburned = .32 * reps;
-        ex_info = ' One Squat burns 0.32 calorie which means you have to do 100 squat to burn 32 calories'
+        ex_info = 'One Squat burns 0.32 calorie which means you have to do 100 squat to burn 32 calories'
 
     if Exersicename == 'shoulder press':
-        pass
+        caloriesburned = 4 * reps;
+        ex_info = '10 minutes exercising shoulder press help you burns 36 Calories'
     if Exersicename == 'push up':
-        pass
+        caloriesburned = .35 * reps;
+        ex_info = 'pushups can burn at least 7 caloriesTrusted Source per minutes'
     if Exersicename == 'Yoga side angle':
         caloriesburned = (Timeinmins/60) * 477;
         ex_info = 'Yoga side angle helps you burn 477 calories in an hour'

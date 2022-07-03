@@ -266,7 +266,7 @@ class Ui_Frame(object):
         self.shoulderPressButton.setText(_translate("Frame", "shoulder press"))
         self.lateralRaisesButton.setText(_translate("Frame", "lateral raises"))
         self.back.setText(_translate("Frame", "Back"))
-        self.start.setText(_translate("Frame", "Start"))
+        self.start.setText(_translate("Frame", "Start live"))
         self.UploadVid.setText(_translate("Frame", "Upload video"))
     def Upload_vid(self,exnum,Frame):
         import os

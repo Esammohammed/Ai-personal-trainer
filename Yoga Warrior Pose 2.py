@@ -22,7 +22,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         a1 = 0
         a2 = 0
         a3 = 0
-        results,image = Pose_Estimation.MakedetectionandExtract(pose,cap)
+        try:
+            results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+        except:
+            break
 
         # Extract landmarks
         try:
@@ -181,7 +184,10 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
                                   mp_drawing.DrawingSpec(color=(245, 117, 66), thickness=2, circle_radius=2),
                                   mp_drawing.DrawingSpec(color=(245, 66, 230), thickness=2, circle_radius=2)
                                   )
-
+        winname = 'Mediapipe Feed'
+        cv2.namedWindow(winname)
+        cv2.moveWindow(winname, 600, 40)
+        cv2.imshow(winname, image)
         cv2.imshow('Mediapipe Feed', image)
 
         if cv2.waitKey(10) & 0xFF == ord('q'):

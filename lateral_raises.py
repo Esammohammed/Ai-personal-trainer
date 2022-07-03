@@ -21,8 +21,14 @@ def main (ui,cap):
     framenumber = 0
     with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
         while cap.isOpened():
+            ret, ll = cap.read()
+            if (ret==False):
+                break
             framenumber = framenumber + 1
-            results,image = Pose_Estimation.MakedetectionandExtract(pose,cap);
+            try:
+                results, image = Pose_Estimation.MakedetectionandExtract(pose, cap);
+            except:
+                break
 
             try:
                 landmarks = results.pose_landmarks.landmark
@@ -49,11 +55,11 @@ def main (ui,cap):
 
                 # Visualize angle
                 cv2.putText(image, str(angle1),
-                            tuple(np.multiply(right_shoulder, [1280, 720]).astype(int)),
+                            tuple(np.multiply(right_shoulder, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
                 cv2.putText(image, str(angle2),
-                            tuple(np.multiply(left_shoulder, [1280, 720]).astype(int)),
+                            tuple(np.multiply(left_shoulder, [850, 480]).astype(int)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
                             )
 
@@ -97,6 +103,10 @@ def main (ui,cap):
                 oldhints = new_hints
                 drawhints()
             new_hints = ''
+            winname = 'Mediapipe Feed'
+            cv2.namedWindow(winname)
+            cv2.moveWindow(winname, 600, 40)
+            cv2.imshow(winname, image)
             cv2.imshow('Mediapipe Feed', image)
 
             if cv2.waitKey(10) & 0xFF == ord('q'):
