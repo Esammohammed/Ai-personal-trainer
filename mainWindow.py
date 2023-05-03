@@ -1,2 +1,0 @@
-import bicepscurl
-bicepscurl.main()
