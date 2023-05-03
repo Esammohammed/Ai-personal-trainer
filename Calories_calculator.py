@@ -5,7 +5,7 @@ def Cl_cal (Exersicename, reps , time):
     time = str(time)
     d = datetime.strptime(time, "%H:%M:%S")
     Timeinmins= d.minute+(d.second/60)
-    caloriesburned = 0.0
+    caloriesburned = 0
     ex_info=''
     if Exersicename == 'bicepscurl':
         caloriesburned= .11 *reps;
